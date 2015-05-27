@@ -1,0 +1,45 @@
+{
+  "map": {
+    "class": "cookyii\\build\\tasks\\MapTask",
+    "description": "Show map of all tasks in current build config",
+  },
+
+  "default": {
+    "depends": ["build"],
+    "description": "Default build",
+  },
+
+  "build": {
+    "depends": [
+      "composer",
+      "migrate"
+    ],
+    "description": "Build project with demo environment"
+  },
+
+  "composer": {
+    "depends": ["composer/install-dev"],
+    "description": "Install all depending composer for development environment (with `required-dev`)",
+    "install": {
+      "class": "cookyii\\build\\tasks\\CommandTask",
+      "description": "Install all depending for development environment (with `require-dev`)",
+      "commandline": "composer install --prefer-dist"
+    },
+    "update": {
+      "class": "cookyii\\build\\tasks\\CommandTask",
+      "description": "Update all depending for development environment (with `require-dev`)",
+      "commandline": "composer update --prefer-dist"
+    },
+    "self-update": {
+      "class": "cookyii\\build\\tasks\\CommandTask",
+      "description": "Update composer script",
+      "commandline": "composer self-update"
+    }
+  },
+
+  "migrate": {
+    "class": "cookyii\\build\\tasks\\EchoTask",
+    "description": "Run database migration",
+    "message": "Executing migrations for database..."
+  }
+}
