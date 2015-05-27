@@ -60,6 +60,13 @@ Reference конфигурации задачи
 
 [наверх](#Использование)
 
+[CallableTask]: docs/ru/02-reference-task-callable.md
+[CommandTask]: docs/ru/02-reference-task-command.md
+[DeleteTask]: docs/ru/02-reference-task-delete.md
+[EchoTask]: docs/ru/02-reference-task-echo.md
+[FileExistsTask]: docs/ru/02-reference-task-file-exists.md
+[MapTask]: docs/ru/02-reference-task-map.md
+
 ### Конфигурационный файл `build.php` (config-type `default`)
 Конфигурационный файл `build.php` представляет собой обычный PHP файл, который возвращает массив с описанием инструкций для сборки.
 Ключи массива - название задачи (таска), значения - конфигурация задачи. 
@@ -129,10 +136,3 @@ return [
 WIP
 
 [наверх](#Использование)
-
-[CallableTask]: docs/ru/02-reference-task-callable.md
-[CommandTask]: docs/ru/02-reference-task-command.md
-[DeleteTask]: docs/ru/02-reference-task-delete.md
-[EchoTask]: docs/ru/02-reference-task-echo.md
-[FileExistsTask]: docs/ru/02-reference-task-file-exists.md
-[MapTask]: docs/ru/02-reference-task-map.md
