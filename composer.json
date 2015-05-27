@@ -37,6 +37,6 @@
     "bin-dir": "bin"
   },
   "bin": [
-    "bin/build"
+    "build"
   ]
 }

@@ -56,10 +56,13 @@ return [
 ];
 ```
 
+Run build
+---------
+
 ```sh
-$ bin/build # start build from `default` task
-$ bin/build migrate # start build from `migrate` task
-$ bin/build -c ./project/build-conf.php # start build with specify non default conf file
+$ ./vendor/bin/build # start build from `default` task
+$ ./vendor/bin/build migrate # start build from `migrate` task
+$ ./vendor/bin/build -c ./project/build-conf.php # start build with specify non default conf file
 ```
 
 Documentation

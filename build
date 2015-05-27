@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+/**
+ * build.php
+ * @author Revin Roman http://phptime.ru
+ */
+
+define('BASE_PATH', __DIR__);
+
+foreach ([__DIR__ . '/../vendor/autoload.php', __DIR__ . '/vendor/autoload.php'] as $file) {
+    if (file_exists($file)) {
+        define('COMPOSER_INSTALL', realpath($file));
+        break;
+    }
+}
+
+
+require_once COMPOSER_INSTALL;
+
+(new \cookyii\build\applications\BuildApplication())
+    ->run();
