@@ -21,6 +21,9 @@ class BuildCommand extends AbstractCommand
     /** @var \cookyii\build\config\AbstractConfigReader */
     public $configReader;
 
+    /** @var array */
+    private $executed = [];
+
     protected function configure()
     {
         parent::configure();
@@ -36,7 +39,8 @@ class BuildCommand extends AbstractCommand
             )
             ->addOption('config', 'c', Console\Input\InputOption::VALUE_OPTIONAL, 'Where is the configuration file', 'build.php')
             ->addOption('config-type', 't', Console\Input\InputOption::VALUE_OPTIONAL, 'Config type (default, phing, json)', 'default')
-            ->addOption('task-delimiter', 'd', Console\Input\InputOption::VALUE_OPTIONAL, 'Delimiter for the name of the task', '/');
+            ->addOption('task-delimiter', 'd', Console\Input\InputOption::VALUE_OPTIONAL, 'Delimiter for the name of the task', '/')
+            ->addOption('loop-threshold', 'l', Console\Input\InputOption::VALUE_OPTIONAL, 'Number of repetitions of the task to be discarded error loop', 3);
     }
 
     /**
@@ -125,6 +129,8 @@ class BuildCommand extends AbstractCommand
      */
     private function executeTask($task_name, $prefix = null, $indent = 0)
     {
+        $this->detectLoop($task_name);
+
         $chunks = explode($this->input->getOption('task-delimiter'), $task_name);
 
         $task = $this->config;
@@ -183,6 +189,28 @@ class BuildCommand extends AbstractCommand
         }
 
         return true;
+    }
+
+    /**
+     * @param string $task_name
+     */
+    private function detectLoop($task_name)
+    {
+        $loop_threshold = (int)$this->input->getOption('loop-threshold');
+        $loop_threshold = $loop_threshold <= 0 ? 3 : $loop_threshold;
+
+        if (!isset($this->executed[$task_name])) {
+            $this->executed[$task_name] = 0;
+        }
+
+        $this->executed[$task_name]++;
+
+        if ($this->executed[$task_name] >= $loop_threshold) {
+            $executed = array_flip($this->executed);
+            ksort($executed);
+
+            throw new \RuntimeException('Loop detected (' . array_pop($executed) . ' <> ' . array_pop($executed) . ').');
+        }
     }
 
     private function readConfig()

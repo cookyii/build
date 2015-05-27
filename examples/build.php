@@ -38,7 +38,7 @@ return [
         'description' => 'Delete all temporary files and remove installed packages',
         'assets' => [
             'class' => cookyii\build\tasks\DeleteTask::className(),
-            'description' => 'Очистить все assets',
+            'description' => 'Remove all assets',
             'deleteDir' => false,
             'fileSets' => [
                 [

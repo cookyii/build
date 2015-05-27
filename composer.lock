@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cdf27e156c151a0f665886747336d36e",
+    "hash": "a391a8e9b8971f670b5db2b557e2b57b",
     "packages": [
         {
             "name": "sabre/uri",
