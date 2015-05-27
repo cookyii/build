@@ -1,7 +1,7 @@
 Cookyii/Build
 =============
 
-Cookyii/build is a simple PHP build tool built on [Symfony Console](http://symfony.com/doc/current/components/console/index.html).
+Cookyii/build is a simple PHP build tool built on [Symfony Console][].
 
 Build config
 ------------
@@ -65,5 +65,9 @@ $ bin/build -c ./project/build-conf.php # start build with specify non default c
 Documentation
 -------------
 
-- [Installing][docs/ru/00-installing.md]
-- [Usage][docs/ru/01-usage.md]
+- [Installing][]
+- [Usage][]
+
+[Symfony Console]: http://symfony.com/doc/current/components/console/introduction.html
+[Installing]: docs/ru/00-installing.md
+[Usage]: docs/ru/01-usage.md
