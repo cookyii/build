@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+/**
+ * build.php
+ * @author Revin Roman http://phptime.ru
+ */
+
+define('BASE_PATH', __DIR__);
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+(new \cookyii\build\applications\BuildApplication())
+    ->run();

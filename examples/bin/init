@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+/**
+ * init.php
+ * @author Revin Roman http://phptime.ru
+ */
+
+echo "\n  Initialize the application under 'env' environment? [yes|no] ";
+$answer = trim(fgets(STDIN));
+if (strncasecmp($answer, 'y', 1)) {
+    echo "\n  Quit initialization.\n";
+
+    exit(1);
+}

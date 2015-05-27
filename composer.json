@@ -1,0 +1,42 @@
+{
+  "name": "cookyii/build",
+  "description": "Simple build tool",
+  "keywords": [
+    "build",
+    "tool"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Revin Roman",
+      "email": "roman@rmrevin.ru",
+      "homepage": "https://rmrevin.ru",
+      "role": "Founder and project lead"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/cookyii/build/issues?state=open",
+    "source": "https://github.com/cookyii/build"
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.4.0",
+    "symfony/console": "2.6.*",
+    "symfony/finder": "2.6.*",
+    "sabre/xml": "1.0.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~3.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "cookyii\\build\\": ""
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "bin": [
+    "bin/build"
+  ]
+}

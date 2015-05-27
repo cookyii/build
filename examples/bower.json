@@ -1,0 +1,12 @@
+{
+  "name": "cookyii-build-example",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cookyii/build",
+  "license": "BSD-3-Clause",
+  "private": true,
+  "dependencies": {
+    "jquery": "*",
+    "jquery-form": "*",
+    "jquery.scrollTo": "*"
+  }
+}

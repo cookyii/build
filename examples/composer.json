@@ -1,0 +1,34 @@
+{
+  "name": "cookyii/build-example",
+  "description": "Example for Cookyii build tool",
+  "keywords": [
+    "build",
+    "tool"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Revin Roman",
+      "email": "roman@rmrevin.ru",
+      "homepage": "https://rmrevin.ru",
+      "role": "Founder and project lead"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/cookyii/build/issues?state=open",
+    "source": "https://github.com/cookyii/build"
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.4.0",
+    "sabre/xml": "1.0.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~3.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "cookyii\\build\\example\\": ""
+    }
+  }
+}
