@@ -1,0 +1,20 @@
+{
+  "default": {
+    "class": "cookyii\\build\\tasks\\EchoTask",
+    "description": "Run default task",
+    "message": "Executing default task..."
+  },
+
+  "build": {
+    "prod": {
+      "class": "cookyii\\build\\tasks\\EchoTask",
+      "description": "Run production build",
+      "message": "Executing production build..."
+    },
+    "dev": {
+      "class": "cookyii\\build\\tasks\\EchoTask",
+      "description": "Run dev build",
+      "message": "Executing dev build..."
+    }
+  }
+}
