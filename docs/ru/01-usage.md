@@ -2,7 +2,10 @@
 =============
 
 * [Команда `build`](#Команда-build)
-* [Команда `build`](#Команда-build)
+* [Концепция задач](#Концепция-задач)
+* [Конфигурационный файл `build.php` (config-type `default`)](#Конфигурационный-файл-buildphp-config-type-default)
+* [Конфигурационный файл `build.json` (config-type `json`)](#Конфигурационный-файл-buildjson-config-type-json)
+* [Конфигурационный файл `build.xml` (config-type `phing`)](#Конфигурационный-файл-buildxml-config-type-phing)
 
 Команда `build`
 ---------------
