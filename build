@@ -5,14 +5,19 @@
  * @author Revin Roman http://phptime.ru
  */
 
-foreach ([__DIR__ . '/../../vendor/autoload.php', __DIR__ . '/../vendor/autoload.php', __DIR__ . '/vendor/autoload.php'] as $file) {
+foreach ([
+             __DIR__ . '/../../autoload.php',
+             __DIR__ . '/../../vendor/autoload.php',
+             __DIR__ . '/../vendor/autoload.php',
+             __DIR__ . '/vendor/autoload.php',
+         ] as $file) {
     if (file_exists($file)) {
-        define('COOKYUU_BUILD_COMPOSER_INSTALL', realpath($file));
+        define('COOKYII_BUILD_COMPOSER_INSTALL', realpath($file));
         break;
     }
 }
 
-if (!defined('COOKYUU_BUILD_COMPOSER_INSTALL')) {
+if (!defined('COOKYII_BUILD_COMPOSER_INSTALL')) {
     fwrite(STDERR,
         'You need to set up the project dependencies using the following commands:' . PHP_EOL .
         'wget http://getcomposer.org/composer.phar' . PHP_EOL .
@@ -21,7 +26,7 @@ if (!defined('COOKYUU_BUILD_COMPOSER_INSTALL')) {
     die(1);
 }
 
-require_once COOKYUU_BUILD_COMPOSER_INSTALL;
+require_once COOKYII_BUILD_COMPOSER_INSTALL;
 
 (new \cookyii\build\applications\BuildApplication())
     ->run();
