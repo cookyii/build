@@ -28,14 +28,11 @@ build [-c|--config[="..."]] [-t|--config-type[="..."]] [-d|--task-delimiter[="..
 # заупстить таск migrate/backend из конфиг файла build.php
 ```
 
-Конфигурационный файл `build.php` (config-type `default`)
----------------------------------------------------------
+### Конфигурационный файл `build.php` (config-type `default`)
 WIP
 
-Конфигурационный файл `build.json` (config-type `json`)
--------------------------------------------------------
+### Конфигурационный файл `build.json` (config-type `json`)
 WIP
 
-Конфигурационный файл `build.xml` (config-type `phing`)
--------------------------------------------------------
+### Конфигурационный файл `build.xml` (config-type `phing`)
 WIP
