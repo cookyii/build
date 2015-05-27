@@ -5,7 +5,7 @@
 Composer
 --------
 
-Cookyii/build устанавливается при помощи [Composer][https://getcomposer.org/]:
+Cookyii/build устанавливается при помощи [Composer][]:
 
     $ composer require cookyii/build
 
