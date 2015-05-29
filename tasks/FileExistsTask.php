@@ -32,7 +32,9 @@ class FileExistsTask extends AbstractTask
                 $filename = $this->command->configReader->basePath . DIRECTORY_SEPARATOR . $filename;
             }
 
-            if (!file_exists($filename)) {
+            $fs = new \Symfony\Component\Filesystem\Filesystem();
+
+            if (!$fs->exists($filename)) {
                 $message = empty($this->message)
                     ? 'File "%s" not exists'
                     : $this->message;

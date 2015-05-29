@@ -25,6 +25,8 @@ class DeleteTask extends AbstractTask
     public function run()
     {
         if (!empty($this->fileSets)) {
+            $fs = new \Symfony\Component\Filesystem\Filesystem();
+
             foreach ($this->fileSets as $fileSet) {
                 $fileSet = is_string($fileSet)
                     ? ['dir' => $fileSet]
@@ -44,12 +46,14 @@ class DeleteTask extends AbstractTask
                     }
 
                     if ($File->isFile() || $File->isLink()) {
-                        if (!unlink($File->getPathname())) {
-                            $this->log(sprintf('<task-error> ERR </task-error> <error>Unable to unlink file "%s"</error>.', $File->getPathname()));
-                        } else {
+                        try {
+                            $fs->remove($File->getPathname());
+
                             if ($this->output->isVerbose()) {
                                 $this->log(sprintf('<task-result> DEL </task-result> %s', $File->getPathname()));
                             }
+                        } catch (\Exception $e) {
+                            $this->log(sprintf('<task-error> ERR </task-error> <error>Unable to unlink file "%s"</error>.', $File->getPathname()));
                         }
                     }
                 }
@@ -57,12 +61,14 @@ class DeleteTask extends AbstractTask
                 if (!empty($dirs)) {
                     $dirs = array_reverse($dirs);
                     foreach ($dirs as $dir) {
-                        if (!rmdir($dir)) {
-                            $this->log(sprintf('<task-error> ERR </task-error> <error>Unable to remove directory "%s"</error>.', $dir));
-                        } else {
+                        try {
+                            $fs->remove($dir);
+
                             if ($this->output->isVerbose()) {
                                 $this->log(sprintf('<task-result> DEL </task-result> %s', $dir));
                             }
+                        } catch (\Exception $e) {
+                            $this->log(sprintf('<task-error> ERR </task-error> <error>Unable to remove directory "%s"</error>.', $dir));
                         }
                     }
                 }
@@ -70,12 +76,14 @@ class DeleteTask extends AbstractTask
                 if ($this->deleteDir) {
                     $dir = $fileSet['dir'];
 
-                    if (!rmdir($dir)) {
-                        $this->log(sprintf('<task-error> ERR </task-error> <error>Unable to remove directory "%s"</error>.', $dir));
-                    } else {
+                    try {
+                        $fs->remove($dir);
+
                         if ($this->output->isVerbose()) {
                             $this->log(sprintf('<task-result> DEL </task-result> %s', $dir));
                         }
+                    } catch (\Exception $e) {
+                        $this->log(sprintf('<task-error> ERR </task-error> <error>Unable to remove directory "%s"</error>.', $dir));
                     }
                 }
             }
