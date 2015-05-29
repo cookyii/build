@@ -23,7 +23,7 @@ class MyCompositeTask extends \cookyii\build\tasks\AbstractCompositeTask
         return [
             'default' => [
                 'depends' => ['execute-something'],
-                'description' => 'Install all depending for development environment (with `require-dev`)',
+                'description' => 'Default task for `MyCompositeTask`',
             ],
 
             'show-something' => [
