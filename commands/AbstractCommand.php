@@ -30,6 +30,10 @@ abstract class AbstractCommand extends Console\Command\Command
     {
         $method = $newLine ? 'writeln' : 'write';
 
+        if (is_array($message) || is_object($message)) {
+            $message = dump($message, 1);
+        }
+
         $messages = explode("\n", $message);
         foreach ($messages as $mes) {
             $this->output->$method(str_repeat('  ', $indent) . $mes);

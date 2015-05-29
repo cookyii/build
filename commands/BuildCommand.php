@@ -6,6 +6,7 @@
 
 namespace cookyii\build\commands;
 
+use cookyii\build\events\TaskEvent;
 use Symfony\Component\Console;
 
 /**
@@ -15,6 +16,9 @@ use Symfony\Component\Console;
 class BuildCommand extends AbstractCommand
 {
 
+    /** @var \Symfony\Component\EventDispatcher\EventDispatcher */
+    public $eventDispatcher;
+
     /** @var array */
     public $config = [];
 
@@ -23,6 +27,11 @@ class BuildCommand extends AbstractCommand
 
     /** @var array */
     private $executed = [];
+
+    const EVENT_BEFORE_CREATE_TASK_OBJECT = 'build.before.create.task.object';
+    const EVENT_AFTER_CREATE_TASK_OBJECT = 'build.after.create.task.object';
+    const EVENT_BEFORE_EXECUTE_TASK = 'build.before.execute.task';
+    const EVENT_AFTER_EXECUTE_TASK = 'build.after.execute.task';
 
     protected function configure()
     {
@@ -40,7 +49,10 @@ class BuildCommand extends AbstractCommand
             ->addOption('config', 'c', Console\Input\InputOption::VALUE_OPTIONAL, 'Where is the configuration file', 'build.php')
             ->addOption('config-type', 't', Console\Input\InputOption::VALUE_OPTIONAL, 'Config type (default, phing, json)', 'default')
             ->addOption('task-delimiter', 'd', Console\Input\InputOption::VALUE_OPTIONAL, 'Delimiter for the name of the task', '/')
-            ->addOption('loop-threshold', 'l', Console\Input\InputOption::VALUE_OPTIONAL, 'Number of repetitions of the task to be discarded error loop', 3);
+            ->addOption('loop-threshold', 'l', Console\Input\InputOption::VALUE_OPTIONAL, 'Number of repetitions of the task to be discarded error loop', 3)
+            ->addOption('color', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Support colors in output', 'yes');
+
+        $this->eventDispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
     }
 
     /**
@@ -180,15 +192,65 @@ class BuildCommand extends AbstractCommand
                 $this->log(print_r($attributes, 1), $indent + 2);
             }
 
+            $Event = new TaskEvent($task, $indent + 1);
+
+            if (!$this->raiseEvent(static::EVENT_BEFORE_CREATE_TASK_OBJECT, $Event)) {
+                return false;
+            }
+
             /** @var \cookyii\build\tasks\AbstractTask $Task */
             $Task = new $task['class']($this);
+
+            $EventTask = new TaskEvent($Task, $indent + 1);
+
+            $this->eventDispatcher->dispatch(static::EVENT_AFTER_CREATE_TASK_OBJECT, $EventTask);
+
+            if (!$this->raiseEvent(static::EVENT_AFTER_CREATE_TASK_OBJECT, $EventTask)) {
+                return false;
+            }
 
             $attributes['prefix'] = $prefix;
             $attributes['indent'] = $indent;
 
             $Task->configure($attributes);
 
-            return $Task->run();
+            $this->eventDispatcher->dispatch(static::EVENT_BEFORE_EXECUTE_TASK, $EventTask);
+
+            if (!$this->raiseEvent(static::EVENT_BEFORE_EXECUTE_TASK, $EventTask)) {
+                return false;
+            }
+
+            $result = $Task->run();
+
+            $this->eventDispatcher->dispatch(static::EVENT_AFTER_EXECUTE_TASK, $EventTask);
+
+            if (!$this->raiseEvent(static::EVENT_AFTER_EXECUTE_TASK, $EventTask)) {
+                return false;
+            }
+
+            return $result;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $event
+     * @param TaskEvent $Event
+     * @return bool
+     */
+    private function raiseEvent($event, TaskEvent $Event)
+    {
+        if ($this->output->isVeryVerbose()) {
+            $this->log(sprintf('Raise event %s', $event), $Event->getIndent());
+        }
+
+        $this->eventDispatcher->dispatch($event, $Event);
+
+        if ($Event->isPropagationStopped()) {
+            $this->log(sprintf('<error>Event %s: Propagation stopped.</error>', $event), $Event->getIndent());
+
+            return false;
         }
 
         return true;
@@ -272,6 +334,8 @@ class BuildCommand extends AbstractCommand
 
     private function setStyles()
     {
+        $color = $this->input->getOption('color');
+
         $Formatter = $this->output
             ->getFormatter();
 
@@ -280,5 +344,18 @@ class BuildCommand extends AbstractCommand
         $Formatter->setStyle('task-error', new Console\Formatter\OutputFormatterStyle('black', 'red'));
         $Formatter->setStyle('task-result', new Console\Formatter\OutputFormatterStyle('black', 'yellow'));
         $Formatter->setStyle('header', new Console\Formatter\OutputFormatterStyle(null, null, ['bold']));
+
+        if (in_array($color, ['no', 'none', 'never'], true)) {
+            $defaultStyle = new Console\Formatter\OutputFormatterStyle();
+
+            $Formatter->setStyle('error', $defaultStyle);
+            $Formatter->setStyle('info', $defaultStyle);
+            $Formatter->setStyle('comment', $defaultStyle);
+            $Formatter->setStyle('question', $defaultStyle);
+            $Formatter->setStyle('task', $defaultStyle);
+            $Formatter->setStyle('task-error', $defaultStyle);
+            $Formatter->setStyle('task-result', $defaultStyle);
+            $Formatter->setStyle('header', $defaultStyle);
+        }
     }
 }
