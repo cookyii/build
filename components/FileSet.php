@@ -47,7 +47,8 @@ class FileSet extends Component
         if (!empty($this->exclude)) {
             $Finder->filter(function (\SplFileInfo $File) {
                 foreach ($this->exclude as $mask) {
-                    if (($this->dir . DIRECTORY_SEPARATOR . $mask) === $File->getPathname()) {
+                    $pattern = '^' . str_replace(['.', '*'], ['\.', '.*'], $mask) . '^is';
+                    if (preg_match($pattern, $File->getPathname())) {
                         return false;
                     }
                 }
