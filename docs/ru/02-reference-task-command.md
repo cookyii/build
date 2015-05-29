@@ -20,13 +20,16 @@ Reference
 --------------------
 ```php
 [
-    [
+    // ./build install
+    'install' => [
         'class' => '\cookyii\build\tasks\CommandTask',
         'description' => 'Run `make install` in project folder',
         'commandline' => 'make install',
         'cwd' => '/var/www/project',
     ],
-    [
+    
+    // ./build npm
+    'npm' => [
         'class' => '\cookyii\build\tasks\CommandTask',
         'description' => 'Install node.js packages',
         'commandline' => 'npm install',
