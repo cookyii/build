@@ -27,8 +27,8 @@ Reference
         'message' => 'Application configuration not exists.',
     ],
     
-    // ./build npm
-    'npm' => [
+    // ./build check-lock
+    'check-lock' => [
         'class' => '\cookyii\build\tasks\FileExistsTask',
         'description' => 'Check lock file',
         'filename' => __DIR__ . '/runtime/.lock',
