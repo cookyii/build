@@ -17,13 +17,13 @@ return [
 
     'instruction' => [
         'first' => [
-            'class' => cookyii\build\tasks\EchoTask::className(),
+            'class' => 'cookyii\build\tasks\EchoTask',
             'description' => 'Install all depending for development environment (with `require-dev`)',
             'message' => 'Execute first instruction',
             'depends' => ['instruction/second'],
         ],
         'second' => [
-            'class' => cookyii\build\tasks\EchoTask::className(),
+            'class' => 'cookyii\build\tasks\EchoTask',
             'description' => 'Update all depending for development environment (with `require-dev`)',
             'message' => 'Execute second instruction',
             'depends' => ['instruction/first'],

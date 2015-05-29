@@ -15,14 +15,11 @@ use Symfony\Component\Console;
 abstract class AbstractTask extends \cookyii\build\components\Component
 {
 
-    /** @var string */
+    /** @var string|null */
     public $description;
 
     /** @var \cookyii\build\commands\BuildCommand */
     public $command;
-
-    /** @var integer */
-    public $indent;
 
     /** @var Console\Input\InputInterface */
     public $input;
@@ -30,14 +27,18 @@ abstract class AbstractTask extends \cookyii\build\components\Component
     /** @var Console\Output\ConsoleOutput */
     public $output;
 
+    /** @var integer */
+    public $indent = 0;
+
+    /** @var string|null */
+    public $prefix;
+
     /**
      * @param \cookyii\build\commands\BuildCommand $BuildCommand
-     * @param integer $indent
      */
-    public function __construct($BuildCommand, $indent)
+    public function __construct($BuildCommand)
     {
         $this->command = $BuildCommand;
-        $this->indent = $indent;
         $this->input = $BuildCommand->input;
         $this->output = $BuildCommand->output;
     }

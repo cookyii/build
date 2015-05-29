@@ -29,27 +29,13 @@ return [
     ],
 
     'composer' => [
-        'depends' => ['composer/install-dev'],
+        'class' => 'cookyii\build\tasks\ComposerTask',
         'description' => 'Install all depending composer for development environment (with `required-dev`)',
-        'install' => [
-            'class' => cookyii\build\tasks\CommandTask::className(),
-            'description' => 'Install all depending for development environment (with `require-dev`)',
-            'commandline' => 'composer install --prefer-dist',
-        ],
-        'update' => [
-            'class' => cookyii\build\tasks\CommandTask::className(),
-            'description' => 'Update all depending for development environment (with `require-dev`)',
-            'commandline' => 'composer update --prefer-dist',
-        ],
-        'self-update' => [
-            'class' => cookyii\build\tasks\CommandTask::className(),
-            'description' => 'Update composer script',
-            'commandline' => 'composer self-update',
-        ],
+        'defaultTask' => 'install-dev',
     ],
 
     'migrate' => [
-        'class' => cookyii\build\tasks\EchoTask::className(),
+        'class' => 'cookyii\build\tasks\EchoTask',
         'description' => 'Run database migration',
         'message' => 'Executing migrations for database...',
     ],

@@ -37,10 +37,13 @@ build [-c|--config[="..."]] [-t|--config-type[="..."]] [-d|--task-delimiter[="..
 [наверх](#Использование)
 
 ### Концепция задач
-Конфигурация билда состоит из задач. Задача представляет собой особым образом сконфигурированный объект. 
+Конфигурация билда состоит из задач. 
+Задача представляет собой особым образом сконфигурированный объект. 
+Этот объект должен наследоваться от `[AbstractTask][]` или `[AbstractCompositeTask][]`.
 В данный момент в `cookyii/build` доступны следующие задачи:
 * [CallableTask][] - задача выполняется произвольную php функцию (callable).
 * [CommandTask][] - задача выполняет произвольную программу в командной строке (cli command).
+* [ComposerTask][] - задача выполняет различные операции composer.
 * [DeleteTask][] - задача удаляет файлы.
 * [EchoTask][] - задача выводит произвольное сообщение.
 * [FileExistsTask][] - задача проверяет существование файла.
@@ -130,8 +133,11 @@ WIP
 
 [наверх](#Использование)
 
+[AbstractCompositeTask]: 02-reference-abstract-composite-task.md
+[AbstractTask]: 02-reference-abstract-task.md
 [CallableTask]: 02-reference-task-callable.md
 [CommandTask]: 02-reference-task-command.md
+[ComposerTask]: 02-reference-task-composer.md
 [DeleteTask]: 02-reference-task-delete.md
 [EchoTask]: 02-reference-task-echo.md
 [FileExistsTask]: 02-reference-task-file-exists.md

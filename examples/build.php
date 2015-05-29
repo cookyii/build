@@ -9,7 +9,7 @@ define('COMPOSER', 'composer');
 
 return [
     'map' => [
-        'class' => cookyii\build\tasks\MapTask::className(),
+        'class' => 'cookyii\build\tasks\MapTask',
         'description' => 'Show map of all tasks in current build config',
     ],
 
@@ -37,7 +37,7 @@ return [
         'depends' => ['clear/assets', 'clear/vendor', 'clear/node'],
         'description' => 'Delete all temporary files and remove installed packages',
         'assets' => [
-            'class' => cookyii\build\tasks\DeleteTask::className(),
+            'class' => 'cookyii\build\tasks\DeleteTask',
             'description' => 'Remove all assets',
             'deleteDir' => false,
             'fileSets' => [
@@ -48,7 +48,7 @@ return [
             ],
         ],
         'vendor' => [
-            'class' => cookyii\build\tasks\DeleteTask::className(),
+            'class' => 'cookyii\build\tasks\DeleteTask',
             'description' => 'Remove all the packages in the directory `vendor`',
             'deleteDir' => false,
             'fileSets' => [
@@ -59,13 +59,13 @@ return [
             ],
         ],
         'node' => [
-            'class' => cookyii\build\tasks\DeleteTask::className(),
+            'class' => 'cookyii\build\tasks\DeleteTask',
             'description' => 'Remove all the packages in the directory `node_modules` and remove the directory `node_modules`',
             'deleteDir' => true,
             'fileSets' => ['node_modules'],
         ],
         'all' => [
-            'class' => cookyii\build\tasks\DeleteTask::className(),
+            'class' => 'cookyii\build\tasks\DeleteTask',
             'description' => 'Delete all temporary files and remove installed packages (alternative)',
             'fileSets' => [
                 [
@@ -84,7 +84,7 @@ return [
 
     'environment' => [
         'check' => [
-            'class' => cookyii\build\tasks\FileExistsTask::className(),
+            'class' => 'cookyii\build\tasks\FileExistsTask',
             'description' => 'Check file exists `.env.php`',
             'filename' => '.env.php',
             'message' => 'Внимание!' . "\n"
@@ -93,16 +93,16 @@ return [
                 . 'Шаблон в файле .environment.example.php',
         ],
         'init' => [
-            'class' => cookyii\build\tasks\CommandTask::className(),
+            'class' => 'cookyii\build\tasks\CommandTask',
             'description' => 'Initialize a new environment (manual selection)',
             'commandline' => 'php ./bin/init',
             'production' => [
-                'class' => cookyii\build\tasks\CommandTask::className(),
+                'class' => 'cookyii\build\tasks\CommandTask',
                 'description' => 'Initialize a new environment (selected Production)',
                 'commandline' => './bin/init --env=Production --force',
             ],
             'demo' => [
-                'class' => cookyii\build\tasks\CommandTask::className(),
+                'class' => 'cookyii\build\tasks\CommandTask',
                 'description' => 'Initialize a new environment (selected Demo)',
                 'commandline' => './bin/init --env=Demo --force',
             ],
@@ -110,41 +110,13 @@ return [
     ],
 
     'composer' => [
-        'depends' => ['composer/install-dev'],
+        'class' => 'cookyii\build\tasks\ComposerTask',
         'description' => 'Install all depending composer for development environment (with `required-dev`)',
-        'install' => [
-            'class' => cookyii\build\tasks\CommandTask::className(),
-            'description' => 'Install all depending for productions environment (without `require-dev`)',
-            'commandline' => COMPOSER . ' install --prefer-dist --no-dev',
-        ],
-        'install-dev' => [
-            'class' => cookyii\build\tasks\CommandTask::className(),
-            'description' => 'Install all depending for development environment (with `require-dev`)',
-            'commandline' => COMPOSER . ' install --prefer-dist',
-        ],
-        'update' => [
-            'class' => cookyii\build\tasks\CommandTask::className(),
-            'description' => 'Update all depending for productions environment (without `require-dev`)',
-            'commandline' => COMPOSER . ' update --prefer-dist --no-dev',
-        ],
-        'update-dev' => [
-            'class' => cookyii\build\tasks\CommandTask::className(),
-            'description' => 'Update all depending for development environment (with `require-dev`)',
-            'commandline' => COMPOSER . ' update --prefer-dist',
-        ],
-        'selfupdate' => [
-            'class' => cookyii\build\tasks\CommandTask::className(),
-            'description' => 'Update composer script',
-            'commandline' => COMPOSER . ' selfupdate',
-        ],
-        'self-update' => [
-            'depends' => ['composer/selfupdate'],
-            'description' => 'Update composer script',
-        ]
+        'defaultTask' => 'install-dev',
     ],
 
     'npm' => [
-        'class' => cookyii\build\tasks\CommandTask::className(),
+        'class' => 'cookyii\build\tasks\CommandTask',
         'description' => 'Install all npm and bower dependencies',
         'commandline' => 'npm install',
     ],
@@ -153,7 +125,7 @@ return [
         'depends' => ['less/frontend', 'less/backend'],
         'description' => 'Compile all less styles',
         'frontend' => [
-            'class' => cookyii\build\tasks\CommandTask::className(),
+            'class' => 'cookyii\build\tasks\CommandTask',
             'description' => 'Compile all less styles for frontend application',
             'commandline' => [
                 './node_modules/.bin/lessc --source-map-map-inline assets/less/styles.less > assets/css/styles-raw.css',
@@ -162,7 +134,7 @@ return [
             ],
         ],
         'backend' => [
-            'class' => cookyii\build\tasks\CommandTask::className(),
+            'class' => 'cookyii\build\tasks\CommandTask',
             'description' => 'Compile all less styles for backend application',
             'commandline' => [
                 './node_modules/.bin/lessc --source-map-map-inline assets/less/styles.less > assets/css/styles-raw.css',
@@ -173,7 +145,7 @@ return [
     ],
 
     'migrate' => [
-        'class' => cookyii\build\tasks\EchoTask::className(),
+        'class' => 'cookyii\build\tasks\EchoTask',
         'description' => 'Run database migration',
         'message' => 'Executing migrations for database...',
     ],

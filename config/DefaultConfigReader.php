@@ -23,7 +23,11 @@ class DefaultConfigReader extends AbstractConfigReader
 
             return false;
         } else {
-            return include($this->configFile);
+            $config = include($this->configFile);
+
+            $config = $this->expandCompositeTasks($config);
+
+            return $config;
         }
     }
 }

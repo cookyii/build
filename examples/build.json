@@ -125,37 +125,9 @@
   },
 
   "composer": {
-    "depends": ["composer/install-dev"],
+    "class": "cookyii\\build\\tasks\\ComposerTask",
     "description": "Install all depending composer for development environment (with `required-dev`)",
-    "install": {
-      "class": "cookyii\\build\\tasks\\CommandTask",
-      "description": "Install all depending for productions environment (without `require-dev`)",
-      "commandline": "composer install --prefer-dist --no-dev"
-    },
-    "install-dev": {
-      "class": "cookyii\\build\\tasks\\CommandTask",
-      "description": "Install all depending for development environment (with `require-dev`)",
-      "commandline": "composer install --prefer-dist"
-    },
-    "update": {
-      "class": "cookyii\\build\\tasks\\CommandTask",
-      "description": "Update all depending for productions environment (without `require-dev`)",
-      "commandline": "composer update --prefer-dist --no-dev"
-    },
-    "update-dev": {
-      "class": "cookyii\\build\\tasks\\CommandTask",
-      "description": "Update all depending for development environment (with `require-dev`)",
-      "commandline": "composer update --prefer-dist"
-    },
-    "selfupdate": {
-      "class": "cookyii\\build\\tasks\\CommandTask",
-      "description": "Update composer script",
-      "commandline": "composer selfupdate"
-    },
-    "self-update": {
-      "depends": ["composer/selfupdate"],
-      "description": "Update composer script"
-    }
+    "defaultTask": "install-dev"
   },
 
   "npm": {

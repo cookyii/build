@@ -21,6 +21,9 @@ abstract class AbstractConfigReader extends \cookyii\build\components\Component
     /** @var string */
     public $basePath;
 
+    /** @var \cookyii\build\commands\BuildCommand */
+    public $command;
+
     /** @var Console\Input\InputInterface */
     public $input;
 
@@ -28,16 +31,16 @@ abstract class AbstractConfigReader extends \cookyii\build\components\Component
     public $output;
 
     /**
-     * @param Console\Input\InputInterface $input
-     * @param Console\Output\OutputInterface $output
+     * @param \cookyii\build\commands\BuildCommand $BuildCommand
      */
-    public function __construct(Console\Input\InputInterface $input, Console\Output\OutputInterface $output)
+    public function __construct($BuildCommand)
     {
-        $this->configFile = realpath($input->getOption('config'));
-        $this->basePath = dirname($this->configFile);
+        $this->command = $BuildCommand;
+        $this->input = $BuildCommand->input;
+        $this->output = $BuildCommand->output;
 
-        $this->input = $input;
-        $this->output = $output;
+        $this->configFile = realpath($this->input->getOption('config'));
+        $this->basePath = dirname($this->configFile);
     }
 
     /**
@@ -54,4 +57,28 @@ abstract class AbstractConfigReader extends \cookyii\build\components\Component
      * @return array|false
      */
     abstract function read();
+
+    /**
+     * @param array $config
+     * @return array
+     */
+    public function expandCompositeTasks(array $config)
+    {
+        if (!empty($config)) {
+            foreach ($config as $task => $conf) {
+                if (isset($conf['class']) && !empty($conf['class'])) {
+                    $Task = new $conf['class']($this->command);
+
+                    if ($Task instanceof \cookyii\build\tasks\AbstractCompositeTask) {
+                        $tasks = $Task->tasks();
+                        if (!empty($tasks)) {
+                            $config[$task] = array_merge($conf, $tasks);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $config;
+    }
 }

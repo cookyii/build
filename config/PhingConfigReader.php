@@ -29,7 +29,11 @@ class PhingConfigReader extends AbstractConfigReader
 
             $xml = $reader->parse();
 
-            return [];
+            $config = [];
+
+            $config = $this->expandCompositeTasks($config);
+
+            return $config;
         }
     }
 }

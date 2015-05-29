@@ -24,7 +24,11 @@ class JsonConfigReader extends AbstractConfigReader
 
             return false;
         } else {
-            return json_decode(file_get_contents($this->configFile), true);
+            $config = json_decode(file_get_contents($this->configFile), true);
+
+            $config = $this->expandCompositeTasks($config);
+
+            return $config;
         }
     }
 }
