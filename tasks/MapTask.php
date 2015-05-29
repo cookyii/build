@@ -15,12 +15,19 @@ use Symfony\Component\Console;
 class MapTask extends AbstractTask
 {
 
+    /** @var AbstractCompositeTask */
+    public $task;
+
     /**
      * @inheritdoc
      */
     public function run()
     {
-        $this->showTasks($this->command->config, null);
+        if (!empty($this->task) && $this->task instanceof AbstractCompositeTask) {
+            $this->showTasks($this->task->tasks(), null);
+        } else {
+            $this->showTasks($this->command->config, null);
+        }
 
         return true;
     }
@@ -32,6 +39,8 @@ class MapTask extends AbstractTask
      */
     private function showTasks(array $config, $task = null, $indent = 0)
     {
+        $delimiter = $this->command->getDelimiter();
+
         if ($task === null) {
             foreach ($config as $task => $conf) {
                 $this->showTasks($conf, $task, $indent);
@@ -51,6 +60,13 @@ class MapTask extends AbstractTask
                     if (isset($config['depends']) && !empty($config['depends'])) {
                         $this->log('<comment>[depends]</comment>', 1);
                         foreach ($config['depends'] as $depend) {
+                            $chunks = explode($delimiter, $task);
+                            array_pop($chunks);
+
+                            $depend = empty($chunks)
+                                ? str_replace('*' . $delimiter, '', $depend)
+                                : str_replace('*', implode($delimiter, $chunks), $depend);
+
                             $this->log(sprintf(' * %s', $depend), 1);
                         }
                     }

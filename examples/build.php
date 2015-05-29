@@ -29,6 +29,12 @@ return [
         'description' => 'Default build',
     ],
 
+    'runtime' => [
+        'class' => 'cookyii\build\tasks\LockTask',
+        'description' => 'Show map of task runtime/*',
+        'lockFile' => 'runtime/runtime.lock',
+    ],
+
     'build' => [
         'prod' => [
             'depends' => ['environment/check', 'environment/init/production', 'composer', 'npm', 'less', 'migrate'],
@@ -123,7 +129,8 @@ return [
     'composer' => [
         'class' => 'cookyii\build\tasks\ComposerTask',
         'description' => 'Install all depending composer for development environment (with `required-dev`)',
-        'defaultTask' => 'install-dev',
+        'composer' => '../../composer.phar',
+//        'defaultTask' => 'install-dev',
     ],
 
     'npm' => [

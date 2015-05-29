@@ -23,8 +23,9 @@ class ComposerTask extends AbstractCompositeTask
     {
         return [
             'default' => [
-                'depends' => ['install-dev'],
-                'description' => 'Install all depending for development environment (with `require-dev`)',
+                'class' => 'cookyii\build\tasks\MapTask',
+                'description' => 'Show map tasks',
+                'task' => $this,
             ],
 
             'install-dev' => [
@@ -50,13 +51,14 @@ class ComposerTask extends AbstractCompositeTask
             ],
 
             'selfupdate' => [
+                'depends' => ['*/install'],
                 'class' => '\cookyii\build\tasks\CommandTask',
                 'description' => 'Update composer script',
-                'commandline' => $this->composer . ' selfupdate',
+                'commandline' => 'pwd && '.$this->composer . ' selfupdate',
             ],
             'self-update' => [
-                'depends' => ['selfupdate'],
-                'description' => 'Update composer script',
+                'depends' => ['*/selfupdate'],
+                'description' => 'Update composer script (alias for `selfupdate`)',
             ]
         ];
     }

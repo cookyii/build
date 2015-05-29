@@ -49,8 +49,9 @@ class BuildCommand extends AbstractCommand
             )
             ->addOption('config', 'c', Console\Input\InputOption::VALUE_OPTIONAL, 'Where is the configuration file', 'build.php')
             ->addOption('config-type', 't', Console\Input\InputOption::VALUE_OPTIONAL, 'Config type (default, phing, json)', 'default')
-            ->addOption('task-delimiter', 'd', Console\Input\InputOption::VALUE_OPTIONAL, 'Delimiter for the name of the task', '/')
-            ->addOption('loop-threshold', 'l', Console\Input\InputOption::VALUE_OPTIONAL, 'Number of repetitions of the task to be discarded error loop', 3)
+            ->addOption('task-delimiter', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Delimiter for the name of the task', '/')
+            ->addOption('loop-threshold', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Number of repetitions of the task to be discarded error loop', 3)
+            ->addOption('disable-events', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Disable event in this run', false)
             ->addOption('color', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Support colors in output', 'yes');
 
         $this->eventDispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
@@ -119,27 +120,16 @@ class BuildCommand extends AbstractCommand
     {
         $this->detectLoop($task_name);
 
-        $delimiter = $this->input->getOption('task-delimiter');
-        $delimiter = empty($delimiter) ? '/' : $delimiter;
-
-        $chunks = explode($delimiter, $task_name);
+        $chunks = explode($this->getDelimiter(), $task_name);
 
         if (empty($chunks)) {
             throw new \InvalidArgumentException(sprintf('Bad task name "%s".', $task_name));
         } else {
-            // search among neighboring tasks
             $task = $tasks;
-
-            if (empty($chunks[0])) {
-                // search in all tasks
-                $task = $this->config;
-            }
 
             foreach ($chunks as $chunk) {
                 if (!isset($task[$chunk])) {
-                    $this->log($prefix . ' task not found.');
-
-                    return false;
+                    throw new \RuntimeException($prefix . ' task not found.');
                 } else {
                     $task = $task[$chunk];
                 }
@@ -160,6 +150,46 @@ class BuildCommand extends AbstractCommand
     {
         $this->log('<task> TASK </task> ' . $prefix);
 
+        $class = isset($task['class']) && !empty($task['class'])
+            ? $task['class']
+            : 'cookyii\build\tasks\BlankTask';
+
+        if (!class_exists($class)) {
+            throw new \RuntimeException(sprintf('Class "%s" not found.', $class));
+        }
+
+        if ($this->output->isVerbose()) {
+            $this->log('<comment>[class]</comment> ', $indent + 1, false);
+            $this->log($class);
+        }
+
+        $Event = new TaskEvent($this, $task, $indent + 1);
+
+        if (!$this->raiseEvent(static::EVENT_BEFORE_CREATE_TASK_OBJECT, $Event)) {
+            return false;
+        }
+
+        /** @var \cookyii\build\tasks\AbstractTask $Task */
+        $Task = new $class($this);
+
+        $attributes = $task;
+
+        $attributes['prefix'] = $prefix;
+        $attributes['indent'] = $indent;
+
+        if ($this->output->isDebug()) {
+            $this->log('<comment>[attributes]</comment>', $indent + 1);
+            $this->log(print_r($attributes, 1), $indent + 2);
+        }
+
+        $Task->configure($attributes);
+
+        $EventTask = new TaskEvent($this, $Task, $indent + 1);
+
+        if (!$this->raiseEvent(static::EVENT_AFTER_CREATE_TASK_OBJECT, $EventTask)) {
+            return false;
+        }
+
         if (isset($task['depends']) && !empty($task['depends'])) {
             if ($this->output->isVerbose()) {
                 $this->log('<comment>[depends]</comment>', $indent + 1);
@@ -170,7 +200,16 @@ class BuildCommand extends AbstractCommand
             }
 
             foreach ($task['depends'] as $depend) {
-                $result = $this->executeTasks($tasks, $depend, $prefix . '[' . $depend . ']');
+                $chunks = explode($this->getDelimiter(), str_replace([']', '['], '', $prefix));
+                array_pop($chunks);
+
+                $depend = empty($chunks) ? $depend : str_replace('*', implode($this->getDelimiter(), $chunks), $depend);
+
+                $result = $this->executeTasks(
+                    $tasks,
+                    $depend,
+                    $prefix . '[' . $depend . ']'
+                );
 
                 if (false === $result) {
                     $this->log('<task-error> TASK </task-error> <error>' . $prefix . '[' . $depend . '] failure.</error>');
@@ -180,54 +219,17 @@ class BuildCommand extends AbstractCommand
             }
         }
 
-        if (isset($task['class'])) {
-            if ($this->output->isVerbose()) {
-                $this->log('<comment>[class]</comment> ', $indent + 1, false);
-                $this->log($task['class']);
-            }
-
-            $attributes = $task;
-            unset($attributes['class'], $attributes['depends']);
-
-            if ($this->output->isDebug()) {
-                $this->log('<comment>[attributes]</comment>', $indent + 1);
-                $this->log(print_r($attributes, 1), $indent + 2);
-            }
-
-            $Event = new TaskEvent($this, $task, $indent + 1);
-
-            if (!$this->raiseEvent(static::EVENT_BEFORE_CREATE_TASK_OBJECT, $Event)) {
-                return false;
-            }
-
-            /** @var \cookyii\build\tasks\AbstractTask $Task */
-            $Task = new $task['class']($this);
-
-            $EventTask = new TaskEvent($this, $Task, $indent + 1);
-
-            if (!$this->raiseEvent(static::EVENT_AFTER_CREATE_TASK_OBJECT, $EventTask)) {
-                return false;
-            }
-
-            $attributes['prefix'] = $prefix;
-            $attributes['indent'] = $indent;
-
-            $Task->configure($attributes);
-
-            if (!$this->raiseEvent(static::EVENT_BEFORE_EXECUTE_TASK, $EventTask)) {
-                return false;
-            }
-
-            $result = $Task->run();
-
-            if (!$this->raiseEvent(static::EVENT_AFTER_EXECUTE_TASK, $EventTask)) {
-                return false;
-            }
-
-            return $result;
+        if (!$this->raiseEvent(static::EVENT_BEFORE_EXECUTE_TASK, $EventTask)) {
+            return false;
         }
 
-        return true;
+        $result = $Task->run();
+
+        if (!$this->raiseEvent(static::EVENT_AFTER_EXECUTE_TASK, $EventTask)) {
+            return false;
+        }
+
+        return $result;
     }
 
     /**
@@ -237,6 +239,12 @@ class BuildCommand extends AbstractCommand
      */
     private function raiseEvent($event, TaskEvent $Event)
     {
+        $disable_events = (string)$this->input->getOption('disable-events');
+
+        if (in_array($disable_events, ['yes', 'force', 'always', 'true', '1'], true)) {
+            return true;
+        }
+
         if ($this->output->isVeryVerbose()) {
             $this->log(sprintf('Raise event %s', $event), $Event->getIndent());
         }
@@ -378,5 +386,15 @@ class BuildCommand extends AbstractCommand
             $Formatter->setStyle('task-result', $defaultStyle);
             $Formatter->setStyle('header', $defaultStyle);
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getDelimiter()
+    {
+        $delimiter = (string)$this->input->getOption('task-delimiter');
+
+        return empty($delimiter) ? '/' : $delimiter;
     }
 }
