@@ -20,7 +20,7 @@ class DeleteTask extends AbstractTask
     public $deleteDir = false;
 
     /**
-     * @return bool
+     * @inheritdoc
      */
     public function run()
     {

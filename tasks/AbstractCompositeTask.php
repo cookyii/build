@@ -13,14 +13,18 @@ namespace cookyii\build\tasks;
 abstract class AbstractCompositeTask extends AbstractTask
 {
 
-    /** @var string */
+    /** @var string default task */
     public $defaultTask = 'default';
 
     /**
+     * List of children tasks
      * @return array
      */
     abstract public function tasks();
 
+    /**
+     * @inheritdoc
+     */
     public function run()
     {
         $tasks = $this->tasks();

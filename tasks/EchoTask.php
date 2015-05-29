@@ -17,7 +17,7 @@ class EchoTask extends AbstractTask
     public $message;
 
     /**
-     * @return bool
+     * @inheritdoc
      */
     public function run()
     {

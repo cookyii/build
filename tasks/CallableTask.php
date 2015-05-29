@@ -17,7 +17,7 @@ class CallableTask extends AbstractTask
     public $handler;
 
     /**
-     * @return bool
+     * @inheritdoc
      */
     public function run()
     {

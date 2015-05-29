@@ -44,6 +44,7 @@ abstract class AbstractTask extends \cookyii\build\components\Component
     }
 
     /**
+     * Send message to output
      * @param string $message
      * @param integer $indent
      */
@@ -53,6 +54,15 @@ abstract class AbstractTask extends \cookyii\build\components\Component
     }
 
     /**
+     * Send empty message to output
+     */
+    public function newLine()
+    {
+        $this->log('');
+    }
+
+    /**
+     * Task logic
      * @return bool
      */
     abstract public function run();

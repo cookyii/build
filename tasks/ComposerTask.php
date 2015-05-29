@@ -13,10 +13,11 @@ namespace cookyii\build\tasks;
 class ComposerTask extends AbstractCompositeTask
 {
 
+    /** @var string composer execute file */
     public $composer = 'composer';
 
     /**
-     * @return array
+     * @inheritdoc
      */
     public function tasks()
     {

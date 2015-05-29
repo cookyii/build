@@ -41,4 +41,14 @@ class MyCompositeTask extends \cookyii\build\tasks\AbstractCompositeTask
 }
 ```
 
+Reference
+---------
+
+Класс `AbstractCompositeTask` наследует все атрибуты и методы класса [`AbstractTask`][], а также имеет ряд собственных атрибутов.
+
+| Атрибут | Тип | Описание | 
+| ------- | --- | -------- |
+| `defaultTask` | `string` | Название задачи, которая будет выполнена по умолчанию. |
+
+[`AbstractTask`]: 02-reference-abstract-task.md
 [`ComposerTask`]: 02-reference-task-composer.md

@@ -15,23 +15,22 @@ use Symfony\Component\Console;
 class MapTask extends AbstractTask
 {
 
-    /** @var \Symfony\Component\Console\Helper\Table */
-    private $table;
-
     /**
-     * @return bool
+     * @inheritdoc
      */
     public function run()
     {
-        $this->table = (new Console\Helper\Table($this->output))
-            ->setHeaders(['Task', 'Description']);
-
         $this->showTasks($this->command->config, null);
 
         return true;
     }
 
-    private function showTasks($config, $task = null, $indent = 0)
+    /**
+     * @param array $config
+     * @param string|null $task
+     * @param integer $indent
+     */
+    private function showTasks(array $config, $task = null, $indent = 0)
     {
         if ($task === null) {
             foreach ($config as $task => $conf) {
@@ -48,13 +47,16 @@ class MapTask extends AbstractTask
                     }
                 }
 
-                if (isset($config['depends']) && !empty($config['depends'])) {
-                    $this->log('<comment>[depends]</comment>', 1);
-                    foreach ($config['depends'] as $depend) {
-                        $this->log(sprintf(' * %s', $depend), 1);
+                if ($this->output->isVerbose()) {
+                    if (isset($config['depends']) && !empty($config['depends'])) {
+                        $this->log('<comment>[depends]</comment>', 1);
+                        foreach ($config['depends'] as $depend) {
+                            $this->log(sprintf(' * %s', $depend), 1);
+                        }
                     }
                 }
-                $this->log('', $indent + 1);
+
+                $this->log('');
             }
 
             foreach ($config as $key => $value) {
@@ -66,8 +68,6 @@ class MapTask extends AbstractTask
                     $this->showTasks($value, $task . '/' . $key, $indent);
                 }
             }
-
-
         }
     }
 }

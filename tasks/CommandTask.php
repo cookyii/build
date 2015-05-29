@@ -26,7 +26,7 @@ class CommandTask extends AbstractTask
     public $callback;
 
     /**
-     * @return bool
+     * @inheritdoc
      */
     public function run()
     {

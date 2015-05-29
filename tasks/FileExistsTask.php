@@ -20,7 +20,7 @@ class FileExistsTask extends AbstractTask
     public $message;
 
     /**
-     * @return bool
+     * @inheritdoc
      */
     public function run()
     {
