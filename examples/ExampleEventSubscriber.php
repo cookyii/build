@@ -42,7 +42,7 @@ class ExampleEventSubscriber implements \Symfony\Component\EventDispatcher\Event
      */
     public function onAfterCreateTaskObject(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a subscriber event %s', BuildCommand::EVENT_AFTER_CREATE_TASK_OBJECT));
+        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_AFTER_CREATE_TASK_OBJECT));
     }
 
     /**
@@ -50,7 +50,7 @@ class ExampleEventSubscriber implements \Symfony\Component\EventDispatcher\Event
      */
     public function onBeforeExecuteTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a subscriber event %s', BuildCommand::EVENT_BEFORE_EXECUTE_TASK));
+        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_BEFORE_EXECUTE_TASK));
     }
 
     /**
@@ -58,6 +58,6 @@ class ExampleEventSubscriber implements \Symfony\Component\EventDispatcher\Event
      */
     public function onAfterExecuteTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a event %s', BuildCommand::EVENT_AFTER_EXECUTE_TASK));
+        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_AFTER_EXECUTE_TASK));
     }
 }

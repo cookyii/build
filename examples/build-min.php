@@ -5,6 +5,11 @@
  */
 
 return [
+    '.events' => [
+        'subscribers' => [],
+        'listeners' => [],
+    ],
+
     'map' => [
         'class' => 'cookyii\build\tasks\MapTask',
         'description' => 'Show map of all tasks in current build config',

@@ -1,4 +1,28 @@
 {
+  ".events": {
+    "subscribers": [
+      "cookyii\\build\\examples\\ExampleEventSubscriber"
+    ],
+    "listeners": {
+      "build.onBeforeCreateTaskObject": [
+        "cookyii\\build\\examples\\ExampleEventListener",
+        "onBeforeCreateTaskObject"
+      ],
+      "build.onAfterCreateTaskObject": [
+        "cookyii\\build\\examples\\ExampleEventListener",
+        "onAfterCreateTaskObject"
+      ],
+      "build.onBeforeExecuteTask": [
+        "cookyii\\build\\examples\\ExampleEventListener",
+        "onBeforeExecuteTask"
+      ],
+      "build.onAfterExecuteTask": [
+        "cookyii\\build\\examples\\ExampleEventListener",
+        "onAfterExecuteTask"
+      ]
+    }
+  },
+
   "map": {
     "class": "cookyii\\build\\tasks\\MapTask",
     "description": "Show map of all tasks in current build config"

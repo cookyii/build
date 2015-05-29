@@ -309,9 +309,9 @@ class BuildCommand extends AbstractCommand
 
     private function registerEventListeners()
     {
-        if (isset($this->config['.eventSubscribers'])) {
-            $subscribers = $this->config['.eventSubscribers'];
-            unset($this->config['.eventSubscribers']);
+        if (isset($this->config['.events']) && isset($this->config['.events']['subscribers'])) {
+            $subscribers = $this->config['.events']['subscribers'];
+            unset($this->config['.events']['subscribers']);
 
             if (is_array($subscribers) && !empty($subscribers)) {
                 foreach ($subscribers as $subscriberClass) {
@@ -320,12 +320,12 @@ class BuildCommand extends AbstractCommand
             }
         }
 
-        if (isset($this->config['.events'])) {
-            $events = $this->config['.events'];
-            unset($this->config['.events']);
+        if (isset($this->config['.events']) && isset($this->config['.events']['listeners'])) {
+            $listeners = $this->config['.events']['listeners'];
+            unset($this->config['.events']['listeners']);
 
-            if (is_array($events) && !empty($events)) {
-                foreach ($events as $eventName => $listener) {
+            if (is_array($listeners) && !empty($listeners)) {
+                foreach ($listeners as $eventName => $listener) {
                     $this->eventDispatcher->addListener($eventName, $listener);
                 }
             }
