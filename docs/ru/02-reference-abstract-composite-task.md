@@ -12,11 +12,8 @@ AbstractCompositeTask
 
 Напимер:
 ```php
-/**
- * Class MyCompositeTask
- * @package cookyii\build\tasks
- */
-class MyCompositeTask extends AbstractCompositeTask
+
+class MyCompositeTask extends \cookyii\build\tasks\AbstractCompositeTask
 {
 
     /**
