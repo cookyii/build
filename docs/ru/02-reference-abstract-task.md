@@ -1,6 +1,8 @@
 AbstractTask
 ============
 
+**\cookyii\build\tasks\AbstractTask**
+
 Этот абстрактный класс позваляет создавать задачу для выполнения в `cookyii/build`.
 
 Для создания задачи необходимо создать новый класс, унаследовать его от `cookyii\build\tasks\AbstractTask`
