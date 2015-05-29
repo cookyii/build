@@ -13,6 +13,9 @@ namespace cookyii\build\events;
 class TaskEvent extends \Symfony\Component\EventDispatcher\Event
 {
 
+    /** @var \cookyii\build\commands\BuildCommand */
+    protected $command;
+
     /** @var array|\cookyii\build\tasks\AbstractTask */
     protected $task;
 
@@ -20,13 +23,23 @@ class TaskEvent extends \Symfony\Component\EventDispatcher\Event
     protected $indent;
 
     /**
+     * @param \cookyii\build\commands\BuildCommand $command
      * @param array|\cookyii\build\tasks\AbstractTask $task
      * @param integer $indent
      */
-    public function __construct($task, $indent)
+    public function __construct($command, $task, $indent)
     {
+        $this->command = $command;
         $this->task = $task;
         $this->indent = $indent;
+    }
+
+    /**
+     * @return \cookyii\build\commands\BuildCommand
+     */
+    public function getCommand()
+    {
+        return $this->command;
     }
 
     /**
@@ -43,5 +56,14 @@ class TaskEvent extends \Symfony\Component\EventDispatcher\Event
     public function getIndent()
     {
         return $this->indent;
+    }
+
+    /**
+     * @param string $message
+     * @param integer $indent
+     */
+    public function log($message, $indent = 0)
+    {
+        $this->getCommand()->log($message, $this->indent + $indent);
     }
 }

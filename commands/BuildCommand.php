@@ -74,6 +74,7 @@ class BuildCommand extends AbstractCommand
         $this->log('<task-result> CONF </task-result> Reading config... ', 0, false);
 
         $this->readConfig();
+        $this->registerEventListeners();
 
         if (empty($this->config)) {
             $this->log('<error>Unable to read config file.</error>');
@@ -192,7 +193,7 @@ class BuildCommand extends AbstractCommand
                 $this->log(print_r($attributes, 1), $indent + 2);
             }
 
-            $Event = new TaskEvent($task, $indent + 1);
+            $Event = new TaskEvent($this, $task, $indent + 1);
 
             if (!$this->raiseEvent(static::EVENT_BEFORE_CREATE_TASK_OBJECT, $Event)) {
                 return false;
@@ -201,9 +202,7 @@ class BuildCommand extends AbstractCommand
             /** @var \cookyii\build\tasks\AbstractTask $Task */
             $Task = new $task['class']($this);
 
-            $EventTask = new TaskEvent($Task, $indent + 1);
-
-            $this->eventDispatcher->dispatch(static::EVENT_AFTER_CREATE_TASK_OBJECT, $EventTask);
+            $EventTask = new TaskEvent($this, $Task, $indent + 1);
 
             if (!$this->raiseEvent(static::EVENT_AFTER_CREATE_TASK_OBJECT, $EventTask)) {
                 return false;
@@ -214,15 +213,11 @@ class BuildCommand extends AbstractCommand
 
             $Task->configure($attributes);
 
-            $this->eventDispatcher->dispatch(static::EVENT_BEFORE_EXECUTE_TASK, $EventTask);
-
             if (!$this->raiseEvent(static::EVENT_BEFORE_EXECUTE_TASK, $EventTask)) {
                 return false;
             }
 
             $result = $Task->run();
-
-            $this->eventDispatcher->dispatch(static::EVENT_AFTER_EXECUTE_TASK, $EventTask);
 
             if (!$this->raiseEvent(static::EVENT_AFTER_EXECUTE_TASK, $EventTask)) {
                 return false;
@@ -309,6 +304,20 @@ class BuildCommand extends AbstractCommand
     {
         $this->configReader = $this->getConfigReader();
         $this->config = $this->configReader->read();
+    }
+
+    private function registerEventListeners()
+    {
+        if (isset($this->config['.events'])) {
+            $events = $this->config['.events'];
+            unset($this->config['.events']);
+
+            if (is_array($events) && !empty($events)) {
+                foreach ($events as $eventName => $listener) {
+                    $this->eventDispatcher->addListener($eventName, $listener);
+                }
+            }
+        }
     }
 
     /**
