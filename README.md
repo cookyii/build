@@ -3,8 +3,16 @@ Cookyii/Build
 
 Cookyii/build is a simple PHP build tool built on [Symfony Console][].
 
-Build config
+Documentation
+-------------
+
+- [Installing][]
+- [Usage][]
+
+Quick start
 ------------
+
+**Configuration**
 
 In project path must be file `build.php` (It can be called whatever you like. The name `build.php` is taken by default.)
 
@@ -42,20 +50,13 @@ return [
 ];
 ```
 
-Run build
----------
+**Run build**
 
 ```sh
 $ ./vendor/bin/build # start build from `default` task
 $ ./vendor/bin/build migrate # start build from `migrate` task
 $ ./vendor/bin/build -c ./project/build-conf.php # start build with specify non default conf file
 ```
-
-Documentation
--------------
-
-- [Installing][]
-- [Usage][]
 
 [Symfony Console]: http://symfony.com/doc/current/components/console/introduction.html
 [Installing]: docs/ru/00-installing.md

@@ -10,17 +10,20 @@ use cookyii\build\events\TaskEvent;
 return [
     '.events' => [
         BuildCommand::EVENT_BEFORE_EXECUTE_TASK => function (TaskEvent $TaskEvent) {
-            $TaskEvent->log(sprintf('this is a event %s', BuildCommand::EVENT_BEFORE_EXECUTE_TASK));
+            $TaskEvent->log(sprintf('this is a listener event %s', BuildCommand::EVENT_BEFORE_EXECUTE_TASK));
         },
         BuildCommand::EVENT_AFTER_EXECUTE_TASK => function (TaskEvent $TaskEvent) {
-            $TaskEvent->log(sprintf('this is a event %s', BuildCommand::EVENT_AFTER_EXECUTE_TASK));
+            $TaskEvent->log(sprintf('this is a listener event %s', BuildCommand::EVENT_AFTER_EXECUTE_TASK));
         },
         BuildCommand::EVENT_BEFORE_CREATE_TASK_OBJECT => function (TaskEvent $TaskEvent) {
-            $TaskEvent->log(sprintf('this is a event %s', BuildCommand::EVENT_BEFORE_CREATE_TASK_OBJECT));
+            $TaskEvent->log(sprintf('this is a listener event %s', BuildCommand::EVENT_BEFORE_CREATE_TASK_OBJECT));
         },
         BuildCommand::EVENT_AFTER_CREATE_TASK_OBJECT => function (TaskEvent $TaskEvent) {
-            $TaskEvent->log(sprintf('this is a event %s', BuildCommand::EVENT_AFTER_CREATE_TASK_OBJECT));
+            $TaskEvent->log(sprintf('this is a listener event %s', BuildCommand::EVENT_AFTER_CREATE_TASK_OBJECT));
         },
+    ],
+    '.eventSubscribers' => [
+        'cookyii\build\examples\ExampleEventSubscriber',
     ],
 
     'map' => [

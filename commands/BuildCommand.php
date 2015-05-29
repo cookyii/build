@@ -28,10 +28,11 @@ class BuildCommand extends AbstractCommand
     /** @var array */
     private $executed = [];
 
-    const EVENT_BEFORE_CREATE_TASK_OBJECT = 'build.before.create.task.object';
-    const EVENT_AFTER_CREATE_TASK_OBJECT = 'build.after.create.task.object';
-    const EVENT_BEFORE_EXECUTE_TASK = 'build.before.execute.task';
-    const EVENT_AFTER_EXECUTE_TASK = 'build.after.execute.task';
+    /** Events */
+    const EVENT_BEFORE_CREATE_TASK_OBJECT = 'build.onBeforeCreateTaskObject';
+    const EVENT_AFTER_CREATE_TASK_OBJECT = 'build.onAfterCreateTaskObject';
+    const EVENT_BEFORE_EXECUTE_TASK = 'build.onBeforeExecuteTask';
+    const EVENT_AFTER_EXECUTE_TASK = 'build.onAfterExecuteTask';
 
     protected function configure()
     {
@@ -308,6 +309,17 @@ class BuildCommand extends AbstractCommand
 
     private function registerEventListeners()
     {
+        if (isset($this->config['.eventSubscribers'])) {
+            $subscribers = $this->config['.eventSubscribers'];
+            unset($this->config['.eventSubscribers']);
+
+            if (is_array($subscribers) && !empty($subscribers)) {
+                foreach ($subscribers as $subscriberClass) {
+                    $this->eventDispatcher->addSubscriber(new $subscriberClass);
+                }
+            }
+        }
+
         if (isset($this->config['.events'])) {
             $events = $this->config['.events'];
             unset($this->config['.events']);
