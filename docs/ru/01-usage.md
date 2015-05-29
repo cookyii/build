@@ -133,8 +133,8 @@ WIP
 
 [наверх](#Использование)
 
-[AbstractCompositeTask]: 02-reference-abstract-composite-task.md
-[AbstractTask]: 02-reference-abstract-task.md
+[`AbstractCompositeTask`]: 02-reference-abstract-composite-task.md
+[`AbstractTask`]: 02-reference-abstract-task.md
 [CallableTask]: 02-reference-task-callable.md
 [CommandTask]: 02-reference-task-command.md
 [ComposerTask]: 02-reference-task-composer.md
