@@ -74,7 +74,7 @@ Reference конфигурации задачи
 return [
     // ./build default
     'default' => [
-        'class' => cookyii\build\tasks\EchoTask::className(),
+        'class' => 'cookyii\build\tasks\EchoTask',
         'description' => 'Run default task',
         'message' => 'Executing default task...',
     ],
