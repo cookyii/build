@@ -14,7 +14,7 @@ In project path must be file `build.php` (It can be called whatever you like. Th
 
 return [
     'map' => [
-        'class' => cookyii\build\tasks\MapTask::className(),
+        'class' => 'cookyii\build\tasks\MapTask',
         'description' => 'Show map of all tasks in current build config',
     ],
 
