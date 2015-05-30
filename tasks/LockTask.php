@@ -81,6 +81,10 @@ class LockTask extends AbstractCompositeTask
             throw new \RuntimeException(sprintf('%s already locked.', $this->filename));
         }
 
+        if ($this->output->isVerbose()) {
+            $this->log(sprintf('Locked "%s".', $this->filename));
+        }
+
         return true;
     }
 
@@ -90,6 +94,10 @@ class LockTask extends AbstractCompositeTask
     public function release()
     {
         $this->getLockHandler()->release();
+
+        if ($this->output->isVerbose()) {
+            $this->log(sprintf('Released "%s".', $this->filename));
+        }
 
         return true;
     }

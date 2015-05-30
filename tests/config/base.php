@@ -49,6 +49,14 @@ return [
         ],
     ],
 
+    'lock' => [
+        '.description' => 'Execute LockTask',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\LockTask',
+            'filename' => realpath(__DIR__ . '/../runtime/runtime.lock'),
+        ],
+    ],
+
     'map' => [
         '.description' => 'Execute MapTask',
         '.task' => 'cookyii\build\tasks\MapTask',
