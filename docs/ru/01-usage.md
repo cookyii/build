@@ -14,7 +14,9 @@
 
 Reference команды `build`
 ```sh
-build [-c|--config[="..."]] [-t|--config-type[="..."]] [--task-delimiter[="..."]] [--loop-threshold[="..."]] [--disable-events[="..."]] [--color[="..."]] [task]
+build [-c|--config[="..."]] [-t|--config-type[="..."]] [--task-delimiter[="..."]]
+    [--loop-threshold[="..."]] [--disable-events[="..."]] [--color[="..."]]
+    [task]
 ```
 
 | Параметр | По умолчанию | 
