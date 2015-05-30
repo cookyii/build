@@ -23,42 +23,54 @@ class ComposerTask extends AbstractCompositeTask
     {
         return [
             'default' => [
-                'class' => 'cookyii\build\tasks\MapTask',
-                'description' => 'Show map tasks',
-                'task' => $this,
+                '.description' => 'Show map tasks',
+                '.task' => [
+                    'class' => 'cookyii\build\tasks\MapTask',
+                    'task' => $this,
+                ],
             ],
 
             'install-dev' => [
-                'class' => '\cookyii\build\tasks\CommandTask',
-                'description' => 'Install all depending for development environment (with `require-dev`)',
-                'commandline' => $this->composer . ' install --prefer-dist',
+                '.description' => 'Install all depending for development environment (with `require-dev`)',
+                '.task' => [
+                    'class' => '\cookyii\build\tasks\CommandTask',
+                    'commandline' => $this->composer . ' install --prefer-dist',
+                ],
             ],
             'update-dev' => [
-                'class' => '\cookyii\build\tasks\CommandTask',
-                'description' => 'Update all depending for development environment (with `require-dev`)',
-                'commandline' => $this->composer . ' update --prefer-dist',
+                '.description' => 'Update all depending for development environment (with `require-dev`)',
+                '.task' => [
+                    'class' => '\cookyii\build\tasks\CommandTask',
+                    'commandline' => $this->composer . ' update --prefer-dist',
+                ],
             ],
 
             'install' => [
-                'class' => '\cookyii\build\tasks\CommandTask',
-                'description' => 'Install all depending for productions environment (without `require-dev`)',
-                'commandline' => $this->composer . ' install --prefer-dist --no-dev',
+                '.description' => 'Install all depending for productions environment (without `require-dev`)',
+                '.task' => [
+                    'class' => '\cookyii\build\tasks\CommandTask',
+                    'commandline' => $this->composer . ' install --prefer-dist --no-dev',
+                ],
             ],
             'update' => [
-                'class' => '\cookyii\build\tasks\CommandTask',
-                'description' => 'Update all depending for productions environment (without `require-dev`)',
-                'commandline' => $this->composer . ' update --prefer-dist --no-dev',
+                '.description' => 'Update all depending for productions environment (without `require-dev`)',
+                '.task' => [
+                    'class' => '\cookyii\build\tasks\CommandTask',
+                    'commandline' => $this->composer . ' update --prefer-dist --no-dev',
+                ],
             ],
 
             'selfupdate' => [
-                'depends' => ['*/install'],
-                'class' => '\cookyii\build\tasks\CommandTask',
-                'description' => 'Update composer script',
-                'commandline' => $this->composer . ' selfupdate',
+                '.description' => 'Update composer script',
+                '.depends' => ['*/install'],
+                '.task' => [
+                    'class' => '\cookyii\build\tasks\CommandTask',
+                    'commandline' => $this->composer . ' selfupdate',
+                ],
             ],
             'self-update' => [
-                'depends' => ['*/selfupdate'],
-                'description' => 'Update composer script (alias for `selfupdate`)',
+                '.description' => 'Update composer script (alias for `selfupdate`)',
+                '.depends' => ['*/selfupdate'],
             ]
         ];
     }

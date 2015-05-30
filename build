@@ -28,5 +28,25 @@ if (!defined('COOKYII_BUILD_COMPOSER_INSTALL')) {
 
 require_once COOKYII_BUILD_COMPOSER_INSTALL;
 
+/**
+ * @param mixed $var
+ * @param integer $depth
+ * @param boolean $highlight
+ * @param boolean $return
+ * @return string|boolean
+ */
+function dump($var, $depth = 10, $highlight = false, $return = false)
+{
+    $dump = \cookyii\build\components\VarDumper::dumpAsString($var, $depth, $highlight);
+
+    if ($return) {
+        return $dump;
+    } else {
+        echo $dump;
+    }
+
+    return true;
+}
+
 (new \cookyii\build\applications\BuildApplication())
     ->run();

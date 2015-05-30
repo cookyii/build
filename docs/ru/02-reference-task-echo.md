@@ -14,16 +14,20 @@ Reference
 [
     // ./build message
     'datetime' => [
-        'class' => '\cookyii\build\tasks\EchoTask',
-        'description' => 'Show some message',
-        'message' => 'Hello world!',
+        '.description' => 'Show some message',
+        '.task' => [
+            'class' => '\cookyii\build\tasks\EchoTask',
+            'message' => 'Hello world!',
+        ],
     ],
     
     // ./build datetime
     'datetime' => [
-        'class' => '\cookyii\build\tasks\EchoTask',
-        'description' => 'Show datetime',
-        'message' => 'Now ' . date('d.m.Y H:i'),
+        '.description' => 'Show datetime',
+        '.task' => [
+            'class' => '\cookyii\build\tasks\EchoTask',
+            'message' => 'Now ' . date('d.m.Y H:i'),
+        ],
     ],
 ],
 ```

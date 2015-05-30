@@ -21,18 +21,22 @@ Reference
 [
     // ./build check-config
     'check-config' => [
-        'class' => '\cookyii\build\tasks\FileExistsTask',
-        'description' => 'Check application config',
-        'filename' => __DIR__ . '/config/mail-local.php',
-        'message' => 'Application configuration not exists.',
+        '.description' => 'Check application config',
+        '.task' => [
+            'class' => '\cookyii\build\tasks\FileExistsTask',
+            'filename' => __DIR__ . '/config/mail-local.php',
+            'message' => 'Application configuration not exists.',            
+        ],
     ],
     
     // ./build check-lock
     'check-lock' => [
-        'class' => '\cookyii\build\tasks\FileExistsTask',
-        'description' => 'Check lock file',
-        'filename' => __DIR__ . '/runtime/.lock',
-        'message' => 'Application locked.',
+        '.description' => 'Check lock file',
+        '.task' => [
+            'class' => '\cookyii\build\tasks\FileExistsTask',
+            'filename' => __DIR__ . '/runtime/.lock',
+            'message' => 'Application locked.',
+        ],
     ],
 ],
 ```

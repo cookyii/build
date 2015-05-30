@@ -38,28 +38,34 @@ class LockTask extends AbstractCompositeTask
     {
         return [
             'default' => [
-                'class' => 'cookyii\build\tasks\MapTask',
-                'description' => 'Show map tasks',
-                'task' => $this,
+                '.description' => 'Show map tasks',
+                '.task' => [
+                    'class' => 'cookyii\build\tasks\MapTask',
+                    'task' => $this,
+                ],
             ],
 
             'disable' => [
-                'depends' => ['*/lock'],
-                'description' => 'Put a lock (alias for `lock`)',
+                '.description' => 'Put a lock (alias for `lock`)',
+                '.depends' => ['*/lock'],
             ],
             'lock' => [
-                'class' => 'cookyii\build\tasks\CallableTask',
-                'description' => 'Put a lock',
-                'handler' => [$this, 'lock'],
+                '.description' => 'Put a lock',
+                '.task' => [
+                    'class' => 'cookyii\build\tasks\CallableTask',
+                    'handler' => [$this, 'lock'],
+                ],
             ],
             'enable' => [
-                'depends' => ['*/release'],
-                'description' => 'Release a lock (alias for `release`)',
+                '.description' => 'Release a lock (alias for `release`)',
+                '.depends' => ['*/release'],
             ],
             'release' => [
-                'class' => 'cookyii\build\tasks\CallableTask',
-                'description' => 'Release a lock',
-                'handler' => [$this, 'release'],
+                '.description' => 'Release a lock',
+                '.task' => [
+                    'class' => 'cookyii\build\tasks\CallableTask',
+                    'handler' => [$this, 'release'],
+                ],
             ],
         ];
     }

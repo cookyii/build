@@ -16,8 +16,8 @@ Reference
 [
     // ./build map
     'map' => [
-        'class' => '\cookyii\build\tasks\MapTask',
-        'description' => 'Show map of all tasks in current build config',
+        '.description' => 'Show map of all tasks in current build config',
+        '.task' => '\cookyii\build\tasks\MapTask',
     ],
 ],
 ```

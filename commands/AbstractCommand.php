@@ -31,7 +31,7 @@ abstract class AbstractCommand extends Console\Command\Command
         $method = $newLine ? 'writeln' : 'write';
 
         if (is_array($message) || is_object($message)) {
-            $message = dump($message, 1);
+            $message = dump($message, 3, false, true);
         }
 
         $messages = explode("\n", $message);

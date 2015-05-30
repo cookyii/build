@@ -11,29 +11,33 @@ return [
     ],
 
     'map' => [
-        'class' => 'cookyii\build\tasks\MapTask',
-        'description' => 'Show map of all tasks in current build config',
+        '.description' => 'Show map of all tasks in current build config',
+        '.class' => 'cookyii\build\tasks\MapTask',
     ],
 
     'default' => [
-        'depends' => ['build'],
-        'description' => 'Default build',
+        '.description' => 'Default build',
+        '.depends' => ['build'],
     ],
 
     'build' => [
-        'depends' => ['composer', 'migrate'],
-        'description' => 'Build project with demo environment',
+        '.description' => 'Build project with demo environment',
+        '.depends' => ['composer', 'migrate'],
     ],
 
     'composer' => [
-        'class' => 'cookyii\build\tasks\ComposerTask',
-        'description' => 'Install all depending composer for development environment (with `required-dev`)',
-        'defaultTask' => 'install-dev',
+        '.description' => 'Install all depending composer for development environment (with `required-dev`)',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\ComposerTask',
+            'defaultTask' => 'install-dev',
+        ],
     ],
 
     'migrate' => [
-        'class' => 'cookyii\build\tasks\EchoTask',
-        'description' => 'Run database migration',
-        'message' => 'Executing migrations for database...',
+        '.description' => 'Run database migration',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\EchoTask',
+            'message' => 'Executing migrations for database...',
+        ],
     ],
 ];

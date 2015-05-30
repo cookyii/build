@@ -24,9 +24,11 @@ Reference
     // ./build composer/update
     // ./build composer/selfupdate
     'composer' => [
-        'class' => '\cookyii\build\tasks\ComposerTask',
-        'description' => 'Install all depending for development environment (with `require-dev`)',
-        'composer' => '../composer.phar',
+        '.description' => 'Install all depending for development environment (with `require-dev`)',
+        '.task' => [
+            'class' => '\cookyii\build\tasks\ComposerTask',
+            'composer' => '../composer.phar',
+        ],
     ],
 ],
 ```

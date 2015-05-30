@@ -20,6 +20,9 @@ class BuildCommand extends AbstractCommand
     public $eventDispatcher;
 
     /** @var array */
+    public $rawConfig = [];
+
+    /** @var array */
     public $config = [];
 
     /** @var \cookyii\build\config\AbstractConfigReader */
@@ -93,12 +96,17 @@ class BuildCommand extends AbstractCommand
                 $this->log(sprintf('<comment>[config file]</comment> %s', $this->configReader->configFile), 1);
             }
 
-            $task = $input->getArgument('task');
+            $task_name = $input->getArgument('task');
+            if (empty($task_name)) {
+                throw new \InvalidArgumentException('Empty task name.');
+            }
 
             $this->log('');
 
-            if (false === $this->executeTasks($this->config, $task, '[' . $task . ']', 0)) {
-                $this->log('<task-error> TASK </task-error> <error>[' . $task . '] failure.</error>');
+            $task = $this->findTask($task_name);
+
+            if (!$this->executeTask($task, $task_name, 0)) {
+                $this->log('<task-error> TASK </task-error> <error>[' . $task_name . '] failure.</error>');
 
                 $result = 1;
             }
@@ -110,57 +118,45 @@ class BuildCommand extends AbstractCommand
     }
 
     /**
-     * @param array $tasks
      * @param string $task_name
-     * @param string|null $prefix
-     * @param integer $indent
-     * @return bool
+     * @return array
      */
-    private function executeTasks(array $tasks, $task_name, $prefix = null, $indent = 0)
+    private function findTask($task_name)
     {
         $this->detectLoop($task_name);
 
-        $chunks = explode($this->getDelimiter(), $task_name);
-
-        if (empty($chunks)) {
+        if (empty($task_name)) {
             throw new \InvalidArgumentException(sprintf('Bad task name "%s".', $task_name));
         } else {
-            $task = $tasks;
-
-            foreach ($chunks as $chunk) {
-                if (!isset($task[$chunk])) {
-                    throw new \RuntimeException($prefix . ' task not found.');
-                } else {
-                    $task = $task[$chunk];
-                }
+            if (!isset($this->config[$task_name])) {
+                throw new \RuntimeException(sprintf('%s task not found.', $task_name));
             }
 
-            return $this->executeTask($tasks, $task, $prefix, $indent);
+            return $this->config[$task_name];
         }
     }
 
     /**
-     * @param array $tasks
      * @param array $task
      * @param string $prefix
      * @param integer $indent
      * @return bool
      */
-    public function executeTask(array $tasks, array $task, $prefix, $indent)
+    public function executeTask(array $task, $prefix, $indent)
     {
         $this->log('<task> TASK </task> ' . $prefix);
 
-        $class = isset($task['class']) && !empty($task['class'])
-            ? $task['class']
+        $className = isset($task['.task']) && !empty($task['.task'])
+            ? is_array($task['.task']) ? $task['.task']['class'] : $task['.task']
             : 'cookyii\build\tasks\BlankTask';
 
-        if (!class_exists($class)) {
-            throw new \RuntimeException(sprintf('Class "%s" not found.', $class));
+        if (!class_exists($className)) {
+            throw new \RuntimeException(sprintf('Class "%s" not found.', $className));
         }
 
         if ($this->output->isVerbose()) {
             $this->log('<comment>[class]</comment> ', $indent + 1, false);
-            $this->log($class);
+            $this->log($className);
         }
 
         $Event = new TaskEvent($this, $task, $indent + 1);
@@ -170,9 +166,11 @@ class BuildCommand extends AbstractCommand
         }
 
         /** @var \cookyii\build\tasks\AbstractTask $Task */
-        $Task = new $class($this);
+        $Task = new $className($this);
 
-        $attributes = $task;
+        $attributes = isset($task['.task']) && !empty($task['.task'])
+            ? is_array($task['.task']) ? $task['.task'] : []
+            : [];
 
         $attributes['prefix'] = $prefix;
         $attributes['indent'] = $indent;
@@ -190,29 +188,21 @@ class BuildCommand extends AbstractCommand
             return false;
         }
 
-        if (isset($task['depends']) && !empty($task['depends'])) {
+        if (isset($task['.depends']) && !empty($task['.depends'])) {
             if ($this->output->isVerbose()) {
                 $this->log('<comment>[depends]</comment>', $indent + 1);
-                $chunks = array_chunk($task['depends'], 4);
+                $chunks = array_chunk($task['.depends'], 4);
                 foreach ($chunks as $chunk) {
                     $this->log(implode(', ', $chunk), $indent + 2);
                 }
             }
 
-            foreach ($task['depends'] as $depend) {
-                $chunks = explode($this->getDelimiter(), str_replace([']', '['], '', $prefix));
-                array_pop($chunks);
-
-                $depend = empty($chunks) ? $depend : str_replace('*', implode($this->getDelimiter(), $chunks), $depend);
-
-                $result = $this->executeTasks(
-                    $tasks,
-                    $depend,
-                    $prefix . '[' . $depend . ']'
-                );
+            foreach ($task['.depends'] as $depend_name) {
+                $depend = $this->findTask($depend_name);
+                $result = $this->executeTask($depend, $prefix . '[' . $depend_name . ']', $indent + 1);
 
                 if (false === $result) {
-                    $this->log('<task-error> TASK </task-error> <error>' . $prefix . '[' . $depend . '] failure.</error>');
+                    $this->log('<task-error> TASK </task-error> <error>' . $prefix . '[' . $depend_name . '] failure.</error>');
 
                     return false;
                 }
@@ -312,14 +302,14 @@ class BuildCommand extends AbstractCommand
     private function readConfig()
     {
         $this->configReader = $this->getConfigReader();
-        $this->config = $this->configReader->read();
+        $this->rawConfig = $this->configReader->read();
+        $this->config = $this->configReader->expandConfig($this->rawConfig);
     }
 
     private function registerEventListeners()
     {
-        if (isset($this->config['.events']) && isset($this->config['.events']['subscribers'])) {
-            $subscribers = $this->config['.events']['subscribers'];
-            unset($this->config['.events']['subscribers']);
+        if (isset($this->rawConfig['.events']) && isset($this->rawConfig['.events']['subscribers'])) {
+            $subscribers = $this->rawConfig['.events']['subscribers'];
 
             if (is_array($subscribers) && !empty($subscribers)) {
                 foreach ($subscribers as $subscriberClass) {
@@ -328,9 +318,8 @@ class BuildCommand extends AbstractCommand
             }
         }
 
-        if (isset($this->config['.events']) && isset($this->config['.events']['listeners'])) {
-            $listeners = $this->config['.events']['listeners'];
-            unset($this->config['.events']['listeners']);
+        if (isset($this->rawConfig['.events']) && isset($this->rawConfig['.events']['listeners'])) {
+            $listeners = $this->rawConfig['.events']['listeners'];
 
             if (is_array($listeners) && !empty($listeners)) {
                 foreach ($listeners as $eventName => $listener) {

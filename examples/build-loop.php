@@ -6,27 +6,31 @@
 
 return [
     'default' => [
-        'depends' => ['build'],
-        'description' => 'Default build',
+        '.description' => 'Default build',
+        '.depends' => ['build'],
     ],
 
     'build' => [
-        'depends' => ['instruction/first'],
-        'description' => 'Build project with demo environment',
+        '.description' => 'Build project with demo environment',
+        '.depends' => ['instruction/first'],
     ],
 
     'instruction' => [
         'first' => [
-            'class' => 'cookyii\build\tasks\EchoTask',
-            'description' => 'Install all depending for development environment (with `require-dev`)',
-            'message' => 'Execute first instruction',
-            'depends' => ['instruction/second'],
+            '.description' => 'Install all depending for development environment (with `require-dev`)',
+            '.depends' => ['instruction/second'],
+            '.task' => [
+                'class' => 'cookyii\build\tasks\EchoTask',
+                'message' => 'Execute first instruction',
+            ],
         ],
         'second' => [
-            'class' => 'cookyii\build\tasks\EchoTask',
-            'description' => 'Update all depending for development environment (with `require-dev`)',
-            'message' => 'Execute second instruction',
-            'depends' => ['instruction/first'],
+            '.description' => 'Update all depending for development environment (with `require-dev`)',
+            '.depends' => ['instruction/first'],
+            '.task' => [
+                'class' => 'cookyii\build\tasks\EchoTask',
+                'message' => 'Execute second instruction',
+            ],
         ],
     ],
 ];

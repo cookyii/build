@@ -21,34 +21,38 @@ Reference
 [
     // ./build clear
     'clear' => [
-        'class' => '\cookyii\build\tasks\DeleteTask',
-        'description' => 'Clear app',
-        'deleteDir' => false,
-        'fileSets' => [
-            [
-                'dir' => __DIR__ . '/runtime/logs',
-                'exclude' => ['payments-*.log'],
-            ],
-            [
-                'dir' => __DIR__ . '/runtime/debug',
-                'exclude' => [],
+        '.description' => 'Clear app',
+        '.task' => [
+            'class' => '\cookyii\build\tasks\DeleteTask',
+            'deleteDir' => false,
+            'fileSets' => [
+                [
+                    'dir' => __DIR__ . '/runtime/logs',
+                    'exclude' => ['payments-*.log'],
+                ],
+                [
+                    'dir' => __DIR__ . '/runtime/debug',
+                    'exclude' => [],
+                ],
             ],
         ],
     ],
     
     // ./build remove-all-packages
     'remove-all-packages' => [
-        'class' => '\cookyii\build\tasks\DeleteTask',
-        'description' => 'Remove all packages',
-        'deleteDir' => true,
-        'fileSets' => [
-            [
-                'dir' => __DIR__ . '/vendor',
-                'exclude' => ['payments-*.log'],
-            ],
-            [
-                'dir' => __DIR__ . '/node-modules',
-                'exclude' => [],
+        '.description' => 'Remove all packages',
+        '.task' => [
+            'class' => '\cookyii\build\tasks\DeleteTask',
+            'deleteDir' => true,
+            'fileSets' => [
+                [
+                    'dir' => __DIR__ . '/vendor',
+                    'exclude' => ['payments-*.log'],
+                ],
+                [
+                    'dir' => __DIR__ . '/node-modules',
+                    'exclude' => [],
+                ],
             ],
         ],
     ],

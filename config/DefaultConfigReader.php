@@ -25,8 +25,6 @@ class DefaultConfigReader extends AbstractConfigReader
         } else {
             $config = include($this->configFile);
 
-            $config = $this->expandCompositeTasks($config);
-
             return $config;
         }
     }

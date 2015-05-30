@@ -22,21 +22,25 @@ Reference
 [
     // ./build install
     'install' => [
-        'class' => '\cookyii\build\tasks\CommandTask',
-        'description' => 'Run `make install` in project folder',
-        'commandline' => 'make install',
-        'cwd' => '/var/www/project',
+        '.description' => 'Run `make install` in project folder',
+        '.task' => [
+            'class' => '\cookyii\build\tasks\CommandTask',
+            'commandline' => 'make install',
+            'cwd' => '/var/www/project',
+        ],
     ],
     
     // ./build npm
     'npm' => [
-        'class' => '\cookyii\build\tasks\CommandTask',
-        'description' => 'Install node.js packages',
-        'commandline' => 'npm install',
-        'cwd' => __DIR__,
-        'callback' => function (CommandTask $Task, $result) {
-            save_result_to_file($result);
-        }
+        '.description' => 'Install node.js packages',
+        '.task' => [
+            'class' => '\cookyii\build\tasks\CommandTask',
+            'commandline' => 'npm install',
+            'cwd' => __DIR__,
+            'callback' => function (CommandTask $Task, $result) {
+                save_result_to_file($result);
+            },
+        ],
     ],
 ],
 ```

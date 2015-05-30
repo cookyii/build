@@ -20,25 +20,31 @@ Reference
 [
     // ./build email
     'email' => [
-        'class' => '\cookyii\build\tasks\CallableTask',
-        'description' => 'Send email about new build',
-        'handler' => function (CallableTask $Task) {
-            mailto('email@localhost', 'New build', 'Hello, it\'s a new build.');
-        },
+        '.description' => 'Send email about new build',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\CallableTask',
+            'handler' => function (CallableTask $Task) {
+                mailto('email@localhost', 'New build', 'Hello, it\'s a new build.');
+            },
+        ],
     ],
     
     // ./build some-static
     'some-static' => [
-        'class' => '\cookyii\build\tasks\CallableTask',
-        'description' => 'Call \app\Command::staticMethod()',
-        'handler' => ['\app\Command', 'staticMethod'],
+        '.description' => 'Call \app\Command::staticMethod()',
+        '.task' => [
+            'class' => '\cookyii\build\tasks\CallableTask',
+            'handler' => ['\app\Command', 'staticMethod'],
+        ],
     ],
     
     // ./build some-method
     'some-method' => [
-        'class' => '\cookyii\build\tasks\CallableTask',
-        'description' => 'Call $SomeObject->someMethod()',
-        'handler' => [$SomeObject, 'someMethod'],
+        '.description' => 'Call $SomeObject->someMethod()',
+        '.task' => [
+            'class' => '\cookyii\build\tasks\CallableTask',
+            'handler' => [$SomeObject, 'someMethod'],
+        ],
     ],
 ],
 ```

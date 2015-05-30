@@ -29,14 +29,18 @@ class MyCompositeTask extends \cookyii\build\tasks\AbstractCompositeTask
             ],
 
             'show-something' => [
-                'class' => '\cookyii\build\tasks\EchoTask',
-                'description' => 'Show something',
-                'message' => 'Hello world!',
+                '.description' => 'Show something',
+                '.task' => [
+                    'class' => '\cookyii\build\tasks\EchoTask',
+                    'message' => 'Hello world!',
+                ],
             ],
             'execute-something' => [
-                'class' => '\cookyii\build\tasks\CommandTask',
-                'description' => 'Execute something',
-                'commandline' => 'ls -lah',
+                '.description' => 'Execute something',
+                '.task' => [
+                    'class' => '\cookyii\build\tasks\CommandTask',
+                    'commandline' => 'ls -lah',
+                ],
             ],
         ];
     }

@@ -58,9 +58,9 @@ Reference конфигурации задачи
 
 | Атрибут | Описание | 
 | ------- | -------- |
-| `class` | Название PHP класса задачи |
-| `description` | Описание задачи (для задачи [`MapTask`][], но будет полезно просто видеть описание в конфигурационном файле) |
-| `depends` | Массив задач, которые должны быть выполнены перед текущей задачей |
+| `.task` | Массив конфигурации или название PHP класса задачи |
+| `.description` | Описание задачи (для задачи [`MapTask`][], но будет полезно просто видеть описание в конфигурационном файле) |
+| `.depends` | Массив задач, которые должны быть выполнены перед текущей задачей |
 | `*` | Остальные атрибуты, которые требуются для конкретной задачи |
 
 [наверх](#Использование)
@@ -76,24 +76,30 @@ Reference конфигурации задачи
 return [
     // ./build default
     'default' => [
-        'class' => 'cookyii\build\tasks\EchoTask',
-        'description' => 'Run default task',
-        'message' => 'Executing default task...',
+        '.description' => 'Run default task',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\EchoTask',
+            'message' => 'Executing default task...',
+        ],
     ],
 
     'build' => [
         // ./build build/prod
         'prod' => [
-            'class' => 'cookyii\build\tasks\EchoTask',
-            'description' => 'Run production build',
-            'message' => 'Executing production build...',
+            '.description' => 'Run production build',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\EchoTask',
+                'message' => 'Executing production build...',
+            ],
         ],
 
         // ./build build/dev
         'dev' => [
-            'class' => 'cookyii\build\tasks\EchoTask',
-            'description' => 'Run dev build',
-            'message' => 'Executing dev build...',
+            '.description' => 'Run dev build',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\EchoTask',
+                'message' => 'Executing dev build...',
+            ],
         ],
     ],
 ];
@@ -108,21 +114,27 @@ return [
 ```json
 {
   "default": {
-    "class": "cookyii\\build\\tasks\\EchoTask",
-    "description": "Run default task",
-    "message": "Executing default task..."
+    ".description": "Run default task",
+    ".task": {
+        "class": "cookyii\\build\\tasks\\EchoTask",
+        "message": "Executing default task..."
+    }
   },
 
   "build": {
     "prod": {
-      "class": "cookyii\\build\\tasks\\EchoTask",
-      "description": "Run production build",
-      "message": "Executing production build..."
+      ".description": "Run production build",
+      ".taks": {
+        "class": "cookyii\\build\\tasks\\EchoTask",
+        "message": "Executing production build..."
+      }
     },
     "dev": {
-      "class": "cookyii\\build\\tasks\\EchoTask",
-      "description": "Run dev build",
-      "message": "Executing dev build..."
+      ".description": "Run dev build",
+      ".task": {
+        "class": "cookyii\\build\\tasks\\EchoTask",
+        "message": "Executing dev build..."
+      }
     }
   }
 }

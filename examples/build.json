@@ -24,171 +24,205 @@
   },
 
   "map": {
-    "class": "cookyii\\build\\tasks\\MapTask",
-    "description": "Show map of all tasks in current build config"
+    ".description": "Show map of all tasks in current build config",
+    ".task": "cookyii\\build\\tasks\\MapTask"
   },
 
   "default": {
-    "depends": ["build/dev"],
-    "description": "Default build"
+    ".description": "Default build",
+    ".depends": ["build/dev"]
+  },
+
+  "runtime": {
+    ".description": "Show map of task runtime/*",
+    ".task": {
+      "class": "cookyii\\build\\tasks\\LockTask",
+      "lockFile": "runtime/runtime.lock"
+    }
   },
 
   "build": {
     "prod": {
-      "depends": [
+      ".description": "Build project with production environment",
+      ".depends": [
         "environment/check",
         "environment/init/production",
         "composer",
         "npm",
         "less",
         "migrate"
-      ],
-      "description": "Build project with production environment"
+      ]
     },
     "demo": {
-      "depends": [
+      ".description": "Build project with demo environment",
+      ".depends": [
         "environment/check",
         "environment/init/demo",
         "composer",
         "npm",
         "less",
         "migrate"
-      ],
-      "description": "Build project with demo environment"
+      ]
     },
     "dev": {
-      "depends": [
+      ".description": "Build project with developer environment",
+      ".depends": [
         "environment/check",
         "environment/init",
         "composer",
         "npm",
         "less",
         "migrate"
-      ],
-      "description": "Build project with developer environment"
+      ]
     }
   },
 
   "clear": {
-    "depends": [
-      "clear/assets",
-      "clear/vendor",
-      "clear/node"
+    ".description": "Delete all temporary files and remove installed packages",
+    ".depends": [
+      "*/assets",
+      "*/vendor",
+      "*/node"
     ],
-    "description": "Delete all temporary files and remove installed packages",
     "assets": {
-      "class": "cookyii\\build\\tasks\\DeleteTask",
-      "description": "Remove all assets",
-      "deleteDir": false,
-      "fileSets": [
-        {
-          "dir": "assets/css",
-          "exclude": [".gitignore"]
-        }
-      ]
+      ".description": "Remove all assets",
+      ".task": {
+        "class": "cookyii\\build\\tasks\\DeleteTask",
+        "deleteDir": false,
+        "fileSets": [
+          {
+            "dir": "assets/css",
+            "exclude": [".gitignore"]
+          }
+        ]
+      }
     },
     "vendor": {
-      "class": "cookyii\\build\\tasks\\DeleteTask",
-      "description": "Remove all the packages in the directory `vendor`",
-      "deleteDir": false,
-      "fileSets": [
-        {
-          "dir": "vendor",
-          "exclude": [".gitignore"]
-        }
-      ]
+      ".description": "Remove all the packages in the directory `vendor`",
+      ".task": {
+        "class": "cookyii\\build\\tasks\\DeleteTask",
+        "deleteDir": false,
+        "fileSets": [
+          {
+            "dir": "vendor",
+            "exclude": [".gitignore"]
+          }
+        ]
+      }
     },
     "node": {
-      "class": "cookyii\\build\\tasks\\DeleteTask",
-      "description": "Remove all the packages in the directory `node_modules` and remove the directory `node_modules`",
-      "deleteDir": true,
-      "fileSets": ["node_modules"]
+      ".description": "Remove all the packages in the directory `node_modules` and remove the directory `node_modules`",
+      ".task": {
+        "class": "cookyii\\build\\tasks\\DeleteTask",
+        "deleteDir": true,
+        "fileSets": ["node_modules"]
+      }
     },
     "all": {
-      "class": "cookyii\\build\\tasks\\DeleteTask",
-      "description": "Delete all temporary files and remove installed packages (alternative)",
-      "fileSets": [
-        {
-          "dir": "assets/css",
-          "exclude": [".gitignore"]
-        },
-        {
-          "dir": "vendor",
-          "exclude": [".gitignore"]
-        },
-        {
-          "dir": "node_modules",
-          "exclude": []
-        }
-      ]
+      ".description": "Delete all temporary files and remove installed packages (alternative)",
+      ".task": {
+        "class": "cookyii\\build\\tasks\\DeleteTask",
+        "fileSets": [
+          {
+            "dir": "assets/css",
+            "exclude": [".gitignore"]
+          },
+          {
+            "dir": "vendor",
+            "exclude": [".gitignore"]
+          },
+          {
+            "dir": "node_modules",
+            "exclude": []
+          }
+        ]
+      }
     }
   },
 
   "environment": {
     "check": {
-      "class": "cookyii\\build\\tasks\\FileExistsTask",
-      "description": "Check file exists `.env.php`",
-      "filename": ".env.php",
-      "message": "Внимание!\nНеобходимо заполнить параметры окружения\nв файле %s\nШаблон в файле .environment.example.php"
+      ".description": "Check file exists `.env.php`",
+      ".task": {
+        "class": "cookyii\\build\\tasks\\FileExistsTask",
+        "filename": ".env.php",
+        "message": "Внимание!\nНеобходимо заполнить параметры окружения\nв файле %s\nШаблон в файле .environment.example.php"
+      }
     },
     "init": {
-      "class": "cookyii\\build\\tasks\\CommandTask",
-      "description": "Initialize a new environment (manual selection)",
-      "commandline": "php ./bin/init",
-      "production": {
+      ".description": "Initialize a new environment (manual selection)",
+      ".task": {
         "class": "cookyii\\build\\tasks\\CommandTask",
-        "description": "Initialize a new environment (selected Production)",
-        "commandline": "./bin/init --env=Production --force"
+        "commandline": "php ./bin/init"
+      },
+      "production": {
+        ".description": "Initialize a new environment (selected Production)",
+        ".task": {
+          "class": "cookyii\\build\\tasks\\CommandTask",
+          "commandline": "./bin/init --env=Production --force"
+        }
       },
       "demo": {
-        "class": "cookyii\\build\\tasks\\CommandTask",
-        "description": "Initialize a new environment (selected Demo)",
-        "commandline": "./bin/init --env=Demo --force"
+        ".description": "Initialize a new environment (selected Demo)",
+        ".task": {
+          "class": "cookyii\\build\\tasks\\CommandTask",
+          "commandline": "./bin/init --env=Demo --force"
+        }
       }
     }
   },
 
   "composer": {
-    "class": "cookyii\\build\\tasks\\ComposerTask",
-    "description": "Install all depending composer for development environment (with `required-dev`)",
-    "defaultTask": "install-dev"
+    ".description": "Install all depending composer for development environment (with `required-dev`)",
+    ".task": {
+      "class": "cookyii\\build\\tasks\\ComposerTask",
+      "composer": "../../composer.phar"
+    }
   },
 
   "npm": {
-    "class": "cookyii\\build\\tasks\\CommandTask",
-    "description": "Install all npm and bower dependencies",
-    "commandline": "npm install"
+    ".description": "Install all npm and bower dependencies",
+    ".task": {
+      "class": "cookyii\\build\\tasks\\CommandTask",
+      "commandline": "npm install"
+    }
   },
 
   "less": {
-    "depends": [
-      "less/frontend",
-      "less/backend"
+    ".description": "Compile all less styles",
+    ".depends": [
+      "*/frontend",
+      "*/backend"
     ],
-    "description": "Compile all less styles",
     "frontend": {
-      "class": "cookyii\\build\\tasks\\CommandTask",
-      "description": "Compile all less styles for frontend application",
-      "commandline": [
-        "./node_modules/.bin/lessc --source-map-map-inline assets/less/styles.less > assets/css/styles-raw.css",
-        "./node_modules/.bin/autoprefixer assets/css/styles-raw.css -o assets/css/styles.css",
-        "./node_modules/.bin/csso -i assets/css/styles.css -o assets/css/styles-o.css"
-      ]
+      ".description": "Compile all less styles for frontend application",
+      ".task": {
+        "class": "cookyii\\build\\tasks\\CommandTask",
+        "commandline": [
+          "./node_modules/.bin/lessc --source-map-map-inline assets/less/styles.less > assets/css/styles-raw.css",
+          "./node_modules/.bin/autoprefixer assets/css/styles-raw.css -o assets/css/styles.css",
+          "./node_modules/.bin/csso -i assets/css/styles.css -o assets/css/styles-o.css"
+        ]
+      }
     },
     "backend": {
-      "class": "cookyii\\build\\tasks\\CommandTask",
-      "description": "Compile all less styles for backend application",
-      "commandline": [
-        "./node_modules/.bin/lessc --source-map-map-inline assets/less/styles.less > assets/css/styles-raw.css",
-        "./node_modules/.bin/autoprefixer assets/css/styles-raw.css -o assets/css/styles.css",
-        "./node_modules/.bin/csso -i assets/css/styles.css -o assets/css/styles-o.css"
-      ]
+      ".description": "Compile all less styles for backend application",
+      ".task": {
+        "class": "cookyii\\build\\tasks\\CommandTask",
+        "commandline": [
+          "./node_modules/.bin/lessc --source-map-map-inline assets/less/styles.less > assets/css/styles-raw.css",
+          "./node_modules/.bin/autoprefixer assets/css/styles-raw.css -o assets/css/styles.css",
+          "./node_modules/.bin/csso -i assets/css/styles.css -o assets/css/styles-o.css"
+        ]
+      }
     }
   },
 
   "migrate": {
-    "class": "cookyii\\build\\tasks\\EchoTask",
-    "description": "Run database migration",
-    "message": "Executing migrations for database..."
+    ".description": "Run database migration",
+    ".task": {
+      "class": "cookyii\\build\\tasks\\EchoTask",
+      "message": "Executing migrations for database..."
+    }
   }
 }

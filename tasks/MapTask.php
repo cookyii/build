@@ -46,10 +46,10 @@ class MapTask extends AbstractTask
                 $this->showTasks($conf, $task, $indent);
             }
         } else {
-            if (isset($config['class']) || isset($config['depends'])) {
+            if (isset($config['.task']) || isset($config['.depends'])) {
                 $this->log(sprintf('<info>%s</info>', $task), $indent);
-                if (isset($config['description']) && !empty($config['description'])) {
-                    $words = preg_split('/\s+/u', trim($config['description']), null, PREG_SPLIT_DELIM_CAPTURE);
+                if (isset($config['.description']) && !empty($config['.description'])) {
+                    $words = preg_split('/\s+/u', trim($config['.description']), null, PREG_SPLIT_DELIM_CAPTURE);
                     $chunks = array_chunk($words, 6);
                     foreach ($chunks as $chunk) {
                         $this->log(implode(' ', $chunk), $indent + 1);
@@ -57,9 +57,9 @@ class MapTask extends AbstractTask
                 }
 
                 if ($this->output->isVerbose()) {
-                    if (isset($config['depends']) && !empty($config['depends'])) {
+                    if (isset($config['.depends']) && !empty($config['.depends'])) {
                         $this->log('<comment>[depends]</comment>', 1);
-                        foreach ($config['depends'] as $depend) {
+                        foreach ($config['.depends'] as $depend) {
                             $chunks = explode($delimiter, $task);
                             array_pop($chunks);
 
@@ -76,7 +76,7 @@ class MapTask extends AbstractTask
             }
 
             foreach ($config as $key => $value) {
-                if ($key === 'class') {
+                if ($key === '.task') {
                     continue;
                 }
 

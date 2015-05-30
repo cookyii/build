@@ -30,6 +30,9 @@ abstract class AbstractConfigReader extends \cookyii\build\components\Component
     /** @var Console\Output\OutputInterface */
     public $output;
 
+    /** @var array */
+    public static $reservedWords = ['.task', '.depends', '.description', '.events'];
+
     /**
      * @param \cookyii\build\commands\BuildCommand $BuildCommand
      */
@@ -58,16 +61,81 @@ abstract class AbstractConfigReader extends \cookyii\build\components\Component
      */
     abstract function read();
 
+    public static $depends_prefix = null;
+
+    /**
+     * @param array $config
+     * @param string|null $task_prefix
+     * @return array
+     */
+    public function expandConfig(array $config, $task_prefix = null)
+    {
+        $result = [];
+        $subtasks = [];
+
+        if (!empty($config)) {
+            $config = $this->expandCompositeTasks($config);
+
+            foreach ($config as $task => $conf) {
+                if (in_array($task, ['.events', '.task', '.description'], true)) {
+                    continue;
+                }
+
+                if (empty($task_prefix)) {
+                    self::$depends_prefix = $task;
+                }
+
+                $task_key = empty($task_prefix)
+                    ? $task
+                    : ($task_prefix . $this->command->getDelimiter() . $task);
+
+                if ($task !== '.depends' && is_array($conf) && !is_callable($conf)) {
+                    $subtasks = array_merge($subtasks, $this->expandConfig($conf, $task_key));
+
+                    foreach ($conf as $k => $v) {
+                        if (!in_array($k, self::$reservedWords, true) && is_array($v) && !is_callable($v)) {
+                            unset($conf[$k]);
+                        }
+                    }
+                }
+
+                if (is_array($conf)) {
+                    foreach ($conf as $k => $v) {
+                        if ($k === '.depends' && !empty($conf[$k])) {
+                            foreach ($conf[$k] as $dependency_key => $dependency_name) {
+                                $conf[$k][$dependency_key] = str_replace('*', self::$depends_prefix, $dependency_name);
+                            }
+                        }
+                    }
+                }
+
+                if (!in_array($task, self::$reservedWords, true)) {
+                    $result[$task_key] = $conf;
+                }
+            }
+        }
+
+        $result = array_merge($result, $subtasks);
+
+        ksort($result);
+
+        return $result;
+    }
+
     /**
      * @param array $config
      * @return array
      */
-    public function expandCompositeTasks(array $config)
+    private function expandCompositeTasks(array $config)
     {
         if (!empty($config)) {
             foreach ($config as $task => $conf) {
-                if (isset($conf['class']) && !empty($conf['class'])) {
-                    $Task = new $conf['class']($this->command);
+                if (is_array($conf) && isset($conf['.task']) && !empty($conf['.task'])) {
+                    $className = is_array($conf['.task'])
+                        ? $conf['.task']['class']
+                        : $conf['.task'];
+
+                    $Task = new $className($this->command);
 
                     if ($Task instanceof \cookyii\build\tasks\AbstractCompositeTask) {
                         $tasks = $Task->tasks();
