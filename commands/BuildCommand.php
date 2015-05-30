@@ -334,10 +334,27 @@ class BuildCommand extends AbstractCommand
      */
     private function getConfigReader()
     {
+        $configFile = $this->input->getOption('config');
+
+        if (empty($configFile)) {
+            throw new \InvalidArgumentException('Empty config file option.');
+        }
+
+        $ext = array_pop(explode('.', $configFile));
+
         switch ($this->input->getOption('config-type')) {
             default:
             case 'default':
-                $result = new \cookyii\build\config\DefaultConfigReader($this);
+                switch ($ext) {
+                    default:
+                        throw new \RuntimeException(sprintf('Unsupported type of configuration file (%)', $ext));
+                    case 'php':
+                        $result = new \cookyii\build\config\DefaultConfigReader($this);
+                        break;
+                    case 'json':
+                        $result = new \cookyii\build\config\JsonConfigReader($this);
+                        break;
+                }
                 break;
             case 'phing':
                 $result = new \cookyii\build\config\PhingConfigReader($this);
