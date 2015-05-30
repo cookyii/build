@@ -19,9 +19,6 @@ class CommandTask extends AbstractTask
     /** @var string|null */
     public $cwd;
 
-    /** @var callable|null */
-    public $callback;
-
     /**
      * @inheritdoc
      */
@@ -53,13 +50,7 @@ class CommandTask extends AbstractTask
 
                 passthru(implode(' && ', $commands), $return);
 
-                if (is_callable($this->callback)) {
-                    call_user_func($this->callback, $this, $return);
-                }
-
-                if ($return !== 0) {
-                    return false;
-                }
+                return $return === 0;
             }
 
             return true;

@@ -13,7 +13,12 @@ namespace cookyii\build\tasks;
 class CallableTask extends AbstractTask
 {
 
-    /** @var callable|null */
+    /**
+     * @var callable|null
+     * function(CallableTask $Task){
+     *  return true;
+     * }
+     */
     public $handler;
 
     /**

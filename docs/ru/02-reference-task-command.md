@@ -14,7 +14,6 @@ Reference
 | ------- | --- | -------- |
 | `commandline` | `string|array` | Одна команда или массик команд, которые необходимо выполнить в cli. |
 | `cwd` | `string|null` | Путь директории, в которой необходимо выполнить команду. |
-| `callback` | `callable` | Анонимная функция или имя функции, заданное строковой переменной или массивом (например: `functionname`, `[$SomeObject, 'MethodName']`, `function(CommandTask $Task, $result){}`), которую необходимо выполнить после отработки программы. |
 
 Примеры конфигурации
 --------------------
@@ -37,9 +36,6 @@ Reference
             'class' => '\cookyii\build\tasks\CommandTask',
             'commandline' => 'npm install',
             'cwd' => __DIR__,
-            'callback' => function (CommandTask $Task, $result) {
-                save_result_to_file($result);
-            },
         ],
     ],
 ],
