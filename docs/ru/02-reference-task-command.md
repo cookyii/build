@@ -3,7 +3,7 @@ CommandTask
 
 **\cookyii\build\tasks\CommandTask**
 
-задача выполняет произвольную программу в командной строке (cli command).
+Задача выполняет произвольную программу в командной строке (cli command).
 
 Reference
 ---------

@@ -28,16 +28,13 @@ class ExportConfigTask extends AbstractTask
             ? null
             : $this->exportToFile;
 
-        $fs = new \Symfony\Component\Filesystem\Filesystem();
-
-        if (!$fs->isAbsolutePath($exportToFile)) {
-            $exportToFile = $this->command->configReader->basePath . DIRECTORY_SEPARATOR . $exportToFile;
-        }
+        $exportToFile = $this->getAbsolutePath($exportToFile);
 
         if (empty($exportToFile)) {
             echo $this->dump($this->command->rawConfig);
         } else {
-            $fs->dumpFile($exportToFile, $this->dump($this->command->rawConfig), 0664);
+            $this->getFileSystemHelper()
+                ->dumpFile($exportToFile, $this->dump($this->command->rawConfig), 0664);
         }
 
         return true;

@@ -50,12 +50,14 @@ build \
 Задача представляет собой особым образом сконфигурированный объект. 
 Этот объект должен наследоваться от [`AbstractTask`][] или [`AbstractCompositeTask`][].
 В данный момент в `cookyii/build` доступны следующие задачи:
+* [`BlankTask`][] - задача-заглушка, которая используется когда не указан класс задачи.
 * [`CallableTask`][] - задача выполняется произвольную php функцию (callable).
 * [`CommandTask`][] - задача выполняет произвольную программу в командной строке (cli command).
 * [`ComposerTask`][] - задача выполняет различные операции composer.
 * [`DeleteTask`][] - задача удаляет файлы.
 * [`EchoTask`][] - задача выводит произвольное сообщение.
 * [`FileExistsTask`][] - задача проверяет существование файла.
+* [`LockTask`][] - задача управляет блокировкой файла.
 * [`MapTask`][] - задача выводит карту всех доступных задач.
 
 Задачи могут быть собраны в иерархию.
@@ -156,10 +158,12 @@ WIP
 
 [`AbstractCompositeTask`]: 02-reference-abstract-composite-task.md
 [`AbstractTask`]: 02-reference-abstract-task.md
+[`BlankTask`]: 02-reference-task-blank.md
 [`CallableTask`]: 02-reference-task-callable.md
 [`CommandTask`]: 02-reference-task-command.md
 [`ComposerTask`]: 02-reference-task-composer.md
 [`DeleteTask`]: 02-reference-task-delete.md
 [`EchoTask`]: 02-reference-task-echo.md
 [`FileExistsTask`]: 02-reference-task-file-exists.md
+[`LockTask`]: 02-reference-task-lock.md
 [`MapTask`]: 02-reference-task-map.md

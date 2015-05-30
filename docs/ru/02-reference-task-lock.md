@@ -1,14 +1,14 @@
-ComposerTask
-============
+LockTask
+========
 
-**\cookyii\build\tasks\ComposerTask**
+**\cookyii\build\tasks\LockTask**
 
-Задача выполняет различные операции composer.
+Задача управляет блокировкой файла.
 
 Reference
 ---------
 
-Класс `ComposerTask` наследует все атрибуты и методы класса [`AbstractCompositeTask`][], а также имеет ряд собственных атрибутов.
+Класс `LockTask` наследует все атрибуты и методы класса [`AbstractCompositeTask`][], а также имеет ряд собственных атрибутов.
 
 | Атрибут | Тип | Описание | 
 | ------- | --- | -------- |

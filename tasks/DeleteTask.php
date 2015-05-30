@@ -25,8 +25,6 @@ class DeleteTask extends AbstractTask
     public function run()
     {
         if (!empty($this->fileSets)) {
-            $fs = new \Symfony\Component\Filesystem\Filesystem();
-
             foreach ($this->fileSets as $fileSet) {
                 $fileSet = is_string($fileSet)
                     ? ['dir' => $fileSet]
@@ -47,7 +45,8 @@ class DeleteTask extends AbstractTask
 
                     if ($File->isFile() || $File->isLink()) {
                         try {
-                            $fs->remove($File->getPathname());
+                            $this->getFileSystemHelper()
+                                ->remove($File->getPathname());
 
                             if ($this->output->isVerbose()) {
                                 $this->log(sprintf('<task-result> DEL </task-result> %s', $File->getPathname()));
@@ -62,7 +61,8 @@ class DeleteTask extends AbstractTask
                     $dirs = array_reverse($dirs);
                     foreach ($dirs as $dir) {
                         try {
-                            $fs->remove($dir);
+                            $this->getFileSystemHelper()
+                                ->remove($dir);
 
                             if ($this->output->isVerbose()) {
                                 $this->log(sprintf('<task-result> DEL </task-result> %s', $dir));
@@ -77,7 +77,8 @@ class DeleteTask extends AbstractTask
                     $dir = $fileSet['dir'];
 
                     try {
-                        $fs->remove($dir);
+                        $this->getFileSystemHelper()
+                            ->remove($dir);
 
                         if ($this->output->isVerbose()) {
                             $this->log(sprintf('<task-result> DEL </task-result> %s', $dir));

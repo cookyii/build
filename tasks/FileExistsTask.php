@@ -27,14 +27,9 @@ class FileExistsTask extends AbstractTask
         if (empty($this->filename)) {
             throw new \InvalidArgumentException('Empty filename.');
         } else {
-            $fs = new \Symfony\Component\Filesystem\Filesystem();
+            $filename = $this->getAbsolutePath($this->filename);
 
-            $filename = $this->filename;
-            if (!$fs->isAbsolutePath($filename)) {
-                $filename = $this->command->configReader->basePath . DIRECTORY_SEPARATOR . $filename;
-            }
-
-            if (!$fs->exists($filename)) {
+            if (!$this->getFileSystemHelper()->exists($filename)) {
                 $message = empty($this->message)
                     ? 'File "%s" not exists'
                     : $this->message;

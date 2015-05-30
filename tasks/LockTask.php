@@ -14,18 +14,20 @@ class LockTask extends AbstractCompositeTask
 {
 
     /** @var string */
-    public $lockFile;
+    public $filename;
 
     public function run()
     {
-        if (empty($this->lockFile)) {
+        if (empty($this->filename)) {
             throw new \InvalidArgumentException('Empty lock file name.');
         }
 
-        $lockFilePath = dirname($this->lockFile);
+        $this->filename = $this->getAbsolutePath($this->filename);
 
-        if (!is_writable($lockFilePath)) {
-            throw new \RuntimeException(sprintf('Directory %s is not writable.', $lockFilePath));
+        $path = dirname($this->filename);
+
+        if (!is_writable($path)) {
+            throw new \RuntimeException(sprintf('Directory %s is not writable.', $path));
         }
 
         parent::run();
@@ -76,7 +78,7 @@ class LockTask extends AbstractCompositeTask
     public function lock()
     {
         if (!$this->getLockHandler()->lock()) {
-            throw new \RuntimeException(sprintf('%s already locked.', $this->lockFile));
+            throw new \RuntimeException(sprintf('%s already locked.', $this->filename));
         }
 
         return true;
@@ -97,6 +99,6 @@ class LockTask extends AbstractCompositeTask
      */
     private function getLockHandler()
     {
-        return new \Symfony\Component\Filesystem\LockHandler($this->lockFile);
+        return new \Symfony\Component\Filesystem\LockHandler($this->filename);
     }
 }

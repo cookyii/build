@@ -54,16 +54,35 @@ abstract class AbstractTask extends \cookyii\build\components\Component
     }
 
     /**
-     * Send empty message to output
-     */
-    public function newLine()
-    {
-        $this->log('');
-    }
-
-    /**
      * Task logic
      * @return bool
      */
     abstract public function run();
+
+    /**
+     * @param $filename
+     * @return string
+     */
+    protected function getAbsolutePath($filename)
+    {
+        if (!empty($filename) && !$this->getFileSystemHelper()->isAbsolutePath($filename)) {
+            $filename = $this->command->configReader->basePath . DIRECTORY_SEPARATOR . $filename;
+        }
+
+        return $filename;
+    }
+
+    private $fs = null;
+
+    /**
+     * @return \Symfony\Component\Filesystem\Filesystem
+     */
+    protected function getFileSystemHelper()
+    {
+        if ($this->fs === null) {
+            $this->fs = new \Symfony\Component\Filesystem\Filesystem();
+        }
+
+        return $this->fs;
+    }
 }

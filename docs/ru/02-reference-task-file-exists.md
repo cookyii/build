@@ -3,7 +3,7 @@ FileExistsTask
 
 **\cookyii\build\tasks\FileExistsTask**
 
-задача проверяет существование файла.
+Задача проверяет существование файла.
 
 Reference
 ---------

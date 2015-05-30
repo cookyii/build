@@ -3,7 +3,7 @@ DeleteTask
 
 **\cookyii\build\tasks\DeleteTask**
 
-задача удаляет файлы.
+Задача удаляет файлы.
 
 Reference
 ---------
