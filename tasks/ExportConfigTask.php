@@ -84,10 +84,10 @@ class ExportConfigTask extends AbstractTask
             foreach ($config as $k => $v) {
                 $result .= str_repeat('    ', $indent + 1);
                 if ($k === '.events') {
-                    dump([
-                        $k,
-                        $config[$k],
-                    ], 2);
+//                    dump([
+//                        $k,
+//                        $config[$k],
+//                    ], 2);
                 }
 
                 if (!$this->isAssocArray($config)) {

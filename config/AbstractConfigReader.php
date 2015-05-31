@@ -44,10 +44,6 @@ abstract class AbstractConfigReader extends \cookyii\build\components\Component
 
         $this->configFile = realpath($this->input->getOption('config'));
         $this->basePath = dirname($this->configFile);
-
-        dump([
-            $this->configFile,
-        ]);
     }
 
     /**
