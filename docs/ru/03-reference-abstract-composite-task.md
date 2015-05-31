@@ -56,5 +56,5 @@ Reference
 | ------- | --- | -------- |
 | `defaultTask` | `string` | Название задачи, которая будет выполнена по умолчанию. |
 
-[`AbstractTask`]: 02-reference-abstract-task.md
-[`ComposerTask`]: 02-reference-task-composer.md
+[`AbstractTask`]: 03-reference-abstract-task.md
+[`ComposerTask`]: 03-reference-task-composer.md

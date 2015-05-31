@@ -76,7 +76,9 @@ Reference конфигурации задачи
 
 ### Конфигурационный файл `build.php` (config-type `default`)
 Конфигурационный файл `build.php` представляет собой обычный PHP файл, который возвращает массив с описанием инструкций для сборки.
-Ключи массива - название задачи (таска), значения - конфигурация задачи. 
+Ключи массива - название задачи (таска), значения - конфигурация задачи.
+
+**Более подробно о конфигурации в разделе [Конфигурация][].**
 
 Например:
 ```php
@@ -120,6 +122,8 @@ return [
 Конфигурационный файл `build.json` представляет собой обычный JSON файл, который содержит массив с описанием инструкций для сборки.
 Ключи массива - название задачи (таска), значения - конфигурация задачи. 
 
+**Более подробно о конфигурации в разделе [Конфигурация][].**
+
 ```json
 {
   "default": {
@@ -156,14 +160,15 @@ WIP
 
 [наверх](#Использование)
 
-[`AbstractCompositeTask`]: 02-reference-abstract-composite-task.md
-[`AbstractTask`]: 02-reference-abstract-task.md
-[`BlankTask`]: 02-reference-task-blank.md
-[`CallableTask`]: 02-reference-task-callable.md
-[`CommandTask`]: 02-reference-task-command.md
-[`ComposerTask`]: 02-reference-task-composer.md
-[`DeleteTask`]: 02-reference-task-delete.md
-[`EchoTask`]: 02-reference-task-echo.md
-[`FileExistsTask`]: 02-reference-task-file-exists.md
-[`LockTask`]: 02-reference-task-lock.md
-[`MapTask`]: 02-reference-task-map.md
+[Конфигурация]: 02-config.md
+[`AbstractCompositeTask`]: 03-reference-abstract-composite-task.md
+[`AbstractTask`]: 03-reference-abstract-task.md
+[`BlankTask`]: 03-reference-task-blank.md
+[`CallableTask`]: 03-reference-task-callable.md
+[`CommandTask`]: 03-reference-task-command.md
+[`ComposerTask`]: 03-reference-task-composer.md
+[`DeleteTask`]: 03-reference-task-delete.md
+[`EchoTask`]: 03-reference-task-echo.md
+[`FileExistsTask`]: 03-reference-task-file-exists.md
+[`LockTask`]: 03-reference-task-lock.md
+[`MapTask`]: 03-reference-task-map.md

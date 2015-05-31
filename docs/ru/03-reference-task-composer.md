@@ -39,5 +39,5 @@ Reference
 Задача `ComposerTask` является композитной задачей. То есть предоставляет возможность исполнять дополнительные команды.
 Полный reference доступных задач Вы можете увидеть в результате выполнения задачи [`MapTask`][]
 
-[`AbstractCompositeTask`]: 02-reference-abstract-composite-task.md
-[`MapTask`]: 02-reference-task-map.md
+[`AbstractCompositeTask`]: 03-reference-abstract-composite-task.md
+[`MapTask`]: 03-reference-task-map.md
