@@ -19,7 +19,7 @@
 Например:
 ```php
 <?php
-[
+return [
     // ./build less
     'less' => [
         // в этом случае не нужно указывать доп параметров
@@ -67,7 +67,7 @@
             '.task' => 'app\build\tasks\CheckAvailableWebSocketTask',
         ],
     ],
-]
+];
 ```
 
 ```php
