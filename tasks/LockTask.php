@@ -163,12 +163,4 @@ class LockTask extends AbstractCompositeTask
             hash('sha256', $this->name)
         );
     }
-
-    /**
-     * @return \Symfony\Component\Filesystem\LockHandler
-     */
-    private function getLockHandler()
-    {
-        return new \Symfony\Component\Filesystem\LockHandler($this->name, $this->lockPath);
-    }
 }
