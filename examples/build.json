@@ -146,7 +146,7 @@
       ".task": {
         "class": "cookyii\\build\\tasks\\FileExistsTask",
         "filename": ".env.php",
-        "message": "Внимание!\nНеобходимо заполнить параметры окружения\nв файле %s\nШаблон в файле .environment.example.php"
+        "message": "Warning!\nIt is necessary to fill in the parameters environment\nin file %s\nExample in `.environment.example.php`"
       }
     },
     "init": {

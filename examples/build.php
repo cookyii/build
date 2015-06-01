@@ -115,10 +115,10 @@ return [
             '.task' => [
                 'class' => 'cookyii\build\tasks\FileExistsTask',
                 'filename' => '.env.php',
-                'message' => 'Внимание!' . "\n"
-                    . 'Необходимо заполнить параметры окружения' . "\n"
-                    . 'в файле %s' . "\n"
-                    . 'Шаблон в файле .environment.example.php',
+                'message' => 'Warning!' . "\n"
+                    . 'It is necessary to fill in the parameters environment' . "\n"
+                    . 'in file %s' . "\n"
+                    . 'Example in `.environment.example.php`',
             ],
         ],
         'init' => [
