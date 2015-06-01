@@ -3,9 +3,9 @@
 
 * [Концепция](#Концепция)
 * [Задача в её физическом представлении](#Задача-в-её-физическом-представлении)
-* [`*.php` (Default type)](#)
-* [`*.json` (Json type)](#)
-* [`*.xml` (XML type)](#)
+* [`*.php` (Default type)](#php-default-type)
+* [`*.json` (Json type)](#json-json-type)
+* [`*.xml` (XML type)](#xml-xml-type)
 
 Концепция
 ---------
