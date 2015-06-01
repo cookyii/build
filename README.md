@@ -7,8 +7,8 @@ Documentation
 -------------
 
 - [Installing (RU)][]
-- [Usage (RU)][]
 - [Configuration (RU)][]
+- [Usage (RU)][]
 
 Quick start
 ------------
@@ -59,5 +59,5 @@ $ ./vendor/bin/build -c build.dev.php # start build with specified configuration
 [Composer]: http://getcomposer.org/
 [Symfony Console]: http://symfony.com/doc/current/components/console/introduction.html
 [Installing (RU)]: docs/ru/00-installing.md
-[Usage (RU)]: docs/ru/01-usage.md
-[Configuration (RU)]: docs/ru/02-config.md
+[Configuration (RU)]: docs/ru/01-config.md
+[Usage (RU)]: docs/ru/02-usage.md
