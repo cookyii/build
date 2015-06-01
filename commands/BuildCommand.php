@@ -51,7 +51,6 @@ class BuildCommand extends AbstractCommand
                 'default'
             )
             ->addOption('config', 'c', Console\Input\InputOption::VALUE_OPTIONAL, 'Where is the configuration file', 'build.php')
-            ->addOption('config-type', 't', Console\Input\InputOption::VALUE_OPTIONAL, 'Config type (default, phing, json)', 'default')
             ->addOption('task-delimiter', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Delimiter for the name of the task', '/')
             ->addOption('loop-threshold', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Number of repetitions of the task to be discarded error loop', 3)
             ->addOption('disable-events', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Disable event in this run', false)
@@ -342,29 +341,27 @@ class BuildCommand extends AbstractCommand
 
         $ext = array_pop(explode('.', $configFile));
 
-        switch ($this->input->getOption('config-type')) {
-            default:
-            case 'default':
-                switch ($ext) {
-                    default:
-                        throw new \RuntimeException(sprintf('Unsupported type of configuration file (%)', $ext));
-                    case 'php':
-                        $result = new \cookyii\build\config\DefaultConfigReader($this);
-                        break;
-                    case 'json':
-                        $result = new \cookyii\build\config\JsonConfigReader($this);
-                        break;
-                }
+        $configReader = null;
+        $config_reader_map = [
+            '.php' => 'cookyii\build\config\DefaultConfigReader',
+            '.json' => 'cookyii\build\config\JsonConfigReader',
+            '.phing.xml' => 'cookyii\build\config\PhingConfigReader',
+            '.xml' => 'cookyii\build\config\XmlConfigReader',
+        ];
+
+        foreach ($config_reader_map as $ext => $className) {
+            $pattern = '#' . $ext . '$#';
+            if (preg_match($pattern, $configFile)) {
+                $configReader = $className;
                 break;
-            case 'phing':
-                $result = new \cookyii\build\config\PhingConfigReader($this);
-                break;
-            case 'json':
-                $result = new \cookyii\build\config\JsonConfigReader($this);
-                break;
+            }
         }
 
-        return $result;
+        if (empty($configReader)) {
+            throw new \RuntimeException(sprintf('Unsupported type of configuration file (%)', $ext));
+        }
+
+        return new $configReader($this);
     }
 
     private function setStyles()

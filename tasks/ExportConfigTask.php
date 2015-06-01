@@ -59,10 +59,27 @@ class ExportConfigTask extends AbstractTask
                 case 'json':
                     $result = json_encode($config, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
                     break;
+                case 'xml':
+                    $result = $this->xmlFormat($config);
+                    break;
             }
         }
 
         return $result;
+    }
+
+    /**
+     * @param array $config
+     * @param integer $indent
+     * @return string
+     */
+    private function xmlFormat(array $config, $indent = 0)
+    {
+        $result = '';
+
+        $xml = new \Sabre\Xml\Writer();
+
+        return '';
     }
 
     /**

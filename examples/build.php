@@ -24,6 +24,13 @@ return [
         '.task' => 'cookyii\build\tasks\MapTask',
     ],
 
+    'export-config' => [
+        '.task' => [
+            'class' => 'cookyii\build\tasks\ExportConfigTask',
+            'formatter' => 'xml',
+        ],
+    ],
+
     'default' => [
         '.description' => 'Default build',
         '.depends' => ['build/dev'],
