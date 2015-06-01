@@ -37,6 +37,8 @@ class CommandTask extends AbstractTask
                 $this->commandline = [$this->commandline];
             }
 
+            $result = true;
+
             foreach ($this->commandline as $command) {
                 if ($this->output->isVerbose()) {
                     $this->log(sprintf('Executing "%s"', $command));
@@ -50,10 +52,15 @@ class CommandTask extends AbstractTask
 
                 passthru(implode(' && ', $commands), $return);
 
-                return $return === 0;
+                $result = $result && $return === 0;
+
+                if ($result == false) {
+                    $this->log(sprintf('<task-error> ERR </task-error> <error>Bad exit code in command "%s"</error>.', $command));
+                    break;
+                }
             }
 
-            return true;
+            return $result;
         }
     }
 }
