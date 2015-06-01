@@ -54,6 +54,17 @@ return [
         ],
     ],
 
+    'delete' => [
+        '.description' => 'Execute DeleteTask',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\DeleteTask',
+            'deleteDir' => true,
+            'fileSets' => [
+                ['dir' => $runtime_path . '/delete_path']
+            ],
+        ],
+    ],
+
     'echo' => [
         '.description' => 'Execute EchoTask',
         '.task' => [
