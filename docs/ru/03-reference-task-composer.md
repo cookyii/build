@@ -44,39 +44,30 @@ Reference
 **Доступные задачи**
 
 ```bash
-# Задача [`MapTask`][]. Показывает карту доступных команд в текущем пространстве имён.
+#Задача показывает карту доступных команд в текущем пространстве имён.
 ./build composer[/default]
+
+#Задача устанавливает пакет `vendor/pacakage-name` версии `version` в текущем приложении.
+./build composer/require vendor/pacakage-name:version
+
+#Задача устанавливает все пакеты с зафиксированными версиями из файла `composer.lock`. Если файла нет, все зависимости будут установлены через компанду `composer/update-dev`.
+./build composer/install-dev
+
+#Эта задача как и предыдущая - устанавливает все пакеты с зафиксированными версиями из файла `composer.lock`, но при этом игнорирует блок `require-dev` (для продакшена). Если файла нет, все зависимости будут установлены через компанду `composer/update`.
+./build composer/install
+
+#Задача обновляет все зависимые пакеты из файла `composer.json` до актуальных версий.
+./build composer/update-dev
+
+#Эта задача как и предыдущая - обновляет все зависимые пакеты из файла `composer.json` до актуальных версий, но при этом игнорирует блок `require-dev` (для продакшена).
+./build composer/update
+
+#Задача обновляет скрипт `composer.phar` до последней версии.
+./build composer/self-update
+
+#Задача обновляет скрипт `composer.phar` до последней версии (алиас для команды `composer/self-update`).
+./build composer/selfupdate
 ```
 
-`./build composer/require vendor/pacakage-name:version`
-
-Задача [`CommandTask`][]. Устанавливает пакет `vendor/pacakage-name` версии `version` в текущем приложении.
-
-`./build composer/install-dev`
-
-Задача [`CommandTask`][]. Устанавливает все пакеты с зафиксированными версиями из файла `composer.lock`. Если файла нет, все зависимости будут установлены через компанду `composer/update-dev`.
-
-`./build composer/install`
-
-Задача [`CommandTask`][]. Эта задача как и предыдущая - устанавливает все пакеты с зафиксированными версиями из файла `composer.lock`, но при этом игнорирует блок `require-dev` (для продакшена). Если файла нет, все зависимости будут установлены через компанду `composer/update`.
-
-`./build composer/update-dev`
-
-Задача [`CommandTask`][]. Обновляет все зависимые пакеты из файла `composer.json` до актуальных версий.
-
-`./build composer/update`
-
-Задача [`CommandTask`][]. Эта задача как и предыдущая - обновляет все зависимые пакеты из файла `composer.json` до актуальных версий, но при этом игнорирует блок `require-dev` (для продакшена).
-
-`./build composer/self-update`
-
-Задача [`CommandTask`][]. Обновляет скрипт `composer.phar` до последней версии.
-
-`./build composer/selfupdate`
-
-Задача [`CommandTask`][]. Обновляет скрипт `composer.phar` до последней версии (алиас для команды `composer/self-update`).
-
-
 [`AbstractCompositeTask`]: 03-reference-abstract-composite-task.md
-[`CommandTask`]: 03-reference-task-command.md
 [`MapTask`]: 03-reference-task-map.md
