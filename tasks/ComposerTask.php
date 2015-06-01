@@ -62,7 +62,6 @@ class ComposerTask extends AbstractCompositeTask
 
             'selfupdate' => [
                 '.description' => 'Update composer script',
-                '.depends' => ['*/install'],
                 '.task' => [
                     'class' => '\cookyii\build\tasks\CommandTask',
                     'commandline' => $this->composer . ' selfupdate',
