@@ -57,6 +57,7 @@ $ ./vendor/bin/build -c build.dev.php # start build with specified configuration
 ```
 
 **Task reference**
+
 * [`BlankTask`][] - empty task, which is used when a class is not specified.
 * [`CallableTask`][] - task to execute php function (callable).
 * [`CommandTask`][] - task to execute programm on the command line (cli command).
