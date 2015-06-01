@@ -19,32 +19,32 @@ class ExampleEventListener
     /**
      * @param TaskEvent $TaskEvent
      */
-    public static function onBeforeCreateTaskObject(TaskEvent $TaskEvent)
+    public static function onBeforeConfigureTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a listener on event %s', BuildCommand::EVENT_BEFORE_EXECUTE_TASK));
+        $TaskEvent->log(sprintf('this is a listener on event %s', BuildCommand::EVENT_BEFORE_CONFIGURE_TASK));
     }
 
     /**
      * @param TaskEvent $TaskEvent
      */
-    public static function onAfterCreateTaskObject(TaskEvent $TaskEvent)
+    public static function onAfterConfigureTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a listener on event %s', BuildCommand::EVENT_AFTER_CREATE_TASK_OBJECT));
+        $TaskEvent->log(sprintf('this is a listener on event %s', BuildCommand::EVENT_AFTER_CONFIGURE_TASK));
     }
 
     /**
      * @param TaskEvent $TaskEvent
      */
-    public static function onBeforeExecuteTask(TaskEvent $TaskEvent)
+    public static function onBeforeRunTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a listener on event %s', BuildCommand::EVENT_BEFORE_EXECUTE_TASK));
+        $TaskEvent->log(sprintf('this is a listener on event %s', BuildCommand::EVENT_BEFORE_RUN_TASK));
     }
 
     /**
      * @param TaskEvent $TaskEvent
      */
-    public static function onAfterExecuteTask(TaskEvent $TaskEvent)
+    public static function onAfterRunTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a listener on event %s', BuildCommand::EVENT_AFTER_EXECUTE_TASK));
+        $TaskEvent->log(sprintf('this is a listener on event %s', BuildCommand::EVENT_AFTER_RUN_TASK));
     }
 }

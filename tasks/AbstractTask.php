@@ -33,14 +33,28 @@ abstract class AbstractTask extends \cookyii\build\components\Component
     /** @var string|null */
     public $prefix;
 
+    /** Events */
+    const EVENT_AFTER_INITIALIZE = 'task.onAfterInitialize';
+    const EVENT_BEFORE_RUN = 'task.onBeforeRun';
+    const EVENT_AFTER_RUN = 'task.onAfterRun';
+
     /**
-     * @param \cookyii\build\commands\BuildCommand $BuildCommand
+     * @inheritdoc
      */
-    public function __construct($BuildCommand)
+    public function init()
     {
-        $this->command = $BuildCommand;
-        $this->input = $BuildCommand->input;
-        $this->output = $BuildCommand->output;
+        parent::init();
+
+        $this->input = $this->command->input;
+        $this->output = $this->command->output;
+    }
+
+    /**
+     * @return array
+     */
+    public function events()
+    {
+        return [];
     }
 
     /**

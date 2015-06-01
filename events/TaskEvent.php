@@ -19,17 +19,22 @@ class TaskEvent extends \Symfony\Component\EventDispatcher\Event
     /** @var array|\cookyii\build\tasks\AbstractTask */
     protected $task;
 
-    /** @var int */
+    /** @var string */
+    protected $prefix;
+
+    /** @var integer */
     protected $indent;
 
     /**
      * @param \cookyii\build\commands\BuildCommand $command
+     * @param string $prefix
      * @param array|\cookyii\build\tasks\AbstractTask $task
      * @param integer $indent
      */
-    public function __construct($command, $task, $indent)
+    public function __construct($command, $prefix, $task, $indent)
     {
         $this->command = $command;
+        $this->prefix = $prefix;
         $this->task = $task;
         $this->indent = $indent;
     }

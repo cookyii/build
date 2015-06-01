@@ -4,21 +4,21 @@
       "cookyii\\build\\examples\\ExampleEventSubscriber"
     ],
     "listeners": {
-      "build.onBeforeCreateTaskObject": [
+      "build.onBeforeConfigureTask": [
         "cookyii\\build\\examples\\ExampleEventListener",
-        "onBeforeCreateTaskObject"
+        "onBeforeConfigureTask"
       ],
-      "build.onAfterCreateTaskObject": [
+      "build.onAfterConfigureTask": [
         "cookyii\\build\\examples\\ExampleEventListener",
-        "onAfterCreateTaskObject"
+        "onAfterConfigureTask"
       ],
-      "build.onBeforeExecuteTask": [
+      "build.onBeforeRunTask": [
         "cookyii\\build\\examples\\ExampleEventListener",
-        "onBeforeExecuteTask"
+        "onBeforeRunTask"
       ],
-      "build.onAfterExecuteTask": [
+      "build.onAfterRunTask": [
         "cookyii\\build\\examples\\ExampleEventListener",
-        "onAfterExecuteTask"
+        "onAfterRunTask"
       ]
     }
   },
@@ -37,7 +37,7 @@
     ".description": "Show map of task runtime/*",
     ".task": {
       "class": "cookyii\\build\\tasks\\LockTask",
-      "lockFile": "runtime/runtime.lock"
+      "filename": "runtime/runtime.lock"
     }
   },
 

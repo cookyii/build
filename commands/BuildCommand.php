@@ -6,7 +6,9 @@
 
 namespace cookyii\build\commands;
 
+use cookyii\build\components\Component;
 use cookyii\build\events\TaskEvent;
+use cookyii\build\tasks\AbstractTask;
 use Symfony\Component\Console;
 
 /**
@@ -15,9 +17,6 @@ use Symfony\Component\Console;
  */
 class BuildCommand extends AbstractCommand
 {
-
-    /** @var \Symfony\Component\EventDispatcher\EventDispatcher */
-    public $eventDispatcher;
 
     /** @var array */
     public $rawConfig = [];
@@ -32,10 +31,10 @@ class BuildCommand extends AbstractCommand
     private $executed = [];
 
     /** Events */
-    const EVENT_BEFORE_CREATE_TASK_OBJECT = 'build.onBeforeCreateTaskObject';
-    const EVENT_AFTER_CREATE_TASK_OBJECT = 'build.onAfterCreateTaskObject';
-    const EVENT_BEFORE_EXECUTE_TASK = 'build.onBeforeExecuteTask';
-    const EVENT_AFTER_EXECUTE_TASK = 'build.onAfterExecuteTask';
+    const EVENT_BEFORE_CONFIGURE_TASK = 'build.onBeforeConfigureTask';
+    const EVENT_AFTER_CONFIGURE_TASK = 'build.onAfterConfigureTask';
+    const EVENT_BEFORE_RUN_TASK = 'build.onBeforeRunTask';
+    const EVENT_AFTER_RUN_TASK = 'build.onAfterRunTask';
 
     protected function configure()
     {
@@ -55,8 +54,6 @@ class BuildCommand extends AbstractCommand
             ->addOption('loop-threshold', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Number of repetitions of the task to be discarded error loop', 3)
             ->addOption('disable-events', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Disable event in this run', false)
             ->addOption('color', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Support colors in output', 'yes');
-
-        $this->eventDispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
     }
 
     /**
@@ -78,7 +75,6 @@ class BuildCommand extends AbstractCommand
         $this->log('<task-result> CONF </task-result> Reading config... ', 0, false);
 
         $this->readConfig();
-        $this->registerEventListeners();
 
         if (empty($this->config)) {
             $this->log('<error>Unable to read config file.</error>');
@@ -90,6 +86,10 @@ class BuildCommand extends AbstractCommand
             $result = 1;
         } else {
             $this->log('ok.');
+
+            if (isset($this->rawConfig['.events'])) {
+                Component::addEventListeners($this->rawConfig['.events']);
+            }
 
             if ($this->output->isVerbose()) {
                 $this->log(sprintf('<comment>[config file]</comment> %s', $this->configReader->configFile), 1);
@@ -149,6 +149,13 @@ class BuildCommand extends AbstractCommand
             ? is_array($task['.task']) ? $task['.task']['class'] : $task['.task']
             : 'cookyii\build\tasks\BlankTask';
 
+        $params = isset($task['.task']) && !empty($task['.task'])
+            ? is_array($task['.task']) ? $task['.task'] : []
+            : [];
+
+        unset($params['class']);
+        $params['command'] = $this;
+
         if (!class_exists($className)) {
             throw new \RuntimeException(sprintf('Class "%s" not found.', $className));
         }
@@ -158,14 +165,19 @@ class BuildCommand extends AbstractCommand
             $this->log($className);
         }
 
-        $Event = new TaskEvent($this, $task, $indent + 1);
+        $Event = new TaskEvent($this, $prefix, $task, $indent + 1);
 
-        if (!$this->raiseEvent(static::EVENT_BEFORE_CREATE_TASK_OBJECT, $Event)) {
+        if (!$this->dispatch(static::EVENT_BEFORE_CONFIGURE_TASK, $Event)) {
             return false;
         }
 
         /** @var \cookyii\build\tasks\AbstractTask $Task */
-        $Task = new $className($this);
+        $Task = Component::createObject($className, $params);
+
+        Component::addEventListeners($Task->events());
+        if (isset($task['.events']) && !empty($task['.events'])) {
+            Component::addEventListeners($task['.events']);
+        }
 
         $attributes = isset($task['.task']) && !empty($task['.task'])
             ? is_array($task['.task']) ? $task['.task'] : []
@@ -181,9 +193,13 @@ class BuildCommand extends AbstractCommand
 
         $Task->configure($attributes);
 
-        $EventTask = new TaskEvent($this, $Task, $indent + 1);
+        $EventTask = new TaskEvent($this, $prefix, $Task, $indent + 1);
 
-        if (!$this->raiseEvent(static::EVENT_AFTER_CREATE_TASK_OBJECT, $EventTask)) {
+        if (!$this->dispatch(AbstractTask::EVENT_AFTER_INITIALIZE, $EventTask)) {
+            return false;
+        }
+
+        if (!$this->dispatch(static::EVENT_AFTER_CONFIGURE_TASK, $EventTask)) {
             return false;
         }
 
@@ -208,19 +224,32 @@ class BuildCommand extends AbstractCommand
             }
         }
 
-        if (!$this->raiseEvent(static::EVENT_BEFORE_EXECUTE_TASK, $EventTask)) {
+        if (!$this->dispatch(static::EVENT_BEFORE_RUN_TASK, $EventTask)) {
+            return false;
+        }
+
+        if (!$this->dispatch(AbstractTask::EVENT_BEFORE_RUN, $EventTask)) {
             return false;
         }
 
         $result = $Task->run();
 
-        if (!$this->raiseEvent(static::EVENT_AFTER_EXECUTE_TASK, $EventTask)) {
+        if (!$this->dispatch(AbstractTask::EVENT_AFTER_RUN, $EventTask)) {
+            return false;
+        }
+
+        if (!$this->dispatch(static::EVENT_AFTER_RUN_TASK, $EventTask)) {
             return false;
         }
 
         if ($this->output->isVeryVerbose()) {
             $this->log(sprintf('<comment>[executed]</comment> %s', get_class($Task)), $indent + 1);
         }
+
+        if (isset($task['.events']) && !empty($task['.events'])) {
+            Component::removeEventListeners($task['.events']);
+        }
+        Component::removeEventListeners($Task->events());
 
         return $result;
     }
@@ -230,7 +259,7 @@ class BuildCommand extends AbstractCommand
      * @param TaskEvent $Event
      * @return bool
      */
-    private function raiseEvent($event, TaskEvent $Event)
+    private function dispatch($event, TaskEvent $Event)
     {
         $disable_events = (string)$this->input->getOption('disable-events');
 
@@ -242,7 +271,8 @@ class BuildCommand extends AbstractCommand
             $this->log(sprintf('Raise event %s', $event), $Event->getIndent());
         }
 
-        $this->eventDispatcher->dispatch($event, $Event);
+        Component::getEventDispatcher()
+            ->dispatch($event, $Event);
 
         if ($Event->isPropagationStopped()) {
             $this->log(sprintf('<error>Event %s: Propagation stopped.</error>', $event), $Event->getIndent());
@@ -307,29 +337,6 @@ class BuildCommand extends AbstractCommand
         $this->configReader = $this->getConfigReader();
         $this->rawConfig = $this->configReader->read();
         $this->config = $this->configReader->expandConfig($this->rawConfig);
-    }
-
-    private function registerEventListeners()
-    {
-        if (isset($this->rawConfig['.events']) && isset($this->rawConfig['.events']['subscribers'])) {
-            $subscribers = $this->rawConfig['.events']['subscribers'];
-
-            if (is_array($subscribers) && !empty($subscribers)) {
-                foreach ($subscribers as $subscriberClass) {
-                    $this->eventDispatcher->addSubscriber(new $subscriberClass);
-                }
-            }
-        }
-
-        if (isset($this->rawConfig['.events']) && isset($this->rawConfig['.events']['listeners'])) {
-            $listeners = $this->rawConfig['.events']['listeners'];
-
-            if (is_array($listeners) && !empty($listeners)) {
-                foreach ($listeners as $eventName => $listener) {
-                    $this->eventDispatcher->addListener($eventName, $listener);
-                }
-            }
-        }
     }
 
     /**

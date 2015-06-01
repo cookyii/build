@@ -15,11 +15,14 @@ class CallableTask extends AbstractTask
 
     /**
      * @var callable|null
-     * function(CallableTask $Task){
+     * function(CallableTask $Task, ...$params){
      *  return true;
      * }
      */
     public $handler;
+
+    /** @var array */
+    public $params = [];
 
     /**
      * @inheritdoc
@@ -29,7 +32,10 @@ class CallableTask extends AbstractTask
         if (!is_callable($this->handler)) {
             throw new \InvalidArgumentException('Empty handler.');
         } else {
-            $result = call_user_func($this->handler, $this);
+            $result = call_user_func_array(
+                $this->handler,
+                array_merge([$this], $this->params)
+            );
 
             if ($this->output->isVerbose()) {
                 $this->log('Handler executed.');

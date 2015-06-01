@@ -17,9 +17,8 @@ class LockTaskTest extends \cookyii\build\tests\BaseTestCase
     {
         list($return, $output) = $this->executeTask('lock/lock', ['v' => true]);
 
-//        var_dump($output);
-
         $this->assertTrue($return === 0);
+        $this->assertContains('Locked [runtime]', $output);
         $this->assertContains('Build finished', $output);
     }
 }

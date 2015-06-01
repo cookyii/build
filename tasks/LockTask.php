@@ -14,23 +14,18 @@ class LockTask extends AbstractCompositeTask
 {
 
     /** @var string */
-    public $filename;
+    public $name;
 
-    public function run()
+    /** @var string */
+    public $lockPath;
+
+    public function init()
     {
-        if (empty($this->filename)) {
-            throw new \InvalidArgumentException('Empty lock file name.');
+        parent::init();
+
+        if (empty($this->name)) {
+            throw new \InvalidArgumentException('Empty lock name.');
         }
-
-        $this->filename = $this->getAbsolutePath($this->filename);
-
-        $path = dirname($this->filename);
-
-        if (!is_writable($path)) {
-            throw new \RuntimeException(sprintf('Directory %s is not writable.', $path));
-        }
-
-        parent::run();
     }
 
     /**
@@ -47,20 +42,12 @@ class LockTask extends AbstractCompositeTask
                 ],
             ],
 
-            'disable' => [
-                '.description' => 'Put a lock (alias for `lock`)',
-                '.depends' => ['*/lock'],
-            ],
             'lock' => [
                 '.description' => 'Put a lock',
                 '.task' => [
                     'class' => 'cookyii\build\tasks\CallableTask',
                     'handler' => [$this, 'lock'],
                 ],
-            ],
-            'enable' => [
-                '.description' => 'Release a lock (alias for `release`)',
-                '.depends' => ['*/release'],
             ],
             'release' => [
                 '.description' => 'Release a lock',
@@ -78,11 +65,11 @@ class LockTask extends AbstractCompositeTask
     public function lock()
     {
         if (!$this->getLockHandler()->lock()) {
-            throw new \RuntimeException(sprintf('%s already locked.', $this->filename));
+            throw new \RuntimeException(sprintf('[%s] already locked.', $this->name));
         }
 
         if ($this->output->isVerbose()) {
-            $this->log(sprintf('Locked "%s".', $this->filename));
+            $this->log(sprintf('Locked [%s].', $this->name));
         }
 
         return true;
@@ -96,7 +83,7 @@ class LockTask extends AbstractCompositeTask
         $this->getLockHandler()->release();
 
         if ($this->output->isVerbose()) {
-            $this->log(sprintf('Released "%s".', $this->filename));
+            $this->log(sprintf('Released [%s].', $this->name));
         }
 
         return true;
@@ -107,6 +94,6 @@ class LockTask extends AbstractCompositeTask
      */
     private function getLockHandler()
     {
-        return new \Symfony\Component\Filesystem\LockHandler($this->filename);
+        return new \Symfony\Component\Filesystem\LockHandler($this->name, $this->lockPath);
     }
 }

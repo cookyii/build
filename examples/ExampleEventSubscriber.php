@@ -22,42 +22,42 @@ class ExampleEventSubscriber implements \Symfony\Component\EventDispatcher\Event
     public static function getSubscribedEvents()
     {
         return [
-            BuildCommand::EVENT_BEFORE_CREATE_TASK_OBJECT => ['onBeforeCreateTaskObject', 0],
-            BuildCommand::EVENT_AFTER_CREATE_TASK_OBJECT => ['onAfterCreateTaskObject', 0],
-            BuildCommand::EVENT_BEFORE_EXECUTE_TASK => ['onBeforeExecuteTask', 0],
-            BuildCommand::EVENT_AFTER_EXECUTE_TASK => ['onAfterExecuteTask', 0],
+            BuildCommand::EVENT_BEFORE_CONFIGURE_TASK => ['onBeforeConfigureTask', 0],
+            BuildCommand::EVENT_AFTER_CONFIGURE_TASK => ['onAfterConfigureTask', 0],
+            BuildCommand::EVENT_BEFORE_RUN_TASK => ['onBeforeRunTask', 0],
+            BuildCommand::EVENT_AFTER_RUN_TASK => ['onAfterRunTask', 0],
         ];
     }
 
     /**
      * @param TaskEvent $TaskEvent
      */
-    public function onBeforeCreateTaskObject(TaskEvent $TaskEvent)
+    public function onBeforeConfigureTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_BEFORE_EXECUTE_TASK));
+        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_BEFORE_CONFIGURE_TASK));
     }
 
     /**
      * @param TaskEvent $TaskEvent
      */
-    public function onAfterCreateTaskObject(TaskEvent $TaskEvent)
+    public function onAfterConfigureTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_AFTER_CREATE_TASK_OBJECT));
+        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_AFTER_CONFIGURE_TASK));
     }
 
     /**
      * @param TaskEvent $TaskEvent
      */
-    public function onBeforeExecuteTask(TaskEvent $TaskEvent)
+    public function onBeforeRunTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_BEFORE_EXECUTE_TASK));
+        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_BEFORE_RUN_TASK));
     }
 
     /**
      * @param TaskEvent $TaskEvent
      */
-    public function onAfterExecuteTask(TaskEvent $TaskEvent)
+    public function onAfterRunTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_AFTER_EXECUTE_TASK));
+        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_AFTER_RUN_TASK));
     }
 }

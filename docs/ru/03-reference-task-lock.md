@@ -12,22 +12,20 @@ Reference
 
 | Атрибут | Тип | Описание | 
 | ------- | --- | -------- |
-| `composer` | `string` | Путь к исполняемому файлу `composer.phar`. |
+| `name` | `string` | Идентификатор блокировки. |
+| `lockPath` | `string` | Путь к директории, где будет создан файл блокировки. |
 
 Примеры конфигурации
 --------------------
 ```php
 [
-    // ./build composer/install-dev
-    // ./build composer/install
-    // ./build composer/update-dev
-    // ./build composer/update
-    // ./build composer/selfupdate
-    'composer' => [
+    // ./build lock/lock
+    // ./build lock/release
+    'lock' => [
         '.description' => 'Install all depending for development environment (with `require-dev`)',
         '.task' => [
-            'class' => '\cookyii\build\tasks\ComposerTask',
-            'composer' => '../composer.phar',
+            'class' => '\cookyii\build\tasks\LockTask',
+            'name' => 'tempname',
         ],
     ],
 ],
@@ -36,7 +34,7 @@ Reference
 Композитная задача
 ------------------
 
-Задача `ComposerTask` является композитной задачей. То есть предоставляет возможность исполнять дополнительные команды.
+Задача `LockTask` является композитной задачей. То есть предоставляет возможность исполнять дополнительные команды.
 Полный reference доступных задач Вы можете увидеть в результате выполнения задачи [`MapTask`][]
 
 [`AbstractCompositeTask`]: 03-reference-abstract-composite-task.md

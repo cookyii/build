@@ -6,6 +6,7 @@
 
 namespace cookyii\build\config;
 
+use cookyii\build\components\Component;
 use Symfony\Component\Console;
 
 /**
@@ -129,18 +130,26 @@ abstract class AbstractConfigReader extends \cookyii\build\components\Component
     private function expandCompositeTasks(array $config)
     {
         if (!empty($config)) {
-            foreach ($config as $task => $conf) {
+            foreach ($config as $task_name => $conf) {
                 if (is_array($conf) && isset($conf['.task']) && !empty($conf['.task'])) {
                     $className = is_array($conf['.task'])
                         ? $conf['.task']['class']
                         : $conf['.task'];
 
-                    $Task = new $className($this->command);
+                    $params = is_array($conf['.task'])
+                        ? $conf['.task']
+                        : [];
+
+                    unset($params['class']);
+                    $params['command'] = $this->command;
+
+                    /** @var \cookyii\build\tasks\AbstractCompositeTask $Task */
+                    $Task = Component::createObject($className, $params);
 
                     if ($Task instanceof \cookyii\build\tasks\AbstractCompositeTask) {
                         $tasks = $Task->tasks();
                         if (!empty($tasks)) {
-                            $config[$task] = array_merge($conf, $tasks);
+                            $config[$task_name] = array_merge($conf, $tasks);
                         }
                     }
                 }

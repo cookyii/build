@@ -56,7 +56,7 @@ return [
         '.description' => 'Execute LockTask',
         '.task' => [
             'class' => 'cookyii\build\tasks\LockTask',
-            'filename' => $runtime_path . '/runtime.lock',
+            'name' => 'runtime',
         ],
     ],
 

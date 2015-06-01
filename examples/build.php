@@ -12,10 +12,10 @@ return [
             'cookyii\build\examples\ExampleEventSubscriber',
         ],
         'listeners' => [
-            BuildCommand::EVENT_BEFORE_CREATE_TASK_OBJECT => ['cookyii\build\examples\ExampleEventListener', 'onBeforeCreateTaskObject'],
-            BuildCommand::EVENT_AFTER_CREATE_TASK_OBJECT => ['cookyii\build\examples\ExampleEventListener', 'onAfterCreateTaskObject'],
-            BuildCommand::EVENT_BEFORE_EXECUTE_TASK => ['cookyii\build\examples\ExampleEventListener', 'onBeforeExecuteTask'],
-            BuildCommand::EVENT_AFTER_EXECUTE_TASK => ['cookyii\build\examples\ExampleEventListener', 'onAfterExecuteTask'],
+            BuildCommand::EVENT_BEFORE_CONFIGURE_TASK => ['cookyii\build\examples\ExampleEventListener', 'onBeforeConfigureTask'],
+            BuildCommand::EVENT_AFTER_CONFIGURE_TASK => ['cookyii\build\examples\ExampleEventListener', 'onAfterConfigureTask'],
+            BuildCommand::EVENT_BEFORE_RUN_TASK => ['cookyii\build\examples\ExampleEventListener', 'onBeforeRunTask'],
+            BuildCommand::EVENT_AFTER_RUN_TASK => ['cookyii\build\examples\ExampleEventListener', 'onAfterRunTask'],
         ],
     ],
 
@@ -33,7 +33,7 @@ return [
         '.description' => 'Show map of task runtime/*',
         '.task' => [
             'class' => 'cookyii\build\tasks\LockTask',
-            'lockFile' => 'runtime/runtime.lock',
+            'name' => 'runtime',
         ],
     ],
 
