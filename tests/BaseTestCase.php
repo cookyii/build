@@ -14,6 +14,19 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
 {
 
     /**
+     * @param array $options
+     * @return array
+     */
+    public function getConfig(array $options = [])
+    {
+        if (!isset($options['c']) && !isset($options['config'])) {
+            $options['c'] = realpath(__DIR__ . '/config/base.php');
+        }
+
+        return include($options['c']);
+    }
+
+    /**
      * @param string $task_name
      * @param array $options
      * @return array

@@ -218,6 +218,10 @@ class BuildCommand extends AbstractCommand
             return false;
         }
 
+        if ($this->output->isVeryVerbose()) {
+            $this->log(sprintf('<comment>[executed]</comment> %s', get_class($Task)), $indent + 1);
+        }
+
         return $result;
     }
 

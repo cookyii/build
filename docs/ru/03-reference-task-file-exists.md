@@ -24,7 +24,7 @@ Reference
         '.description' => 'Check application config',
         '.task' => [
             'class' => '\cookyii\build\tasks\FileExistsTask',
-            'filename' => __DIR__ . '/config/mail-local.php',
+            'filename' => __DIR__ . '/config/main-local.php',
             'message' => 'Application configuration not exists.',            
         ],
     ],

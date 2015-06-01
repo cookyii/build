@@ -4,6 +4,9 @@
  * @author Revin Roman http://phptime.ru
  */
 
+$base_path = realpath(__DIR__ . '/..');
+$runtime_path = realpath($base_path . '/runtime');
+
 return [
     'blank' => [
         '.description' => 'Nothing',
@@ -37,7 +40,7 @@ return [
         '.task' => [
             'class' => 'cookyii\build\tasks\CommandTask',
             'commandline' => 'ls',
-            'cwd' => realpath(__DIR__ . '/..'),
+            'cwd' => $base_path,
         ],
     ],
 
@@ -53,12 +56,23 @@ return [
         '.description' => 'Execute LockTask',
         '.task' => [
             'class' => 'cookyii\build\tasks\LockTask',
-            'filename' => realpath(__DIR__ . '/../runtime/runtime.lock'),
+            'filename' => $runtime_path . '/runtime.lock',
         ],
     ],
 
     'map' => [
         '.description' => 'Execute MapTask',
         '.task' => 'cookyii\build\tasks\MapTask',
+    ],
+
+    'replacement' => [
+        '.description' => 'Execute ReplacementTask',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\ReplacementTask',
+            'filename' => $runtime_path . '/replacement-target.log',
+            'placeholders' => [
+                '#KEY#' => sha1(microtime(true)),
+            ],
+        ],
     ],
 ];

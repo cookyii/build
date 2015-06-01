@@ -29,7 +29,13 @@ class CallableTask extends AbstractTask
         if (!is_callable($this->handler)) {
             throw new \InvalidArgumentException('Empty handler.');
         } else {
-            return call_user_func($this->handler, $this);
+            $result = call_user_func($this->handler, $this);
+
+            if ($this->output->isVerbose()) {
+                $this->log('Handler executed.');
+            }
+
+            return $result;
         }
     }
 }

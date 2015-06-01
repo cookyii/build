@@ -57,6 +57,7 @@ build \
 * [`FileExistsTask`][] - задача проверяет существование файла.
 * [`LockTask`][] - задача управляет блокировкой файла.
 * [`MapTask`][] - задача выводит карту всех доступных задач.
+* [`ReplacementTask`][] - задача заменяет определённые подстроки в файле.
 
 Задачи могут быть собраны в иерархию.
 Также задачи могут быть зависимы (depend) от других задач.
@@ -170,3 +171,4 @@ WIP
 [`FileExistsTask`]: 03-reference-task-file-exists.md
 [`LockTask`]: 03-reference-task-lock.md
 [`MapTask`]: 03-reference-task-map.md
+[`ReplacementTask`]: 03-reference-task-replacement.md
