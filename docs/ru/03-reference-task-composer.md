@@ -43,9 +43,10 @@ Reference
 
 **Доступные задачи**
 
-`./build composer[/default]`
-
-Задача [`MapTask`][]. Показывает карту доступных команд в текущем пространстве имён.
+```sh
+// Задача [`MapTask`][]. Показывает карту доступных команд в текущем пространстве имён.
+./build composer[/default]
+```
 
 `./build composer/require vendor/pacakage-name:version`
 
