@@ -74,13 +74,13 @@ $ ./vendor/bin/build -c build.dev.php # start build with specified configuration
 [Installing (RU)]: docs/ru/00-installing.md
 [Configuration (RU)]: docs/ru/01-config.md
 [Usage (RU)]: docs/ru/02-usage.md
-[`BlankTask`]: 03-reference-task-blank.md
-[`CallableTask`]: 03-reference-task-callable.md
-[`CommandTask`]: 03-reference-task-command.md
-[`ComposerTask`]: 03-reference-task-composer.md
-[`DeleteTask`]: 03-reference-task-delete.md
-[`EchoTask`]: 03-reference-task-echo.md
-[`FileExistsTask`]: 03-reference-task-file-exists.md
-[`LockTask`]: 03-reference-task-lock.md
-[`MapTask`]: 03-reference-task-map.md
-[`ReplacementTask`]: 03-reference-task-replacement.md
+[`BlankTask`]: docs/ru/03-reference-task-blank.md
+[`CallableTask`]: docs/ru/03-reference-task-callable.md
+[`CommandTask`]: docs/ru/03-reference-task-command.md
+[`ComposerTask`]: docs/ru/03-reference-task-composer.md
+[`DeleteTask`]: docs/ru/03-reference-task-delete.md
+[`EchoTask`]: docs/ru/03-reference-task-echo.md
+[`FileExistsTask`]: docs/ru/03-reference-task-file-exists.md
+[`LockTask`]: docs/ru/03-reference-task-lock.md
+[`MapTask`]: docs/ru/03-reference-task-map.md
+[`ReplacementTask`]: docs/ru/03-reference-task-replacement.md
