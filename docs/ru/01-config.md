@@ -3,9 +3,9 @@
 
 * [Концепция](#Концепция)
 * [Задача в её физическом представлении](#Задача-в-её-физическом-представлении)
-* [`build.php` (Default type)](#build-php-default-type)
-* [`build.json` (Json type)](#build-json-json-type)
-* [`build.xml` (XML type)](#build-xml-xml-type)
+* [`build.php` (Default type)](#buildphp-default-type)
+* [`build.json` (Json type)](#buildjson-json-type)
+* [`build.xml` (XML type)](#buildxml-xml-type)
 
 Концепция
 ---------
