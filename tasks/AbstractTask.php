@@ -15,9 +15,6 @@ use Symfony\Component\Console;
 abstract class AbstractTask extends \cookyii\build\components\Component
 {
 
-    /** @var string|null */
-    public $description;
-
     /** @var \cookyii\build\commands\BuildCommand */
     public $command;
 
