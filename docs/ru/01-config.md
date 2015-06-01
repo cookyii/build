@@ -1,6 +1,12 @@
 Конфигурация билда
 ==================
 
+* [Концепция](#Концепция)
+* [Задача в её физическом представлении](#Задача-в-её-физическом-представлении)
+* [`*.php` (Default type)](#)
+* [`*.json` (Json type)](#)
+* [`*.xml` (XML type)](#)
+
 Концепция
 ---------
 
@@ -134,16 +140,120 @@ return [
 
 Эти обе конфигурации будут работать. Это просто удобный способ объединения задач, в случае их большого количества.
 
-Default type (php file)
------------------------
+Задача в её физическом представлении
+------------------------------------
+Внутри, задача представляет собой особым образом сконфигурированный объект. 
+Этот объект должен наследоваться от [`AbstractTask`][] или [`AbstractCompositeTask`][].
+В данный момент в `cookyii/build` доступны следующие задачи:
+* [`BlankTask`][] - задача-заглушка, которая используется когда не указан класс задачи.
+* [`CallableTask`][] - задача выполняется произвольную php функцию (callable).
+* [`CommandTask`][] - задача выполняет произвольную программу в командной строке (cli command).
+* [`ComposerTask`][] - задача выполняет различные операции composer.
+* [`DeleteTask`][] - задача удаляет файлы.
+* [`EchoTask`][] - задача выводит произвольное сообщение.
+* [`FileExistsTask`][] - задача проверяет существование файла.
+* [`LockTask`][] - задача управляет блокировкой файла.
+* [`MapTask`][] - задача выводит карту всех доступных задач.
+* [`ReplacementTask`][] - задача заменяет определённые подстроки в файле.
+
+[наверх](#Использование)
+
+`*.php` (Default type)
+----------------------
 
 Конфигурационный файл `build.php` представляет собой обычный PHP файл, который возвращает массив с описанием инструкций для сборки.
 Ключи массива - название задачи (таска), значения - конфигурация задачи.
 
-Json type (json file)
----------------------
+Пример:
+
+```php
+<?php
+
+return [
+    // ./build default
+    'default' => [
+        '.description' => 'Run default task',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\EchoTask',
+            'message' => 'Executing default task...',
+        ],
+    ],
+
+    'build' => [
+        // ./build build/prod
+        'prod' => [
+            '.description' => 'Run production build',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\EchoTask',
+                'message' => 'Executing production build...',
+            ],
+        ],
+
+        // ./build build/dev
+        'dev' => [
+            '.description' => 'Run dev build',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\EchoTask',
+                'message' => 'Executing dev build...',
+            ],
+        ],
+    ],
+];
+```
+
+`*.json` (Json type)
+--------------------
 
 Конфигурационный файл `build.json` представляет собой обычный JSON файл, который содержит массив с описанием инструкций для сборки.
 Ключи массива - название задачи (таска), значения - конфигурация задачи.
 
-[`--loop-threshold`]: 01-usage.md
+Пример:
+
+```json
+{
+  "default": {
+    ".description": "Run default task",
+    ".task": {
+        "class": "cookyii\\build\\tasks\\EchoTask",
+        "message": "Executing default task..."
+    }
+  },
+
+  "build": {
+    "prod": {
+      ".description": "Run production build",
+      ".taks": {
+        "class": "cookyii\\build\\tasks\\EchoTask",
+        "message": "Executing production build..."
+      }
+    },
+    "dev": {
+      ".description": "Run dev build",
+      ".task": {
+        "class": "cookyii\\build\\tasks\\EchoTask",
+        "message": "Executing dev build..."
+      }
+    }
+  }
+}
+```
+
+`*.xml` (XML type)
+------------------
+WIP
+
+[наверх](#Использование)
+
+[`--loop-threshold`]: 02-usage.md
+[`AbstractCompositeTask`]: 03-reference-abstract-composite-task.md
+[`AbstractTask`]: 03-reference-abstract-task.md
+[`BlankTask`]: 03-reference-task-blank.md
+[`CallableTask`]: 03-reference-task-callable.md
+[`CommandTask`]: 03-reference-task-command.md
+[`ComposerTask`]: 03-reference-task-composer.md
+[`DeleteTask`]: 03-reference-task-delete.md
+[`EchoTask`]: 03-reference-task-echo.md
+[`FileExistsTask`]: 03-reference-task-file-exists.md
+[`LockTask`]: 03-reference-task-lock.md
+[`MapTask`]: 03-reference-task-map.md
+[`ReplacementTask`]: 03-reference-task-replacement.md
