@@ -24,9 +24,10 @@ Reference
         '.description' => 'Send email about new build',
         '.task' => [
             'class' => 'cookyii\build\tasks\CallableTask',
-            'handler' => function (CallableTask $Task) {
+            'handler' => function (CallableTask $Task, $email, $subject) {
                 mailto('email@localhost', 'New build', 'Hello, it\'s a new build.');
             },
+            'params' => [$email, $subject],
         ],
     ],
     
