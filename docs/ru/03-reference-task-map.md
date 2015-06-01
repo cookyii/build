@@ -1,7 +1,7 @@
 MapTask
 =======
 
-**\cookyii\build\tasks\MapTask**
+[**\cookyii\build\tasks\MapTask**](https://github.com/cookyii/build/blob/master/tasks/MapTask.php)
 
 Задача выводит карту всех доступных задач.
 

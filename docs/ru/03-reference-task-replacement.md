@@ -1,6 +1,8 @@
 ReplacementTask
 ===============
 
+[**\cookyii\build\tasks\ReplacementTask**](https://github.com/cookyii/build/blob/master/tasks/ReplacementTask.php)
+
 Задача заменяет определённые подстроки в файле.
 
 Reference

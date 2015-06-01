@@ -1,7 +1,7 @@
 AbstractTask
 ============
 
-**\cookyii\build\tasks\AbstractTask**
+[**\cookyii\build\tasks\AbstractTask**](https://github.com/cookyii/build/blob/master/tasks/AbstractTask.php)
 
 Этот абстрактный класс позваляет создавать задачу для выполнения в `cookyii/build`.
 

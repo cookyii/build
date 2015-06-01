@@ -1,7 +1,7 @@
 CallableTask
 ============
 
-**\cookyii\build\tasks\CallableTask**
+[**\cookyii\build\tasks\CallableTask**](https://github.com/cookyii/build/blob/master/tasks/CallableTask.php)
 
 Задача выполняется произвольную php функцию (callable).
 

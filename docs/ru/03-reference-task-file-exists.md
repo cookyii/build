@@ -1,7 +1,7 @@
 FileExistsTask
 ==============
 
-**\cookyii\build\tasks\FileExistsTask**
+[**\cookyii\build\tasks\FileExistsTask**](https://github.com/cookyii/build/blob/master/tasks/FileExistsTask.php)
 
 Задача проверяет существование файла.
 

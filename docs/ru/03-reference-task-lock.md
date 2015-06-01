@@ -1,7 +1,7 @@
 LockTask
 ========
 
-**\cookyii\build\tasks\LockTask**
+[**\cookyii\build\tasks\LockTask**](https://github.com/cookyii/build/blob/master/tasks/LockTask.php)
 
 Задача управляет блокировкой файла.
 

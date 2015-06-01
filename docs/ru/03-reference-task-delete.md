@@ -1,7 +1,7 @@
 DeleteTask
 ==========
 
-**\cookyii\build\tasks\DeleteTask**
+[**\cookyii\build\tasks\DeleteTask**](https://github.com/cookyii/build/blob/master/tasks/DeleteTask.php)
 
 Задача удаляет файлы.
 

@@ -1,7 +1,7 @@
 ComposerTask
 ============
 
-**\cookyii\build\tasks\ComposerTask**
+[**\cookyii\build\tasks\ComposerTask**](https://github.com/cookyii/build/blob/master/tasks/ComposerTask.php)
 
 Задача выполняет различные операции composer.
 

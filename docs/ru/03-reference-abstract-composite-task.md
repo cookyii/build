@@ -1,7 +1,7 @@
 AbstractCompositeTask
 =====================
 
-**\cookyii\build\tasks\AbstractCompositeTask**
+[**\cookyii\build\tasks\AbstractCompositeTask**](https://github.com/cookyii/build/blob/master/tasks/AbstractCompositeTask.php)
 
 Этот абстрактный класс позваляет создавать так назваемую композитную задачу.
 То есть задача, которая содержит в себе сразу несколько задач.
