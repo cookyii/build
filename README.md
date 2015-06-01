@@ -13,6 +13,12 @@ Documentation
 Quick start
 ------------
 
+**Installing**
+
+[Composer][]
+
+    $ composer require cookyii/build:dev-master
+
 **Configuration**
 
 In project path must be file `build.php` (It can be called whatever you like. The name `build.php` is taken by default.)
@@ -28,13 +34,8 @@ return [
     ],
 
     'default' => [
-        '.description' => 'Default build',
-        '.depends' => ['build'],
-    ],
-
-    'build' => [
         '.description' => 'Build project with demo environment',
-        '.depends' => ['composer', 'migrate'],
+        '.depends' => ['composer'],
     ],
 
     'composer' => [
@@ -44,25 +45,18 @@ return [
             'defaultTask' => 'install-dev',
         ],
     ],
-
-    'migrate' => [
-        '.description' => 'Run database migration',
-        '.task' => [
-            'class' => 'cookyii\build\tasks\EchoTask',
-            'message' => 'Executing migrations for database...',
-        ],
-    ],
 ];
 ```
 
-**Run build**
+**Usage (run build)**
 
 ```sh
 $ ./vendor/bin/build # start build from `default` task
-$ ./vendor/bin/build migrate # start build from `migrate` task
-$ ./vendor/bin/build -c ./project/build-conf.php # start build with specify non default conf file
+$ ./vendor/bin/build composer # start build from `composer` task
+$ ./vendor/bin/build -c build.dev.php # start build with specified configuration file `build.dev.php`
 ```
 
+[Composer]: http://getcomposer.org/
 [Symfony Console]: http://symfony.com/doc/current/components/console/introduction.html
 [Installing (RU)]: docs/ru/00-installing.md
 [Usage (RU)]: docs/ru/01-usage.md
