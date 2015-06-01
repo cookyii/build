@@ -3,9 +3,9 @@
 
 * [Концепция](#Концепция)
 * [Задача в её физическом представлении](#Задача-в-её-физическом-представлении)
-* [`*.php` (Default type)](#php-default-type)
-* [`*.json` (Json type)](#json-json-type)
-* [`*.xml` (XML type)](#xml-xml-type)
+* [`build.php` (Default type)](#build-php-default-type)
+* [`build.json` (Json type)](#build-json-json-type)
+* [`build.xml` (XML type)](#build-xml-xml-type)
 
 Концепция
 ---------
@@ -158,7 +158,7 @@ return [
 
 [наверх](#Использование)
 
-`*.php` (Default type)
+`build.php` (Default type)
 ----------------------
 
 Конфигурационный файл `build.php` представляет собой обычный PHP файл, который возвращает массив с описанием инструкций для сборки.
@@ -201,7 +201,7 @@ return [
 ];
 ```
 
-`*.json` (Json type)
+`build.json` (Json type)
 --------------------
 
 Конфигурационный файл `build.json` представляет собой обычный JSON файл, который содержит массив с описанием инструкций для сборки.
@@ -238,7 +238,7 @@ return [
 }
 ```
 
-`*.xml` (XML type)
+`build.xml` (XML type)
 ------------------
 WIP
 
