@@ -49,6 +49,11 @@ class BuildCommand extends AbstractCommand
                 'What task you need to execute?',
                 'default'
             )
+            ->addArgument(
+                'arg1',
+                Console\Input\InputArgument::OPTIONAL,
+                'Some argument for task'
+            )
             ->addOption('config', 'c', Console\Input\InputOption::VALUE_OPTIONAL, 'Where is the configuration file', 'build.php')
             ->addOption('task-delimiter', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Delimiter for the name of the task', '/')
             ->addOption('loop-threshold', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Number of repetitions of the task to be discarded error loop', 3)

@@ -44,11 +44,27 @@ return [
         ],
     ],
 
+    'composer' => [
+        '.description' => 'Execute ComposerTask',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\ComposerTask',
+            'composer' => 'composer',
+        ],
+    ],
+
     'echo' => [
         '.description' => 'Execute EchoTask',
         '.task' => [
             'class' => 'cookyii\build\tasks\EchoTask',
             'message' => 'Echo task executed.',
+        ],
+    ],
+
+    'exists' => [
+        '.description' => 'Execute FileExistsTask',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\FileExistsTask',
+            'filename' => $runtime_path . '/non-exists.file',
         ],
     ],
 

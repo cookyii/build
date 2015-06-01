@@ -39,7 +39,7 @@ abstract class AbstractCompositeTask extends AbstractTask
                 $this->log(sprintf('Executing default task "%s".', $defaultTask));
             }
 
-            $this->command->executeTask($task, $this->prefix . '[' . $defaultTask . ']', $this->indent);
+            return $this->command->executeTask($task, $this->prefix . '[' . $defaultTask . ']', $this->indent);
         }
     }
 }
