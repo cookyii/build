@@ -23,7 +23,8 @@ class ComposerTaskTest extends \cookyii\build\tests\BaseTestCase
         $this->assertContains('Build finished', $output);
     }
 
-    public function testInstall(){
+    public function testInstall()
+    {
 
     }
 }

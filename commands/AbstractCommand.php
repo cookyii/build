@@ -21,6 +21,9 @@ abstract class AbstractCommand extends Console\Command\Command
     /** @var Console\Output\ConsoleOutput */
     public $output;
 
+    /** @var array */
+    private $states = [];
+
     /**
      * @param string $message
      * @param integer $indent
@@ -38,5 +41,24 @@ abstract class AbstractCommand extends Console\Command\Command
         foreach ($messages as $mes) {
             $this->output->$method(str_repeat('  ', $indent) . $mes);
         }
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     */
+    public function setState($key, $value)
+    {
+        $this->states[$key] = $value;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $defaultValue
+     * @return mixed
+     */
+    public function getState($key, $defaultValue = null)
+    {
+        return isset($this->states[$key]) ? $this->states[$key] : $defaultValue;
     }
 }

@@ -73,6 +73,7 @@ return [
         '.task' => [
             'class' => 'cookyii\build\tasks\LockTask',
             'name' => 'runtime',
+            'checkState' => 'runtime-lock',
         ],
     ],
 

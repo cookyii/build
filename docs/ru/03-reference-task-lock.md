@@ -37,5 +37,18 @@ Reference
 Задача `LockTask` является композитной задачей. То есть предоставляет возможность исполнять дополнительные команды.
 Полный reference доступных задач Вы можете увидеть в результате выполнения задачи [`MapTask`][]
 
+**Доступные задачи**
+
+```bash
+#Задача показывает карту доступных команд в текущем пространстве имён.
+./build lock[/default]
+
+#Задача устанавливает блокировку.
+./build lock/lock
+
+#Задача снимает блокировку.
+./build lock/release
+```
+
 [`AbstractCompositeTask`]: 03-reference-abstract-composite-task.md
 [`MapTask`]: 03-reference-task-map.md

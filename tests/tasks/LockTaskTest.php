@@ -20,5 +20,23 @@ class LockTaskTest extends \cookyii\build\tests\BaseTestCase
         $this->assertTrue($return === 0);
         $this->assertContains('Locked [runtime]', $output);
         $this->assertContains('Build finished', $output);
+
+        list($return, $output) = $this->executeTask('lock/check', ['v' => true]);
+
+        $this->assertTrue($return === 0);
+        $this->assertContains('Locked [runtime]', $output);
+        $this->assertContains('Build finished', $output);
+
+        list($return, $output) = $this->executeTask('lock/release', ['v' => true]);
+
+        $this->assertTrue($return === 0);
+        $this->assertContains('Released [runtime]', $output);
+        $this->assertContains('Build finished', $output);
+
+        list($return, $output) = $this->executeTask('lock/check', ['v' => true]);
+
+        $this->assertTrue($return === 0);
+        $this->assertContains('Released [runtime]', $output);
+        $this->assertContains('Build finished', $output);
     }
 }
