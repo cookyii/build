@@ -6,8 +6,9 @@ Cookyii/build is a simple PHP build tool built on [Symfony Console][].
 Documentation
 -------------
 
-- [Installing][]
-- [Usage][]
+- [Installing (RU)][]
+- [Usage (RU)][]
+- [Configuration (RU)][]
 
 Quick start
 ------------
@@ -63,5 +64,6 @@ $ ./vendor/bin/build -c ./project/build-conf.php # start build with specify non 
 ```
 
 [Symfony Console]: http://symfony.com/doc/current/components/console/introduction.html
-[Installing]: docs/ru/00-installing.md
-[Usage]: docs/ru/01-usage.md
+[Installing (RU)]: docs/ru/00-installing.md
+[Usage (RU)]: docs/ru/01-usage.md
+[Configuration (RU)]: docs/ru/02-config.md
