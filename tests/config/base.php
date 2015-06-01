@@ -49,6 +49,8 @@ return [
         '.task' => [
             'class' => 'cookyii\build\tasks\ComposerTask',
             'composer' => 'composer',
+            'cwd' => $runtime_path,
+            'quiet' => true,
         ],
     ],
 

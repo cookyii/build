@@ -19,6 +19,9 @@ class ComposerTask extends AbstractCompositeTask
     /** @var string */
     public $cwd;
 
+    /** @var bool */
+    public $quiet = false;
+
     public function init()
     {
         parent::init();
@@ -33,6 +36,8 @@ class ComposerTask extends AbstractCompositeTask
      */
     public function tasks()
     {
+        $quiet = $this->quiet ? ' --quiet' : null;
+
         return [
             'default' => [
                 '.description' => 'Show map subtasks',
@@ -46,7 +51,7 @@ class ComposerTask extends AbstractCompositeTask
                 '.description' => 'Adds required packages to your composer.json and installs them',
                 '.task' => [
                     'class' => '\cookyii\build\tasks\CommandTask',
-                    'commandline' => $this->composer . ' require ' . $this->input->getArgument('arg1'),
+                    'commandline' => $this->composer . ' require ' . $this->input->getArgument('arg1') . $quiet,
                     'cwd' => $this->cwd,
                 ],
             ],
@@ -55,7 +60,7 @@ class ComposerTask extends AbstractCompositeTask
                 '.description' => 'Installs the project dependencies from the composer.lock file if present, or falls back on the composer.json (with `require-dev`)',
                 '.task' => [
                     'class' => '\cookyii\build\tasks\CommandTask',
-                    'commandline' => $this->composer . ' install --prefer-dist',
+                    'commandline' => $this->composer . ' install --prefer-dist' . $quiet,
                     'cwd' => $this->cwd,
                 ],
             ],
@@ -63,7 +68,7 @@ class ComposerTask extends AbstractCompositeTask
                 '.description' => 'Updates your dependencies to the latest version according to composer.json, and updates the composer.lock file (with `require-dev`)',
                 '.task' => [
                     'class' => '\cookyii\build\tasks\CommandTask',
-                    'commandline' => $this->composer . ' update --prefer-dist',
+                    'commandline' => $this->composer . ' update --prefer-dist'. $quiet,
                     'cwd' => $this->cwd,
                 ],
             ],
@@ -72,7 +77,7 @@ class ComposerTask extends AbstractCompositeTask
                 '.description' => 'Installs the project dependencies from the composer.lock file if present, or falls back on the composer.json (without `require-dev`)',
                 '.task' => [
                     'class' => '\cookyii\build\tasks\CommandTask',
-                    'commandline' => $this->composer . ' install --prefer-dist --no-dev',
+                    'commandline' => $this->composer . ' install --prefer-dist --no-dev'. $quiet,
                     'cwd' => $this->cwd,
                 ],
             ],
@@ -80,7 +85,7 @@ class ComposerTask extends AbstractCompositeTask
                 '.description' => 'Updates your dependencies to the latest version according to composer.json, and updates the composer.lock file (without `require-dev`)',
                 '.task' => [
                     'class' => '\cookyii\build\tasks\CommandTask',
-                    'commandline' => $this->composer . ' update --prefer-dist --no-dev',
+                    'commandline' => $this->composer . ' update --prefer-dist --no-dev'. $quiet,
                     'cwd' => $this->cwd,
                 ],
             ],
@@ -89,7 +94,7 @@ class ComposerTask extends AbstractCompositeTask
                 '.description' => 'Updates composer.phar to the latest version',
                 '.task' => [
                     'class' => '\cookyii\build\tasks\CommandTask',
-                    'commandline' => $this->composer . ' selfupdate',
+                    'commandline' => $this->composer . ' selfupdate'. $quiet,
                     'cwd' => $this->cwd,
                 ],
             ],

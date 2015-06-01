@@ -14,6 +14,14 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
 {
 
     /**
+     * @return string
+     */
+    public function getRuntimePath()
+    {
+        return __DIR__ . '/runtime';
+    }
+
+    /**
      * @param array $options
      * @return array
      */
