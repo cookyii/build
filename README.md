@@ -67,6 +67,7 @@ $ ./vendor/bin/build -c build.dev.php # start build with specified configuration
 * [`DeleteTask`][] - task deletes files.
 * [`EchoTask`][] - task displays custom message.
 * [`FileExistsTask`][] - task checks for the existence of the file.
+* [`InputTask`][] - prompt task.
 * [`LockTask`][] - task of managing locking file.
 * [`MapTask`][] - task displays a map of all available tasks.
 * [`ReplacementTask`][] - task of replacing placeholders in file.
@@ -85,6 +86,7 @@ $ ./vendor/bin/build -c build.dev.php # start build with specified configuration
 [`DeleteTask`]: docs/ru/03-reference-task-delete.md
 [`EchoTask`]: docs/ru/03-reference-task-echo.md
 [`FileExistsTask`]: docs/ru/03-reference-task-file-exists.md
+[`InputTask`]: docs/ru/03-reference-task-input.md
 [`LockTask`]: docs/ru/03-reference-task-lock.md
 [`MapTask`]: docs/ru/03-reference-task-map.md
 [`ReplacementTask`]: docs/ru/03-reference-task-replacement.md

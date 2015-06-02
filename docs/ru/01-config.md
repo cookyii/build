@@ -156,6 +156,7 @@ return [
 * [`DeleteTask`][] - задача удаляет файлы.
 * [`EchoTask`][] - задача выводит произвольное сообщение.
 * [`FileExistsTask`][] - задача проверяет существование файла.
+* [`InputTask`][] - задаче предоставляет возможность ввести пользовательские данные путём ввода информации (prompt).
 * [`LockTask`][] - задача управляет блокировкой файла.
 * [`MapTask`][] - задача выводит карту всех доступных задач.
 * [`ReplacementTask`][] - задача заменяет определённые подстроки в файле.
@@ -264,6 +265,7 @@ WIP
 [`DeleteTask`]: 03-reference-task-delete.md
 [`EchoTask`]: 03-reference-task-echo.md
 [`FileExistsTask`]: 03-reference-task-file-exists.md
+[`InputTask`]: 03-reference-task-input.md
 [`LockTask`]: 03-reference-task-lock.md
 [`MapTask`]: 03-reference-task-map.md
 [`ReplacementTask`]: 03-reference-task-replacement.md

@@ -14,6 +14,7 @@ Reference
 | ------- | --- | -------- |
 | `name` | `string` | Идентификатор блокировки. |
 | `lockPath` | `string` | Путь к директории, где будет создан файл блокировки. |
+| `state` | `string` | Название ключа переменной, в которой будет сохранен результат проверки (check) блокировки. |
 
 Примеры конфигурации
 --------------------
@@ -22,6 +23,7 @@ Reference
     // ./build lock
     // ./build lock/lock
     // ./build lock/release
+    // ./build lock/check
     'lock' => [
         '.description' => 'Install all depending for development environment (with `require-dev`)',
         '.task' => [
@@ -49,6 +51,9 @@ Reference
 
 #Задача снимает блокировку.
 ./build lock/release
+
+#Задача проверяет наличие блокировки и сохраняет результат в `state`.
+./build lock/check
 ```
 
 [`AbstractCompositeTask`]: 03-reference-abstract-composite-task.md

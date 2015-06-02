@@ -20,7 +20,7 @@ class LockTask extends AbstractCompositeTask
     public $lockPath;
 
     /** @var string|null */
-    public $checkState;
+    public $state;
 
     public function init()
     {
@@ -126,13 +126,13 @@ class LockTask extends AbstractCompositeTask
      */
     public function check()
     {
-        if (empty($this->checkState)) {
+        if (empty($this->state)) {
             throw new \RuntimeException('Empty check state name.');
         }
 
-        $this->command->setState($this->checkState, $this->exists());
+        $this->command->setState($this->state, $this->exists());
 
-        if ($this->command->getState($this->checkState)) {
+        if ($this->command->getState($this->state)) {
             $this->log(sprintf('<task-result> CHECK </task-result> Locked [%s].', $this->name));
         } else {
             $this->log(sprintf('<task-result> CHECK </task-result> Released [%s].', $this->name));

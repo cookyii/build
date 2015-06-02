@@ -34,7 +34,7 @@ return [
         '.task' => [
             'class' => 'cookyii\build\tasks\LockTask',
             'name' => 'runtime',
-            'checkState' => 'runtime-lock',
+            'state' => 'runtime-lock',
         ],
     ],
 
@@ -152,7 +152,7 @@ return [
                 'fileSets' => [
                     ['dir' => 'runtime/chown'],
                 ],
-            ]
+            ],
         ],
         'chmod' => [
             '.description' => 'Change file mode',
@@ -163,7 +163,15 @@ return [
                 'fileSets' => [
                     ['dir' => 'runtime'],
                 ],
-            ]
+            ],
+        ],
+        'username' => [
+            '.description' => 'Fill you name',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\InputTask',
+                'state' => 'username',
+                'message' => 'Your name:',
+            ],
         ],
     ],
 

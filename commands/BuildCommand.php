@@ -389,6 +389,7 @@ class BuildCommand extends AbstractCommand
 
         $Formatter->setStyle('log', new Console\Formatter\OutputFormatterStyle(null, null));
         $Formatter->setStyle('header', new Console\Formatter\OutputFormatterStyle(null, null, ['bold']));
+        $Formatter->setStyle('prompt', new Console\Formatter\OutputFormatterStyle('blue', 'white'));
         $Formatter->setStyle('error', new Console\Formatter\OutputFormatterStyle('red', null));
         $Formatter->setStyle('task', new Console\Formatter\OutputFormatterStyle('black', 'blue'));
         $Formatter->setStyle('task-error', new Console\Formatter\OutputFormatterStyle('black', 'red'));

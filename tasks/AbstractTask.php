@@ -61,10 +61,20 @@ abstract class AbstractTask extends \cookyii\build\components\Component
      * Send message to output
      * @param string $message
      * @param integer $indent
+     * @param boolean $newLine
      */
-    public function log($message, $indent = 0)
+    protected function log($message, $indent = 0, $newLine = true)
     {
-        $this->command->log($message, $indent + $this->indent + 1);
+        $this->command->log($message, $this->indent($indent), $newLine);
+    }
+
+    /**
+     * @param integer $indent
+     * @return integer
+     */
+    protected function indent($indent = 0)
+    {
+        return $indent + $this->indent + 1;
     }
 
     /**
