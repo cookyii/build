@@ -1,13 +1,13 @@
 <?php
 /**
- * ChowTask.php
+ * ChmodTask.php
  * @author Revin Roman http://phptime.ru
  */
 
 namespace cookyii\build\tasks;
 
 /**
- * Class ChowTask
+ * Class ChmodTask
  * @package cookyii\build\tasks
  */
 class ChmodTask extends AbstractTask
