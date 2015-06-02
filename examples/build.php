@@ -143,6 +143,28 @@ return [
                 ],
             ],
         ],
+        'chown' => [
+            '.description' => 'Change owner',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\ChowTask',
+                'user' => 'www-data',
+                'filename' => 'runtime/chown.test',
+                'fileSets' => [
+                    ['dir' => 'runtime/chown'],
+                ],
+            ]
+        ],
+        'chmod' => [
+            '.description' => 'Change file mode',
+            '.task' => [
+                'class' => 'cookyii\build\tasks\ChmodTask',
+                'dirMode' => 0775,
+                'fileMode' => 0664,
+                'fileSets' => [
+                    ['dir' => 'runtime'],
+                ],
+            ]
+        ],
     ],
 
     'composer' => [

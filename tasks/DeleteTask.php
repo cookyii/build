@@ -31,7 +31,7 @@ class DeleteTask extends AbstractTask
                     : $fileSet;
 
                 if (mb_substr($fileSet['dir'], 0, 1, 'utf-8') !== '/') {
-                    $fileSet['dir'] = $this->command->configReader->basePath . DIRECTORY_SEPARATOR . $fileSet['dir'];
+                    $fileSet['dir'] = $this->getAbsolutePath($fileSet['dir']);
                 }
 
                 $FileSet = new \cookyii\build\components\FileSet();

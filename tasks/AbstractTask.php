@@ -30,6 +30,9 @@ abstract class AbstractTask extends \cookyii\build\components\Component
     /** @var string|null */
     public $prefix;
 
+    /** @var bool */
+    public $skipOnError = false;
+
     /** Events */
     const EVENT_AFTER_INITIALIZE = 'task.onAfterInitialize';
     const EVENT_BEFORE_RUN = 'task.onBeforeRun';

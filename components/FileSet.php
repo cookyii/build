@@ -25,13 +25,20 @@ class FileSet extends Component
     /** @var bool */
     public $ignoreDotFiles = false;
 
+    /** @var bool */
+    public $skipIfNotExists = true;
+
     /**
      * @return \Symfony\Component\Finder\SplFileInfo[]
      */
     public function getListIterator()
     {
         if (!file_exists($this->dir) || !is_dir($this->dir)) {
-            throw new \InvalidArgumentException(sprintf('The "%s" directory does not exist.', $this->dir));
+            if (false === $this->skipIfNotExists) {
+                throw new \InvalidArgumentException(sprintf('The "%s" directory does not exist.', $this->dir));
+            } else {
+                return [];
+            }
         }
 
         $Finder = (new \Symfony\Component\Finder\Finder())

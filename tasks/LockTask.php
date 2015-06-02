@@ -34,9 +34,7 @@ class LockTask extends AbstractCompositeTask
             $this->lockPath = sys_get_temp_dir();
         }
 
-        if (!$this->getFileSystemHelper()->isAbsolutePath($this->lockPath)) {
-            $this->lockPath = $this->command->configReader->basePath . DIRECTORY_SEPARATOR . $this->lockPath;
-        }
+        $this->lockPath = $this->getAbsolutePath($this->lockPath);
     }
 
     /**

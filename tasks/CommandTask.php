@@ -30,7 +30,7 @@ class CommandTask extends AbstractTask
             $cwd = $this->command->configReader->basePath;
 
             if (!empty($this->cwd)) {
-                $cwd = $this->cwd;
+                $cwd = $this->getAbsolutePath($this->cwd);
             }
 
             if (is_string($this->commandline)) {

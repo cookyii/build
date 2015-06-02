@@ -36,7 +36,6 @@ class ReplacementTask extends AbstractTask
 
         if (!$this->getFileSystemHelper()->exists($filename)) {
             throw new \RuntimeException(sprintf('File "%s" not exists', $filename));
-
         }
 
         $content = file_get_contents($filename);
