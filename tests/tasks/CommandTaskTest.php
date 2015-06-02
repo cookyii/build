@@ -18,7 +18,8 @@ class CommandTaskTest extends \cookyii\build\tests\BaseTestCase
         list($return, $output) = $this->executeTask('command', ['vv' => true]);
 
         $this->assertTrue($return === 0);
-        $this->assertContains('Executing "ls"', $output);
+        $this->assertContains('EXEC', $output);
+        $this->assertContains('"ls"', $output);
         $this->assertContains('BaseTestCase.php', $output);
         $this->assertContains('Build finished', $output);
     }
