@@ -146,7 +146,7 @@ return [
         'chown' => [
             '.description' => 'Change owner',
             '.task' => [
-                'class' => 'cookyii\build\tasks\ChowTask',
+                'class' => 'cookyii\build\tasks\ChownTask',
                 'user' => 'www-data',
                 'filename' => 'runtime/chown.test',
                 'fileSets' => [

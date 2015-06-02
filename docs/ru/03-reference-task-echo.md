@@ -15,7 +15,7 @@ Reference
 ```php
 [
     // ./build message
-    'datetime' => [
+    'message' => [
         '.description' => 'Show some message',
         '.task' => [
             'class' => '\cookyii\build\tasks\EchoTask',

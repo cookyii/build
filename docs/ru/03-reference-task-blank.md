@@ -14,12 +14,6 @@ Reference
 --------------------
 ```php
 [
-    // ./build map
-    'map' => [
-        '.description' => 'Show map of all tasks in current build config',
-        '.task' => '\cookyii\build\tasks\BlankTask',
-    ],
-    
     // ./build nothing
     'nothing' => [
         '.description' => 'Nothing to do',

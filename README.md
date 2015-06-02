@@ -60,6 +60,8 @@ $ ./vendor/bin/build -c build.dev.php # start build with specified configuration
 
 * [`BlankTask`][] - empty task, which is used when a class is not specified.
 * [`CallableTask`][] - task to execute php function (callable).
+* [`ChmodTask`][] - task to change file mode (chmod).
+* [`ChownTask`][] - task to change owner (chown).
 * [`CommandTask`][] - task to execute programm on the command line (cli command).
 * [`ComposerTask`][] - task to execute `composer` functions.
 * [`DeleteTask`][] - task deletes files.
@@ -76,6 +78,8 @@ $ ./vendor/bin/build -c build.dev.php # start build with specified configuration
 [Usage (RU)]: docs/ru/02-usage.md
 [`BlankTask`]: docs/ru/03-reference-task-blank.md
 [`CallableTask`]: docs/ru/03-reference-task-callable.md
+[`ChmodTask`]: 03-reference-task-chmod.md
+[`ChownTask`]: 03-reference-task-chown.md
 [`CommandTask`]: docs/ru/03-reference-task-command.md
 [`ComposerTask`]: docs/ru/03-reference-task-composer.md
 [`DeleteTask`]: docs/ru/03-reference-task-delete.md

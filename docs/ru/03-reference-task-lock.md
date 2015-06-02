@@ -19,6 +19,7 @@ Reference
 --------------------
 ```php
 [
+    // ./build lock
     // ./build lock/lock
     // ./build lock/release
     'lock' => [

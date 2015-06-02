@@ -149,6 +149,8 @@ return [
 В данный момент в `cookyii/build` доступны следующие задачи:
 * [`BlankTask`][] - задача-заглушка, которая используется когда не указан класс задачи.
 * [`CallableTask`][] - задача выполняется произвольную php функцию (callable).
+* [`ChmodTask`][] - задача изменяет права доступа к файлам (chmod).
+* [`ChownTask`][] - задача изменяет владельца файла (chown).
 * [`CommandTask`][] - задача выполняет произвольную программу в командной строке (cli command).
 * [`ComposerTask`][] - задача выполняет различные операции composer.
 * [`DeleteTask`][] - задача удаляет файлы.
@@ -255,6 +257,8 @@ WIP
 [`AbstractTask`]: 03-reference-abstract-task.md
 [`BlankTask`]: 03-reference-task-blank.md
 [`CallableTask`]: 03-reference-task-callable.md
+[`ChmodTask`]: 03-reference-task-chmod.md
+[`ChownTask`]: 03-reference-task-chown.md
 [`CommandTask`]: 03-reference-task-command.md
 [`ComposerTask`]: 03-reference-task-composer.md
 [`DeleteTask`]: 03-reference-task-delete.md

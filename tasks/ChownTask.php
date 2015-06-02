@@ -1,29 +1,29 @@
 <?php
 /**
- * ChowTask.php
+ * ChownTask.php
  * @author Revin Roman http://phptime.ru
  */
 
 namespace cookyii\build\tasks;
 
 /**
- * Class ChowTask
+ * Class ChownTask
  * @package cookyii\build\tasks
  */
-class ChowTask extends AbstractTask
+class ChownTask extends AbstractTask
 {
-
-    /** @var string */
-    public $user;
-
-    /** @var string */
-    public $group;
 
     /** @var string|null */
     public $filename;
 
     /** @var array */
     public $fileSets = [];
+
+    /** @var string */
+    public $user;
+
+    /** @var string */
+    public $group;
 
     /** @var bool */
     public $skipOnError = true;
