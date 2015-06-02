@@ -34,6 +34,11 @@ class MyLovelyTask extends \cookyii\build\tasks\AbstractTask
     public function run()
     {
         $result = false;
+        
+        // get global state var
+        if(!$this->command->setState('othertask.state', false)) {
+            throw new \Exception('Oh no...');
+        }
     
         // your magic
         
