@@ -78,8 +78,8 @@ $ ./vendor/bin/build -c build.dev.php # start build with specified configuration
 [Usage (RU)]: docs/ru/02-usage.md
 [`BlankTask`]: docs/ru/03-reference-task-blank.md
 [`CallableTask`]: docs/ru/03-reference-task-callable.md
-[`ChmodTask`]: 03-reference-task-chmod.md
-[`ChownTask`]: 03-reference-task-chown.md
+[`ChmodTask`]: docs/ru/03-reference-task-chmod.md
+[`ChownTask`]: docs/ru/03-reference-task-chown.md
 [`CommandTask`]: docs/ru/03-reference-task-command.md
 [`ComposerTask`]: docs/ru/03-reference-task-composer.md
 [`DeleteTask`]: docs/ru/03-reference-task-delete.md
