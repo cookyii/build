@@ -19,7 +19,7 @@ class BlankTask extends AbstractTask
     public function run()
     {
         if ($this->output->isVerbose()) {
-            $this->log('Blank task executed.');
+            $this->log('<task-result> BLANK </task-result> Blank task executed.');
         }
 
         return true;

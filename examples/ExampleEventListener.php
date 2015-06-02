@@ -21,7 +21,9 @@ class ExampleEventListener
      */
     public static function onBeforeConfigureTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a listener on event %s', BuildCommand::EVENT_BEFORE_CONFIGURE_TASK));
+        if ($TaskEvent->getCommand()->output->isQuiet()) {
+            $TaskEvent->log(sprintf('<comment> EVENT </comment> this is a listener on event %s', BuildCommand::EVENT_BEFORE_CONFIGURE_TASK));
+        }
     }
 
     /**
@@ -29,7 +31,9 @@ class ExampleEventListener
      */
     public static function onAfterConfigureTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a listener on event %s', BuildCommand::EVENT_AFTER_CONFIGURE_TASK));
+        if ($TaskEvent->getCommand()->output->isVerbose()) {
+            $TaskEvent->log(sprintf('<comment> EVENT </comment> this is a listener on event %s', BuildCommand::EVENT_AFTER_CONFIGURE_TASK));
+        }
     }
 
     /**
@@ -37,7 +41,9 @@ class ExampleEventListener
      */
     public static function onBeforeRunTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a listener on event %s', BuildCommand::EVENT_BEFORE_RUN_TASK));
+        if ($TaskEvent->getCommand()->output->isVeryVerbose()) {
+            $TaskEvent->log(sprintf('<comment> EVENT </comment> this is a listener on event %s', BuildCommand::EVENT_BEFORE_RUN_TASK));
+        }
     }
 
     /**
@@ -45,6 +51,8 @@ class ExampleEventListener
      */
     public static function onAfterRunTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a listener on event %s', BuildCommand::EVENT_AFTER_RUN_TASK));
+        if ($TaskEvent->getCommand()->output->isDebug()) {
+            $TaskEvent->log(sprintf('<comment> EVENT </comment> this is a listener on event %s', BuildCommand::EVENT_AFTER_RUN_TASK));
+        }
     }
 }

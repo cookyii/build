@@ -38,7 +38,7 @@ class CallableTask extends AbstractTask
             );
 
             if ($this->output->isVerbose()) {
-                $this->log('Handler executed.');
+                $this->log('<task-result> EXEC </task-result> Handler executed.');
             }
 
             return $result;

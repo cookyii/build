@@ -29,7 +29,7 @@ class EchoTask extends AbstractTask
             }
 
             foreach ($this->message as $message) {
-                $this->log($message);
+                $this->log(sprintf('<task-result> ECHO </task-result> %s', $message));
             }
 
             return true;

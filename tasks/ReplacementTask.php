@@ -42,7 +42,7 @@ class ReplacementTask extends AbstractTask
         $result = file_put_contents($filename, str_replace(array_keys($this->placeholders), array_values($this->placeholders), $content));
 
         if ($this->output->isVerbose()) {
-            $this->log('Placeholders replaced.');
+            $this->log('<task-result> REPLACE </task-result> Placeholders replaced.');
         }
 
         return $result !== false;

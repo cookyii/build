@@ -177,6 +177,9 @@ class Component
         return [$subscribers, $listeners];
     }
 
+    /**
+     * @param array $events
+     */
     public static function addEventListeners(array $events = [])
     {
         if (!empty($events)) {
@@ -215,6 +218,9 @@ class Component
         }
     }
 
+    /**
+     * @param array $events
+     */
     public static function removeEventListeners(array $events = [])
     {
         if (!empty($events)) {

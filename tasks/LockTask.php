@@ -80,8 +80,8 @@ class LockTask extends AbstractCompositeTask
      */
     public function lock()
     {
-        if ($this->output->isVerbose()) {
-            $this->log(sprintf('Lock file %s.', $this->getFilename()));
+        if ($this->output->isVeryVerbose()) {
+            $this->log(sprintf('<task-result> LOCK </task-result> check file [%s].', $this->getFilename()));
         }
 
         if ($this->exists()) {
@@ -92,7 +92,7 @@ class LockTask extends AbstractCompositeTask
             ->touch($this->getFilename());
 
         if ($this->output->isVerbose()) {
-            $this->log(sprintf('Locked [%s].', $this->name));
+            $this->log(sprintf('<task-result> LOCK </task-result> [%s].', $this->name));
         }
 
         return true;
@@ -103,8 +103,8 @@ class LockTask extends AbstractCompositeTask
      */
     public function release()
     {
-        if ($this->output->isVerbose()) {
-            $this->log(sprintf('Lock file %s.', $this->getFilename()));
+        if ($this->output->isVeryVerbose()) {
+            $this->log(sprintf('<task-result> RELEASE </task-result> check file [%s].', $this->getFilename()));
         }
 
         if (!$this->exists()) {
@@ -115,7 +115,7 @@ class LockTask extends AbstractCompositeTask
             ->remove($this->getFilename());
 
         if ($this->output->isVerbose()) {
-            $this->log(sprintf('Released [%s].', $this->name));
+            $this->log(sprintf('<task-result> RELEASE </task-result> [%s].', $this->name));
         }
 
         return true;
@@ -133,9 +133,9 @@ class LockTask extends AbstractCompositeTask
         $this->command->setState($this->checkState, $this->exists());
 
         if ($this->command->getState($this->checkState)) {
-            $this->log(sprintf('Locked [%s].', $this->name));
+            $this->log(sprintf('<task-result> CHECK </task-result> Locked [%s].', $this->name));
         } else {
-            $this->log(sprintf('Released [%s].', $this->name));
+            $this->log(sprintf('<task-result> CHECK </task-result> Released [%s].', $this->name));
         }
 
         return true;

@@ -31,10 +31,18 @@ class ExportConfigTask extends AbstractTask
         $exportToFile = $this->getAbsolutePath($exportToFile);
 
         if (empty($exportToFile)) {
+            if ($this->output->isVerbose()) {
+                $this->log('<task-result> EXPORT </task-result>');
+            }
+
             echo $this->dump($this->command->rawConfig);
         } else {
             $this->getFileSystemHelper()
                 ->dumpFile($exportToFile, $this->dump($this->command->rawConfig), 0664);
+
+            if ($this->output->isVerbose()) {
+                $this->log(sprintf('<task-result> EXPORT </task-result> to %s', $exportToFile));
+            }
         }
 
         return true;

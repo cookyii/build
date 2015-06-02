@@ -39,7 +39,7 @@ class FileExistsTask extends AbstractTask
                 return false;
             } else {
                 if ($this->output->isVerbose()) {
-                    $this->log(sprintf('File %s exist.', $filename));
+                    $this->log(sprintf('<task-result> EXISTS </task-result> %s.', $filename));
                 }
             }
         }

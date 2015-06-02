@@ -34,7 +34,9 @@ class ExampleEventSubscriber implements \Symfony\Component\EventDispatcher\Event
      */
     public function onBeforeConfigureTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_BEFORE_CONFIGURE_TASK));
+        if ($TaskEvent->getCommand()->output->isQuiet()) {
+            $TaskEvent->log(sprintf('<comment> EVENT </comment> this is a subscriber on event %s', BuildCommand::EVENT_BEFORE_CONFIGURE_TASK));
+        }
     }
 
     /**
@@ -42,7 +44,9 @@ class ExampleEventSubscriber implements \Symfony\Component\EventDispatcher\Event
      */
     public function onAfterConfigureTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_AFTER_CONFIGURE_TASK));
+        if ($TaskEvent->getCommand()->output->isVerbose()) {
+            $TaskEvent->log(sprintf('<comment> EVENT </comment> this is a subscriber on event %s', BuildCommand::EVENT_AFTER_CONFIGURE_TASK));
+        }
     }
 
     /**
@@ -50,7 +54,9 @@ class ExampleEventSubscriber implements \Symfony\Component\EventDispatcher\Event
      */
     public function onBeforeRunTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_BEFORE_RUN_TASK));
+        if ($TaskEvent->getCommand()->output->isVeryVerbose()) {
+            $TaskEvent->log(sprintf('<comment> EVENT </comment> this is a subscriber on event %s', BuildCommand::EVENT_BEFORE_RUN_TASK));
+        }
     }
 
     /**
@@ -58,6 +64,8 @@ class ExampleEventSubscriber implements \Symfony\Component\EventDispatcher\Event
      */
     public function onAfterRunTask(TaskEvent $TaskEvent)
     {
-        $TaskEvent->log(sprintf('this is a subscriber on event %s', BuildCommand::EVENT_AFTER_RUN_TASK));
+        if ($TaskEvent->getCommand()->output->isDebug()) {
+            $TaskEvent->log(sprintf('<comment> EVENT </comment> this is a subscriber on event %s', BuildCommand::EVENT_AFTER_RUN_TASK));
+        }
     }
 }

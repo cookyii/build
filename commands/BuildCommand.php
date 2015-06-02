@@ -273,7 +273,7 @@ class BuildCommand extends AbstractCommand
         }
 
         if ($this->output->isVeryVerbose()) {
-            $this->log(sprintf('Raise event %s', $event), $Event->getIndent());
+            $this->log(sprintf('<log> LOG </log> Dispatch event %s', $event), $Event->getIndent());
         }
 
         Component::getEventDispatcher()
@@ -387,11 +387,12 @@ class BuildCommand extends AbstractCommand
         $Formatter = $this->output
             ->getFormatter();
 
+        $Formatter->setStyle('log', new Console\Formatter\OutputFormatterStyle(null, null));
+        $Formatter->setStyle('header', new Console\Formatter\OutputFormatterStyle(null, null, ['bold']));
         $Formatter->setStyle('error', new Console\Formatter\OutputFormatterStyle('red', null));
         $Formatter->setStyle('task', new Console\Formatter\OutputFormatterStyle('black', 'blue'));
         $Formatter->setStyle('task-error', new Console\Formatter\OutputFormatterStyle('black', 'red'));
         $Formatter->setStyle('task-result', new Console\Formatter\OutputFormatterStyle('black', 'yellow'));
-        $Formatter->setStyle('header', new Console\Formatter\OutputFormatterStyle(null, null, ['bold']));
 
         if (in_array($color, ['no', 'none', 'never'], true)) {
             $defaultStyle = new Console\Formatter\OutputFormatterStyle();
