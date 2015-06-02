@@ -1,7 +1,7 @@
 InputTask
 =========
 
-[**\cookyii\build\tasks\InputTask**](https://github.com/cookyii/build/blob/master/tasks/InputTask.php)
+[**\cookyii\build\tasks\InputTask**][]
 
 Задаче предоставляет возможность ввести пользовательские данные путём ввода информации (prompt).
 
@@ -43,4 +43,5 @@ Reference
 ],
 ```
 
+[**\cookyii\build\tasks\InputTask**]: https://github.com/cookyii/build/blob/master/tasks/InputTask.php
 [`AbstractTask`]: 03-reference-abstract-task.md

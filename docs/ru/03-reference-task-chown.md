@@ -1,7 +1,7 @@
 ChownTask
 =========
 
-[**\cookyii\build\tasks\ChownTask**](https://github.com/cookyii/build/blob/master/tasks/ChownTask.php)
+[**\cookyii\build\tasks\ChownTask**][]
 
 Задача изменяет владельца файла (chown).
 
@@ -36,4 +36,5 @@ Reference
 ],
 ```
 
+[**\cookyii\build\tasks\ChownTask**]: https://github.com/cookyii/build/blob/master/tasks/ChownTask.php
 [`AbstractTask`]: 03-reference-abstract-task.md

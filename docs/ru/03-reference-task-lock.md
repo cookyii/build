@@ -1,7 +1,7 @@
 LockTask
 ========
 
-[**\cookyii\build\tasks\LockTask**](https://github.com/cookyii/build/blob/master/tasks/LockTask.php)
+[**\cookyii\build\tasks\LockTask**][]
 
 Задача управляет блокировкой файла.
 
@@ -56,5 +56,6 @@ Reference
 ./build lock/check
 ```
 
+[**\cookyii\build\tasks\LockTask**]: https://github.com/cookyii/build/blob/master/tasks/LockTask.php
 [`AbstractCompositeTask`]: 03-reference-abstract-composite-task.md
 [`MapTask`]: 03-reference-task-map.md

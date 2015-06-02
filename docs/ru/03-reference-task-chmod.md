@@ -1,7 +1,7 @@
 ChmodTask
 =========
 
-[**\cookyii\build\tasks\ChmodTask**](https://github.com/cookyii/build/blob/master/tasks/ChmodTask.php)
+[**\cookyii\build\tasks\ChmodTask**][]
 
 Задача изменяет права доступа к файлам (chmod).
 
@@ -55,4 +55,5 @@ Reference
 ],
 ```
 
+[**\cookyii\build\tasks\ChmodTask**]: https://github.com/cookyii/build/blob/master/tasks/ChmodTask.php
 [`AbstractTask`]: 03-reference-abstract-task.md

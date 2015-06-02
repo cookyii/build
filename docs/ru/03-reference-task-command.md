@@ -1,7 +1,7 @@
 CommandTask
 ===========
 
-[**\cookyii\build\tasks\CommandTask**](https://github.com/cookyii/build/blob/master/tasks/CommandTask.php)
+[**\cookyii\build\tasks\CommandTask**][]
 
 Задача выполняет произвольную программу в командной строке (cli command).
 
@@ -41,4 +41,5 @@ Reference
 ],
 ```
 
+[**\cookyii\build\tasks\CommandTask**]: https://github.com/cookyii/build/blob/master/tasks/CommandTask.php
 [`AbstractTask`]: 03-reference-abstract-task.md

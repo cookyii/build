@@ -1,7 +1,7 @@
 AbstractTask
 ============
 
-[**\cookyii\build\tasks\AbstractTask**](https://github.com/cookyii/build/blob/master/tasks/AbstractTask.php)
+[**\cookyii\build\tasks\AbstractTask**][]
 
 Этот абстрактный класс позваляет создавать задачу для выполнения в `cookyii/build`.
 
@@ -42,3 +42,5 @@ Reference
 | `output` | `OutputInterface` | Ссылка на хелпер взаимодействия с исходящими данными (output). |
 | `indent` | `integer` | Уровень вложенности команды (для логов). |
 | `prefix` | `string` | Префикс текущей выполняемой задачи (для логов). |
+
+[**\cookyii\build\tasks\AbstractTask**]: https://github.com/cookyii/build/blob/master/tasks/AbstractTask.php

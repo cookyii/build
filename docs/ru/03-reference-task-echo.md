@@ -1,7 +1,7 @@
 EchoTask
 ========
 
-[**\cookyii\build\tasks\EchoTask**](https://github.com/cookyii/build/blob/master/tasks/EchoTask.php)
+[**\cookyii\build\tasks\EchoTask**][]
 
 Задача выводит произвольное сообщение.
 
@@ -34,4 +34,5 @@ Reference
 ],
 ```
 
+[**\cookyii\build\tasks\EchoTask**]: https://github.com/cookyii/build/blob/master/tasks/EchoTask.php
 [`AbstractTask`]: 03-reference-abstract-task.md

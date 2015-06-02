@@ -1,7 +1,7 @@
 CallableTask
 ============
 
-[**\cookyii\build\tasks\CallableTask**](https://github.com/cookyii/build/blob/master/tasks/CallableTask.php)
+[**\cookyii\build\tasks\CallableTask**][]
 
 Задача выполняется произвольную php функцию (callable).
 
@@ -51,4 +51,5 @@ Reference
 ],
 ```
 
+[**\cookyii\build\tasks\CallableTask**]: https://github.com/cookyii/build/blob/master/tasks/CallableTask.php
 [`AbstractTask`]: 03-reference-abstract-task.md

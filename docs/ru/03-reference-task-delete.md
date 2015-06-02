@@ -1,7 +1,7 @@
 DeleteTask
 ==========
 
-[**\cookyii\build\tasks\DeleteTask**](https://github.com/cookyii/build/blob/master/tasks/DeleteTask.php)
+[**\cookyii\build\tasks\DeleteTask**][]
 
 Задача удаляет файлы.
 
@@ -59,4 +59,5 @@ Reference
 ],
 ```
 
+[**\cookyii\build\tasks\DeleteTask**]: https://github.com/cookyii/build/blob/master/tasks/DeleteTask.php
 [`AbstractTask`]: 03-reference-abstract-task.md

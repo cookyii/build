@@ -1,7 +1,7 @@
 ReplacementTask
 ===============
 
-[**\cookyii\build\tasks\ReplacementTask**](https://github.com/cookyii/build/blob/master/tasks/ReplacementTask.php)
+[**\cookyii\build\tasks\ReplacementTask**][]
 
 Задача заменяет определённые подстроки в файле.
 
@@ -34,4 +34,5 @@ Reference
 ],
 ```
 
+[**\cookyii\build\tasks\ReplacementTask**]: https://github.com/cookyii/build/blob/master/tasks/ReplacementTask.php
 [`AbstractTask`]: 03-reference-abstract-task.md

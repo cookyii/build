@@ -1,7 +1,7 @@
 ComposerTask
 ============
 
-[**\cookyii\build\tasks\ComposerTask**](https://github.com/cookyii/build/blob/master/tasks/ComposerTask.php)
+[**\cookyii\build\tasks\ComposerTask**][]
 
 Задача выполняет различные операции composer.
 
@@ -69,5 +69,6 @@ Reference
 ./build composer/selfupdate
 ```
 
+[**\cookyii\build\tasks\ComposerTask**]: https://github.com/cookyii/build/blob/master/tasks/ComposerTask.php
 [`AbstractCompositeTask`]: 03-reference-abstract-composite-task.md
 [`MapTask`]: 03-reference-task-map.md

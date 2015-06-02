@@ -1,7 +1,7 @@
 BlankTask
 =========
 
-[**\cookyii\build\tasks\BlankTask**](https://github.com/cookyii/build/blob/master/tasks/BlankTask.php)
+[**\cookyii\build\tasks\BlankTask**][]
 
 Задача-заглушка, которая используется когда не указан класс задачи.
 
@@ -22,4 +22,5 @@ Reference
 ],
 ```
 
+[**\cookyii\build\tasks\BlankTask**]: https://github.com/cookyii/build/blob/master/tasks/BlankTask.php
 [`AbstractTask`]: 03-reference-abstract-task.md
