@@ -35,7 +35,7 @@ class ComposerTaskTest extends \cookyii\build\tests\BaseTestCase
     {
         list($return, $output) = $this->executeTask('composer/require psr/log:^1.0', ['v' => true]);
 
-        $this->assertContains('composer require psr/log', $output);
+        $this->assertContains('require psr/log', $output);
         $this->assertContains('Build finished', $output);
 
         $this->assertTrue(file_exists($this->getRuntimePath() . '/vendor/psr/log'));
@@ -45,7 +45,8 @@ class ComposerTaskTest extends \cookyii\build\tests\BaseTestCase
     {
         list($return, $output) = $this->executeTask('composer/update', ['v' => true]);
 
-        $this->assertContains('composer update', $output);
+        $this->assertContains('update', $output);
+        $this->assertContains('--no-dev', $output);
         $this->assertContains('Build finished', $output);
 
         $this->assertTrue(file_exists($this->getRuntimePath() . '/vendor/psr/log'));
@@ -56,7 +57,8 @@ class ComposerTaskTest extends \cookyii\build\tests\BaseTestCase
     {
         list($return, $output) = $this->executeTask('composer/install', ['v' => true]);
 
-        $this->assertContains('composer install', $output);
+        $this->assertContains('install', $output);
+        $this->assertContains('--no-dev', $output);
         $this->assertContains('Build finished', $output);
 
         $this->assertTrue(file_exists($this->getRuntimePath() . '/vendor/psr/log'));
@@ -67,7 +69,7 @@ class ComposerTaskTest extends \cookyii\build\tests\BaseTestCase
     {
         list($return, $output) = $this->executeTask('composer/update-dev', ['v' => true]);
 
-        $this->assertContains('composer update', $output);
+        $this->assertContains('update', $output);
         $this->assertContains('Build finished', $output);
 
         $this->assertTrue(file_exists($this->getRuntimePath() . '/vendor/psr/log'));
@@ -78,7 +80,7 @@ class ComposerTaskTest extends \cookyii\build\tests\BaseTestCase
     {
         list($return, $output) = $this->executeTask('composer/install-dev', ['v' => true]);
 
-        $this->assertContains('composer install', $output);
+        $this->assertContains('install', $output);
         $this->assertContains('Build finished', $output);
 
         $this->assertTrue(file_exists($this->getRuntimePath() . '/vendor/psr/log'));

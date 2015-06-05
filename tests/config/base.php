@@ -48,7 +48,7 @@ return [
         '.description' => 'Execute ComposerTask',
         '.task' => [
             'class' => 'cookyii\build\tasks\ComposerTask',
-            'composer' => 'composer',
+            'composer' => '../../../composer.phar',
             'cwd' => $runtime_path,
             'quiet' => true,
         ],
@@ -86,7 +86,7 @@ return [
         '.task' => [
             'class' => 'cookyii\build\tasks\LockTask',
             'name' => 'runtime',
-            'checkState' => 'runtime-lock',
+            'state' => 'runtime-lock',
         ],
     ],
 
