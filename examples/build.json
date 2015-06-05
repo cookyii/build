@@ -37,7 +37,8 @@
     ".description": "Show map of task runtime/*",
     ".task": {
       "class": "cookyii\\build\\tasks\\LockTask",
-      "filename": "runtime/runtime.lock"
+      "filename": "runtime/runtime.lock",
+      "state": "runtime-lock"
     }
   },
 
