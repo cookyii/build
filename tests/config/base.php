@@ -1,7 +1,8 @@
 <?php
 /**
  * base.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
+ * @link https://github.com/cookyii/build
  */
 
 $base_path = realpath(__DIR__ . '/..');

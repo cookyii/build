@@ -1,7 +1,8 @@
 <?php
 /**
  * AbstractTask.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
+ * @link https://github.com/cookyii/build
  */
 
 namespace cookyii\build\tasks;

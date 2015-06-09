@@ -1,7 +1,8 @@
 <?php
 /**
  * ExampleEventListener.php
- * @author Revin Roman http://phptime.ru
+ * @author Revin Roman
+ * @link https://github.com/cookyii/build
  */
 
 namespace cookyii\build\examples;
