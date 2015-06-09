@@ -2,6 +2,7 @@
 /**
  * BlankTaskTest.php
  * @author Revin Roman
+ * @license The MIT License (MIT)
  * @link https://github.com/cookyii/build
  */
 
