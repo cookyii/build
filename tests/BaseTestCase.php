@@ -51,7 +51,7 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
         foreach ($options as $k => $v) {
             if (is_bool($v) && (bool)$v === true) {
                 $o[] = '-' . $k;
-            } elseif (mb_strlen($k, 'utf-8') === 1) {
+            } elseif (mb_strlen($k) === 1) {
                 $o[] = '-' . $k . escapeshellarg($v);
             } else {
                 $o[] = '--' . $k . '=' . escapeshellarg($v);

@@ -55,7 +55,7 @@ class ChmodTask extends AbstractTask
                     ? ['dir' => $fileSet]
                     : $fileSet;
 
-                if (mb_substr($fileSet['dir'], 0, 1, 'utf-8') !== '/') {
+                if (mb_substr($fileSet['dir'], 0, 1) !== '/') {
                     $fileSet['dir'] = $this->command->configReader->basePath . DIRECTORY_SEPARATOR . $fileSet['dir'];
                 }
 

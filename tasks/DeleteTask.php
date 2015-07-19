@@ -32,7 +32,7 @@ class DeleteTask extends AbstractTask
                     ? ['dir' => $fileSet]
                     : $fileSet;
 
-                if (mb_substr($fileSet['dir'], 0, 1, 'utf-8') !== '/') {
+                if (mb_substr($fileSet['dir'], 0, 1) !== '/') {
                     $fileSet['dir'] = $this->getAbsolutePath($fileSet['dir']);
                 }
 

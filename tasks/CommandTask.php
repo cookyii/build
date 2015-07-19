@@ -42,8 +42,11 @@ class CommandTask extends AbstractTask
             $result = true;
 
             foreach ($this->commandline as $command) {
-                if ($this->output->isVerbose()) {
+                if ($this->output->isVeryVerbose()) {
                     $this->log(sprintf('<task-result> EXEC </task-result> cwd "%s"', $cwd));
+                }
+
+                if ($this->output->isVerbose()) {
                     $this->log(sprintf('<task-result> EXEC </task-result> "%s"', $command));
                 }
 
