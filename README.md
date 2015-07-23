@@ -74,19 +74,19 @@ $ ./vendor/bin/build -c build.dev.php # start build with specified configuration
 
 [Composer]: http://getcomposer.org/
 [Symfony Console]: http://symfony.com/doc/current/components/console/introduction.html
-[Installing (RU)]: docs/ru/00-installing.md
-[Configuration (RU)]: docs/ru/01-config.md
-[Usage (RU)]: docs/ru/02-usage.md
-[`BlankTask`]: docs/ru/03-reference-task-blank.md
-[`CallableTask`]: docs/ru/03-reference-task-callable.md
-[`ChmodTask`]: docs/ru/03-reference-task-chmod.md
-[`ChownTask`]: docs/ru/03-reference-task-chown.md
-[`CommandTask`]: docs/ru/03-reference-task-command.md
-[`ComposerTask`]: docs/ru/03-reference-task-composer.md
-[`DeleteTask`]: docs/ru/03-reference-task-delete.md
-[`EchoTask`]: docs/ru/03-reference-task-echo.md
-[`FileExistsTask`]: docs/ru/03-reference-task-file-exists.md
-[`InputTask`]: docs/ru/03-reference-task-input.md
-[`LockTask`]: docs/ru/03-reference-task-lock.md
-[`MapTask`]: docs/ru/03-reference-task-map.md
-[`ReplacementTask`]: docs/ru/03-reference-task-replacement.md
+[Installing (RU)]: https://github.com/cookyii/build/blob/master/docs/ru/00-installing.md
+[Configuration (RU)]: https://github.com/cookyii/build/blob/master/docs/ru/01-config.md
+[Usage (RU)]: https://github.com/cookyii/build/blob/master/docs/ru/02-usage.md
+[`BlankTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-blank.md
+[`CallableTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-callable.md
+[`ChmodTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-chmod.md
+[`ChownTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-chown.md
+[`CommandTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-command.md
+[`ComposerTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-composer.md
+[`DeleteTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-delete.md
+[`EchoTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-echo.md
+[`FileExistsTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-file-exists.md
+[`InputTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-input.md
+[`LockTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-lock.md
+[`MapTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-map.md
+[`ReplacementTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-replacement.md
