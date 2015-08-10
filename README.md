@@ -1,7 +1,7 @@
 Cookyii/Build
 =============
 
-Cookyii/build is a simple PHP build tool built on [Symfony Console][].
+Cookyii/build is a simple PHP build tool for any projects.
 
 Documentation
 -------------
