@@ -49,7 +49,7 @@ class SelfTask extends AbstractCompositeTask
                 '.task' => [
                     'class' => '\cookyii\build\tasks\CommandTask',
                     'commandline' => sprintf(
-                        '%s require cookyii/build %s',
+                        '%s require cookyii/build:dev-master %s',
                         $this->composer,
                         '--prefer-dist'
                     ),
