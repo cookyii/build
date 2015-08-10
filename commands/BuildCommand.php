@@ -10,6 +10,7 @@ namespace cookyii\build\commands;
 
 use cookyii\build\components\Component;
 use cookyii\build\events\TaskEvent;
+use cookyii\build\exceptions\ConfigNotFoundException;
 use cookyii\build\tasks\AbstractTask;
 use Symfony\Component\Console;
 
@@ -343,7 +344,11 @@ class BuildCommand extends AbstractCommand
     {
         $this->configReader = $this->getConfigReader();
         $this->rawConfig = $this->configReader->read();
-        $this->config = $this->configReader->expandConfig($this->rawConfig);
+        if (empty($this->rawConfig)) {
+            throw new ConfigNotFoundException('Config not found.');
+        } else {
+            $this->config = $this->configReader->expandConfig($this->rawConfig);
+        }
     }
 
     /**

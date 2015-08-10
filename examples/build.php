@@ -26,6 +26,14 @@ return [
         '.task' => 'cookyii\build\tasks\MapTask',
     ],
 
+    'self' => [
+        '.description' => 'Internal tasks',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\SelfTask',
+            'composer' => '../../composer.phar',
+        ],
+    ],
+
     'default' => [
         '.description' => 'Default build',
         '.depends' => ['build/dev'],

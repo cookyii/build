@@ -18,6 +18,14 @@ Quick start
 [Composer][]
 
     $ composer require cookyii/build:dev-master
+    
+**Updating**
+
+    $ ./build self/update
+    
+or [Composer][]
+
+    $ composer require cookyii/build:dev-master
 
 **Configuration**
 
@@ -37,12 +45,20 @@ return [
         '.description' => 'Build project with demo environment',
         '.depends' => ['composer'],
     ],
+        
+    'self' => [
+        '.description' => 'Internal tasks',
+        '.task' => [
+            'class' => 'cookyii\build\tasks\SelfTask',
+            'composer' => '../../composer.phar',
+        ],
+    ],
 
     'composer' => [
         '.description' => 'Install all depending composer for development environment (with `required-dev`)',
         '.task' => [
             'class' => 'cookyii\build\tasks\ComposerTask',
-            'defaultTask' => 'install-dev',
+            'defaultTask' => 'install',
         ],
     ],
 ];
@@ -71,6 +87,7 @@ $ ./vendor/bin/build -c build.dev.php # start build with specified configuration
 * [`LockTask`][] - task of managing locking file.
 * [`MapTask`][] - task displays a map of all available tasks.
 * [`ReplacementTask`][] - task of replacing placeholders in file.
+* [`SelfTask`][] - task with internal tasks `cookyii/build`.
 
 [Composer]: http://getcomposer.org/
 [Symfony Console]: http://symfony.com/doc/current/components/console/introduction.html
@@ -90,3 +107,4 @@ $ ./vendor/bin/build -c build.dev.php # start build with specified configuration
 [`LockTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-lock.md
 [`MapTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-map.md
 [`ReplacementTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-replacement.md
+[`SelfTask`]: https://github.com/cookyii/build/blob/master/docs/ru/03-reference-task-self.md
