@@ -16,12 +16,12 @@ foreach ([
              __DIR__ . '/vendor/autoload.php',
          ] as $file) {
     if (file_exists($file)) {
-        define('COOKYII_BUILD_COMPOSER_INSTALL', realpath($file));
+        define('COOKYII_BUILD_COMPOSER_AUTOLOAD', realpath($file));
         break;
     }
 }
 
-if (!defined('COOKYII_BUILD_COMPOSER_INSTALL')) {
+if (!defined('COOKYII_BUILD_COMPOSER_AUTOLOAD')) {
     fwrite(STDERR,
         'You need to set up the project dependencies using the following commands:' . PHP_EOL .
         'wget http://getcomposer.org/composer.phar' . PHP_EOL .
@@ -30,7 +30,7 @@ if (!defined('COOKYII_BUILD_COMPOSER_INSTALL')) {
     die(1);
 }
 
-require_once COOKYII_BUILD_COMPOSER_INSTALL;
+require_once COOKYII_BUILD_COMPOSER_AUTOLOAD;
 
 /**
  * @param mixed $var
