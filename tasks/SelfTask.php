@@ -46,10 +46,8 @@ class SelfTask extends AbstractCompositeTask
                 '.task' => [
                     'class' => '\cookyii\build\tasks\CallableTask',
                     'handler' => function () {
-                        $result = false;
-
                         $source_url = 'http://cookyii.com/b/build.phar';
-                        $checksum_url = 'http://cookyii.ru/b/checksum';
+                        $checksum_url = 'http://cookyii.com/b/checksum';
                         $build_phar = $this->cwd . '/build.phar';
 
                         try {
@@ -63,6 +61,8 @@ class SelfTask extends AbstractCompositeTask
                                     $this->log('<task-error> ERR </task-error> Error updating `build.phar`');
                                 }
                             } else {
+                                $result = true;
+
                                 if ($this->output->isVerbose()) {
                                     $this->log('<task-result>  OK  </task-result> `build.phar` already updated.');
                                 }
