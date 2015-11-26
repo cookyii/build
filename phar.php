@@ -7,6 +7,7 @@
  */
 
 $pharFile = 'build.phar';
+$pharPath = __DIR__ . '/dist/' . $pharFile;
 
 if (file_exists($pharFile)) {
     unlink($pharFile);
@@ -25,7 +26,7 @@ $directories = [
     'vendor',
 ];
 
-$phar = new Phar('dist/' . $pharFile, 0, $pharFile);
+$phar = new Phar($pharPath, 0, $pharFile);
 $phar->setSignatureAlgorithm(\Phar::SHA1);
 //$phar->setDefaultStub('build', false);
 $phar->setStub(getStub($pharFile));
@@ -39,6 +40,8 @@ if (Phar::canCompress(Phar::GZ)) {
 } elseif (Phar::canCompress(Phar::BZ2)) {
     $phar->compressFiles(Phar::BZ2);
 }
+
+file_put_contents(dirname($pharPath) . '/checksum', sha1_file($pharPath));
 
 echo 'dist/build.phar created.' . PHP_EOL;
 
