@@ -55,12 +55,19 @@ class SelfTask extends AbstractCompositeTask
                             if ($checksum !== sha1_file($build_phar)) {
                                 copy($source_url, $build_phar);
 
-                                $this->log('<task-result> COPY </task-result> `build.phar` updated to actual version.');
+                                if ($this->output->isVerbose()) {
+                                    $this->log('<task-result> COPY </task-result> `build.phar` updated to actual version.');
+                                }
                             } else {
-                                $this->log('<task-result>  OK  </task-result> `build.phar` already updated.');
+                                if ($this->output->isVerbose()) {
+                                    $this->log('<task-result>  OK  </task-result> `build.phar` already updated.');
+                                }
                             }
                         } catch (\Exception $e) {
-                            $this->log('<task-error> ERR </task-error> `build.phar`');
+                            if ($this->output->isVerbose()) {
+                                $this->log('<task-error> ERR </task-error> Error updating `build.phar`');
+                            }
+
                             throw $e;
                         }
                     },
