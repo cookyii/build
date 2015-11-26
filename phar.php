@@ -9,8 +9,8 @@
 $pharFile = 'build.phar';
 $pharPath = __DIR__ . '/dist/' . $pharFile;
 
-if (file_exists($pharFile)) {
-    unlink($pharFile);
+if (file_exists($pharPath)) {
+    unlink($pharPath);
 }
 
 $directories = [
@@ -28,10 +28,8 @@ $directories = [
 
 $phar = new Phar($pharPath, 0, $pharFile);
 $phar->setSignatureAlgorithm(\Phar::SHA1);
-//$phar->setDefaultStub('build', false);
 $phar->setStub(getStub($pharFile));
 $phar->addFile('build');
-$phar->addFile('composer.json');
 $phar->addFile('README.md');
 $phar->buildFromDirectory('.', '#(' . implode('|', $directories) . ')#');
 
