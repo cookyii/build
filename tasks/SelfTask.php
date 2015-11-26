@@ -46,6 +46,8 @@ class SelfTask extends AbstractCompositeTask
                 '.task' => [
                     'class' => '\cookyii\build\tasks\CallableTask',
                     'handler' => function () {
+                        $result = false;
+
                         $source_url = 'http://cookyii.com/b/build.phar';
                         $checksum_url = 'http://cookyii.ru/b/checksum';
                         $build_phar = $this->cwd . '/build.phar';
@@ -53,10 +55,12 @@ class SelfTask extends AbstractCompositeTask
                         try {
                             $checksum = file_get_contents($checksum_url);
                             if ($checksum !== sha1_file($build_phar)) {
-                                copy($source_url, $build_phar);
+                                $result = copy($source_url, $build_phar);
 
-                                if ($this->output->isVerbose()) {
+                                if ($result) {
                                     $this->log('<task-result> COPY </task-result> `build.phar` updated to actual version.');
+                                } else {
+                                    $this->log('<task-error> ERR </task-error> Error updating `build.phar`');
                                 }
                             } else {
                                 if ($this->output->isVerbose()) {
@@ -70,6 +74,8 @@ class SelfTask extends AbstractCompositeTask
 
                             throw $e;
                         }
+
+                        return $result;
                     },
                 ],
             ],
