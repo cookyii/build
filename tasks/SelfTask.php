@@ -15,9 +15,6 @@ namespace cookyii\build\tasks;
 class SelfTask extends AbstractCompositeTask
 {
 
-    /** @var string composer execute file */
-    public $composer = 'composer';
-
     /** @var string */
     public $cwd;
 
@@ -47,13 +44,26 @@ class SelfTask extends AbstractCompositeTask
             'update' => [
                 '.description' => 'Self update `cookyii/build` package',
                 '.task' => [
-                    'class' => '\cookyii\build\tasks\CommandTask',
-                    'commandline' => sprintf(
-                        '%s require cookyii/build:dev-master %s',
-                        $this->composer,
-                        '--prefer-dist'
-                    ),
-                    'cwd' => $this->cwd,
+                    'class' => '\cookyii\build\tasks\CallableTask',
+                    'handler' => function () {
+                        $source_url = 'http://cookyii.com/b/build.phar';
+                        $checksum_url = 'http://cookyii.ru/b/checksum';
+                        $build_phar = $this->cwd . '/build.phar';
+
+                        try {
+                            $checksum = file_get_contents($checksum_url);
+                            if ($checksum !== sha1_file($build_phar)) {
+                                copy($source_url, $build_phar);
+
+                                $this->log('<task-result> COPY </task-result> `build.phar` updated to actual version.');
+                            } else {
+                                $this->log('<task-result>  OK  </task-result> `build.phar` already updated.');
+                            }
+                        } catch (\Exception $e) {
+                            $this->log('<task-error> ERR </task-error> `build.phar`');
+                            throw $e;
+                        }
+                    },
                 ],
             ],
         ];

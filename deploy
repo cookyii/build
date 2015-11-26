@@ -1,0 +1,3 @@
+#!/bin/bash
+./phar.php
+scp ./dist/* cookyii.com:/var/www/cookyii-www/frontend-app/web/b

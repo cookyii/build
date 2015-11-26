@@ -30,7 +30,6 @@ return [
         '.description' => 'Internal tasks',
         '.task' => [
             'class' => 'cookyii\build\tasks\SelfTask',
-            'composer' => '../../composer.phar',
         ],
     ],
 
