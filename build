@@ -7,6 +7,10 @@
  * @link https://github.com/cookyii/build
  */
 
+if (PHP_SAPI !== 'cli') {
+    echo 'Warning: Build should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL;
+}
+
 foreach ([
              __DIR__ . '/../../autoload.php',
              __DIR__ . '/../autoload.php',
@@ -16,7 +20,7 @@ foreach ([
              __DIR__ . '/vendor/autoload.php',
          ] as $file) {
     if (file_exists($file)) {
-        define('COOKYII_BUILD_COMPOSER_AUTOLOAD', realpath($file));
+        define('COOKYII_BUILD_COMPOSER_AUTOLOAD', $file);
         break;
     }
 }
