@@ -147,7 +147,7 @@ class ComposerTask extends AbstractCompositeTask
                         $this->input->getArgument('arg1'),
                         $this->formatOptions($this->requireOptions, [
                             '--no-interaction' => $this->noInteraction,
-                            '--no-plugin' => $this->noPlugins,
+                            '--no-plugins' => $this->noPlugins,
                             '--ascii' => $this->ascii,
                             '--no-ascii' => $this->noAscii,
                             '--profile' => $this->profile,
@@ -168,7 +168,7 @@ class ComposerTask extends AbstractCompositeTask
                         $this->composer,
                         $this->formatOptions($this->installOptions, [
                             '--no-interaction' => $this->noInteraction,
-                            '--no-plugin' => $this->noPlugins,
+                            '--no-plugins' => $this->noPlugins,
                             '--ascii' => $this->ascii,
                             '--no-ascii' => $this->noAscii,
                             '--profile' => $this->profile,
@@ -188,7 +188,7 @@ class ComposerTask extends AbstractCompositeTask
                         $this->composer,
                         $this->formatOptions([], [
                             '--no-interaction' => $this->noInteraction,
-                            '--no-plugin' => $this->noPlugins,
+                            '--no-plugins' => $this->noPlugins,
                             '--ascii' => $this->ascii,
                             '--no-ascii' => $this->noAscii,
                             '--profile' => $this->profile,
@@ -210,7 +210,7 @@ class ComposerTask extends AbstractCompositeTask
                         $this->formatOptions($this->installOptions, [
                             '--dry-run' => true,
                             '--no-interaction' => $this->noInteraction,
-                            '--no-plugin' => $this->noPlugins,
+                            '--no-plugins' => $this->noPlugins,
                             '--ascii' => $this->ascii,
                             '--no-ascii' => $this->noAscii,
                             '--profile' => $this->profile,
@@ -231,7 +231,7 @@ class ComposerTask extends AbstractCompositeTask
                         $this->formatOptions($this->updateOptions, [
                             '--dry-run' => true,
                             '--no-interaction' => $this->noInteraction,
-                            '--no-plugin' => $this->noPlugins,
+                            '--no-plugins' => $this->noPlugins,
                             '--ascii' => $this->ascii,
                             '--no-ascii' => $this->noAscii,
                             '--profile' => $this->profile,
@@ -253,7 +253,7 @@ class ComposerTask extends AbstractCompositeTask
                         $this->formatOptions($this->installOptions, [
                             '--no-dev' => true,
                             '--no-interaction' => $this->noInteraction,
-                            '--no-plugin' => $this->noPlugins,
+                            '--no-plugins' => $this->noPlugins,
                             '--ascii' => $this->ascii,
                             '--no-ascii' => $this->noAscii,
                             '--profile' => $this->profile,
@@ -274,7 +274,7 @@ class ComposerTask extends AbstractCompositeTask
                         $this->formatOptions($this->updateOptions, [
                             '--no-dev' => true,
                             '--no-interaction' => $this->noInteraction,
-                            '--no-plugin' => $this->noPlugins,
+                            '--no-plugins' => $this->noPlugins,
                             '--ascii' => $this->ascii,
                             '--no-ascii' => $this->noAscii,
                             '--profile' => $this->profile,
@@ -295,7 +295,7 @@ class ComposerTask extends AbstractCompositeTask
                         $this->composer,
                         $this->formatOptions($this->selfupdateOptions, [
                             '--no-interaction' => $this->noInteraction,
-                            '--no-plugin' => $this->noPlugins,
+                            '--no-plugins' => $this->noPlugins,
                             '--ascii' => $this->ascii,
                             '--no-ascii' => $this->noAscii,
                             '--profile' => $this->profile,
@@ -321,7 +321,7 @@ class ComposerTask extends AbstractCompositeTask
                         $this->formatOptions($this->selfupdateOptions, [
                             '--rollback' => true,
                             '--no-interaction' => $this->noInteraction,
-                            '--no-plugin' => $this->noPlugins,
+                            '--no-plugins' => $this->noPlugins,
                             '--ascii' => $this->ascii,
                             '--no-ascii' => $this->noAscii,
                             '--profile' => $this->profile,
