@@ -28,16 +28,70 @@ class ComposerTask extends AbstractCompositeTask
     public $verbose = false;
 
     /** @var bool */
-    public $preferDist = true;
-
-    /** @var bool */
-    public $preferStable = true;
-
-    /** @var bool */
-    public $optimizeAutoloader = true;
+    public $profile = false;
 
     /** @var bool */
     public $noInteraction = false;
+
+    /** @var bool */
+    public $noPlugins = false;
+
+    /** @var bool */
+    public $ascii = false;
+
+    /** @var bool */
+    public $noAscii = false;
+
+    public $requireOptions = [
+        '--prefer-dist',
+        //'--prefer-source',
+        //'--no-progress',
+        //'--no-update',
+        //'--update-no-dev',
+        //'--update-with-dependencies',
+        //'--ignore-platform-reqs',
+        //'--sort-packages',
+        //'--classmap-authoritative',
+    ];
+
+    public $installOptions = [
+        '--prefer-dist',
+        '--optimize-autoloader',
+        //'--prefer-source',
+        //'--no-custom-installers',
+        //'--no-autoloader',
+        //'--no-scripts',
+        //'--no-progress',
+        //'--classmap-authoritative',
+        //'--ignore-platform-reqs',
+    ];
+
+    public $updateOptions = [
+        '--prefer-dist',
+        '--prefer-stable',
+        '--optimize-autoloader',
+        //'--prefer-source',
+        //'--prefer-lowest',
+        //'--lock',
+        //'--no-custom-installers',
+        //'--no-autoloader',
+        //'--no-scripts',
+        //'--no-progress',
+        //'--with-dependencies',
+        //'--classmap-authoritative',
+        //'--ignore-platform-reqs',
+        //'--interactive',
+        //'--root-reqs',
+    ];
+
+    public $selfupdateOptions = [
+        '--stable',
+        //'--preview',
+        //'--snapshot',
+        //'--clean-backups',
+        //'--update-keys',
+        //'--no-progress',
+    ];
 
     public function init()
     {
@@ -49,12 +103,13 @@ class ComposerTask extends AbstractCompositeTask
     }
 
     /**
+     * @param array $defaultOptions
      * @param array $options
      * @return array
      */
-    protected function formatOptions($options = [])
+    protected function formatOptions($defaultOptions = [], $options = [])
     {
-        $result = [];
+        $result = $defaultOptions;
 
         if (!empty($options)) {
             foreach ($options as $option => $value) {
@@ -90,9 +145,12 @@ class ComposerTask extends AbstractCompositeTask
                         '%s require %s %s',
                         $this->composer,
                         $this->input->getArgument('arg1'),
-                        $this->formatOptions([
-                            '--prefer-dist' => $this->preferDist,
+                        $this->formatOptions($this->requireOptions, [
                             '--no-interaction' => $this->noInteraction,
+                            '--no-plugin' => $this->noPlugins,
+                            '--ascii' => $this->ascii,
+                            '--no-ascii' => $this->noAscii,
+                            '--profile' => $this->profile,
                             '--quiet' => $this->quiet,
                             '--verbose' => $this->verbose,
                         ])
@@ -108,10 +166,12 @@ class ComposerTask extends AbstractCompositeTask
                     'commandline' => sprintf(
                         '%s install %s',
                         $this->composer,
-                        $this->formatOptions([
-                            '--prefer-dist' => $this->preferDist,
-                            '--optimize-autoloader' => $this->optimizeAutoloader,
+                        $this->formatOptions($this->installOptions, [
                             '--no-interaction' => $this->noInteraction,
+                            '--no-plugin' => $this->noPlugins,
+                            '--ascii' => $this->ascii,
+                            '--no-ascii' => $this->noAscii,
+                            '--profile' => $this->profile,
                             '--quiet' => $this->quiet,
                             '--verbose' => $this->verbose,
                         ])
@@ -126,11 +186,12 @@ class ComposerTask extends AbstractCompositeTask
                     'commandline' => sprintf(
                         '%s update %s',
                         $this->composer,
-                        $this->formatOptions([
-                            '--prefer-dist' => $this->preferDist,
-                            '--prefer-stable' => $this->preferStable,
-                            '--optimize-autoloader' => $this->optimizeAutoloader,
+                        $this->formatOptions([], [
                             '--no-interaction' => $this->noInteraction,
+                            '--no-plugin' => $this->noPlugins,
+                            '--ascii' => $this->ascii,
+                            '--no-ascii' => $this->noAscii,
+                            '--profile' => $this->profile,
                             '--quiet' => $this->quiet,
                             '--verbose' => $this->verbose,
                         ])
@@ -146,11 +207,13 @@ class ComposerTask extends AbstractCompositeTask
                     'commandline' => sprintf(
                         '%s install %s',
                         $this->composer,
-                        $this->formatOptions([
+                        $this->formatOptions($this->installOptions, [
                             '--dry-run' => true,
-                            '--prefer-dist' => $this->preferDist,
-                            '--optimize-autoloader' => $this->optimizeAutoloader,
                             '--no-interaction' => $this->noInteraction,
+                            '--no-plugin' => $this->noPlugins,
+                            '--ascii' => $this->ascii,
+                            '--no-ascii' => $this->noAscii,
+                            '--profile' => $this->profile,
                             '--quiet' => $this->quiet,
                             '--verbose' => $this->verbose,
                         ])
@@ -165,12 +228,13 @@ class ComposerTask extends AbstractCompositeTask
                     'commandline' => sprintf(
                         '%s update %s',
                         $this->composer,
-                        $this->formatOptions([
+                        $this->formatOptions($this->updateOptions, [
                             '--dry-run' => true,
-                            '--prefer-dist' => $this->preferDist,
-                            '--prefer-stable' => $this->preferStable,
-                            '--optimize-autoloader' => $this->optimizeAutoloader,
                             '--no-interaction' => $this->noInteraction,
+                            '--no-plugin' => $this->noPlugins,
+                            '--ascii' => $this->ascii,
+                            '--no-ascii' => $this->noAscii,
+                            '--profile' => $this->profile,
                             '--quiet' => $this->quiet,
                             '--verbose' => $this->verbose,
                         ])
@@ -186,11 +250,13 @@ class ComposerTask extends AbstractCompositeTask
                     'commandline' => sprintf(
                         '%s install %s',
                         $this->composer,
-                        $this->formatOptions([
+                        $this->formatOptions($this->installOptions, [
                             '--no-dev' => true,
-                            '--prefer-dist' => $this->preferDist,
-                            '--optimize-autoloader' => $this->optimizeAutoloader,
                             '--no-interaction' => $this->noInteraction,
+                            '--no-plugin' => $this->noPlugins,
+                            '--ascii' => $this->ascii,
+                            '--no-ascii' => $this->noAscii,
+                            '--profile' => $this->profile,
                             '--quiet' => $this->quiet,
                             '--verbose' => $this->verbose,
                         ])
@@ -205,15 +271,16 @@ class ComposerTask extends AbstractCompositeTask
                     'commandline' => sprintf(
                         '%s update %s',
                         $this->composer,
-                        $this->formatOptions([
+                        $this->formatOptions($this->updateOptions, [
                             '--no-dev' => true,
-                            '--prefer-dist' => $this->preferDist,
-                            '--prefer-stable' => $this->preferStable,
-                            '--optimize-autoloader' => $this->optimizeAutoloader,
                             '--no-interaction' => $this->noInteraction,
+                            '--no-plugin' => $this->noPlugins,
+                            '--ascii' => $this->ascii,
+                            '--no-ascii' => $this->noAscii,
+                            '--profile' => $this->profile,
                             '--quiet' => $this->quiet,
                             '--verbose' => $this->verbose,
-                        ], ['--no-dev'])
+                        ])
                     ),
                 ],
             ],
@@ -226,8 +293,12 @@ class ComposerTask extends AbstractCompositeTask
                     'commandline' => sprintf(
                         '%s selfupdate %s',
                         $this->composer,
-                        $this->formatOptions([
+                        $this->formatOptions($this->selfupdateOptions, [
                             '--no-interaction' => $this->noInteraction,
+                            '--no-plugin' => $this->noPlugins,
+                            '--ascii' => $this->ascii,
+                            '--no-ascii' => $this->noAscii,
+                            '--profile' => $this->profile,
                             '--quiet' => $this->quiet,
                             '--verbose' => $this->verbose,
                         ])
@@ -247,9 +318,13 @@ class ComposerTask extends AbstractCompositeTask
                     'commandline' => sprintf(
                         '%s selfupdate %s',
                         $this->composer,
-                        $this->formatOptions([
+                        $this->formatOptions($this->selfupdateOptions, [
                             '--rollback' => true,
                             '--no-interaction' => $this->noInteraction,
+                            '--no-plugin' => $this->noPlugins,
+                            '--ascii' => $this->ascii,
+                            '--no-ascii' => $this->noAscii,
+                            '--profile' => $this->profile,
                             '--quiet' => $this->quiet,
                             '--verbose' => $this->verbose,
                         ])
