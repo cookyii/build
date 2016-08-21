@@ -15,10 +15,14 @@ namespace cookyii\build\tasks;
 class FileExistsTask extends AbstractTask
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $filename;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $message;
 
     /**

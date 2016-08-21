@@ -8,8 +8,6 @@
 
 namespace cookyii\build\tasks;
 
-use Symfony\Component\Console;
-
 /**
  * Class AbstractTask
  * @package cookyii\build\tasks
@@ -20,22 +18,34 @@ abstract class AbstractTask extends \cookyii\build\components\Component
     /** @var \cookyii\build\commands\BuildCommand */
     public $command;
 
-    /** @var Console\Input\InputInterface */
+    /**
+     * @var \Symfony\Component\Console\Input\InputInterface
+     */
     public $input;
 
-    /** @var Console\Output\ConsoleOutput */
+    /**
+     * @var \Symfony\Component\Console\Output\ConsoleOutput
+     */
     public $output;
 
-    /** @var integer */
+    /**
+     * @var integer
+     */
     public $indent = 0;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $prefix;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $skipOnError = false;
 
-    /** Events */
+    /**
+     * Events
+     */
     const EVENT_AFTER_INITIALIZE = 'task.onAfterInitialize';
     const EVENT_BEFORE_RUN = 'task.onBeforeRun';
     const EVENT_AFTER_RUN = 'task.onAfterRun';

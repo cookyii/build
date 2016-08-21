@@ -17,10 +17,14 @@ use cookyii\build\components\Console;
 class InputTask extends AbstractTask
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $state;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $message;
 
     /**

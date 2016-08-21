@@ -15,10 +15,14 @@ namespace cookyii\build\tasks;
 class DeleteTask extends AbstractTask
 {
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $fileSets = [];
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $deleteDir = false;
 
     /**

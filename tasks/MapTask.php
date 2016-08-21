@@ -8,8 +8,6 @@
 
 namespace cookyii\build\tasks;
 
-use Symfony\Component\Console;
-
 /**
  * Class MapTask
  * @package cookyii\build\tasks
@@ -17,7 +15,9 @@ use Symfony\Component\Console;
 class MapTask extends AbstractTask
 {
 
-    /** @var AbstractCompositeTask */
+    /**
+     * @var AbstractCompositeTask
+     */
     public $task;
 
     /**

@@ -15,31 +15,49 @@ namespace cookyii\build\tasks;
 class ComposerTask extends AbstractCompositeTask
 {
 
-    /** @var string composer execute file */
+    /**
+     * @var string composer execute file
+     */
     public $composer = 'composer';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $cwd;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $quiet = false;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $verbose = false;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $profile = false;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $noInteraction = false;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $noPlugins = false;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $ascii = false;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $noAscii = false;
 
     public $requireOptions = [

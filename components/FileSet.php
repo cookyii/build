@@ -15,19 +15,29 @@ namespace cookyii\build\components;
 class FileSet extends Component
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $dir;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $exclude = [];
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $followLinks = false;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $ignoreDotFiles = false;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $skipIfNotExists = true;
 
     /**

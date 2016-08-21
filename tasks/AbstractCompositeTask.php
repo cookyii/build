@@ -15,7 +15,9 @@ namespace cookyii\build\tasks;
 abstract class AbstractCompositeTask extends AbstractTask
 {
 
-    /** @var string default task */
+    /**
+     * @var string default task
+     */
     public $defaultTask = 'default';
 
     /**

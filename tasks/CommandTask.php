@@ -15,10 +15,14 @@ namespace cookyii\build\tasks;
 class CommandTask extends AbstractTask
 {
 
-    /** @var string|array|null */
+    /**
+     * @var string|array|null
+     */
     public $commandline;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $cwd;
 
     /**

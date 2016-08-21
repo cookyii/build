@@ -34,11 +34,5 @@
     "psr-4": {
       "cookyii\\build\\": ""
     }
-  },
-  "config": {
-    "bin-dir": "bin"
-  },
-  "bin": [
-    "build"
-  ]
+  }
 }

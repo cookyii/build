@@ -7,7 +7,7 @@
  */
 
 $pharFile = 'build.phar';
-$pharPath = __DIR__ . '/dist/' . $pharFile;
+$pharPath = __DIR__ . '/../dist/' . $pharFile;
 
 if (file_exists($pharPath)) {
     unlink($pharPath);

@@ -141,6 +141,7 @@ class VarDumper
     {
         self::$_output = '';
         self::exportInternal($var, 0);
+
         return self::$_output;
     }
 

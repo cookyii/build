@@ -12,7 +12,11 @@ use cookyii\build\components\Component;
 use cookyii\build\events\TaskEvent;
 use cookyii\build\exceptions\ConfigNotFoundException;
 use cookyii\build\tasks\AbstractTask;
-use Symfony\Component\Console;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class BuildCommand
@@ -21,16 +25,24 @@ use Symfony\Component\Console;
 class BuildCommand extends AbstractCommand
 {
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $rawConfig = [];
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $config = [];
 
-    /** @var \cookyii\build\config\AbstractConfigReader */
+    /**
+     * @var \cookyii\build\config\AbstractConfigReader
+     */
     public $configReader;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     private $executed = [];
 
     /** Events */
@@ -48,28 +60,28 @@ class BuildCommand extends AbstractCommand
             ->setDescription('Build current project')
             ->addArgument(
                 'task',
-                Console\Input\InputArgument::OPTIONAL,
+                InputArgument::OPTIONAL,
                 'What task you need to execute?',
                 'default'
             )
             ->addArgument(
                 'arg1',
-                Console\Input\InputArgument::OPTIONAL,
+                InputArgument::OPTIONAL,
                 'Some argument for task'
             )
-            ->addOption('config', 'c', Console\Input\InputOption::VALUE_OPTIONAL, 'Where is the configuration file', 'build.php')
-            ->addOption('task-delimiter', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Delimiter for the name of the task', '/')
-            ->addOption('loop-threshold', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Number of repetitions of the task to be discarded error loop', 3)
-            ->addOption('disable-events', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Disable event in this run', false)
-            ->addOption('color', null, Console\Input\InputOption::VALUE_OPTIONAL, 'Support colors in output', 'yes');
+            ->addOption('config', 'c', InputOption::VALUE_OPTIONAL, 'Where is the configuration file', 'build.php')
+            ->addOption('task-delimiter', null, InputOption::VALUE_OPTIONAL, 'Delimiter for the name of the task', '/')
+            ->addOption('loop-threshold', null, InputOption::VALUE_OPTIONAL, 'Number of repetitions of the task to be discarded error loop', 3)
+            ->addOption('disable-events', null, InputOption::VALUE_OPTIONAL, 'Disable event in this run', false)
+            ->addOption('color', null, InputOption::VALUE_OPTIONAL, 'Support colors in output', 'yes');
     }
 
     /**
-     * @param Console\Input\InputInterface $input
-     * @param Console\Output\ConsoleOutput $output
-     * @return integer
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
      */
-    protected function execute(Console\Input\InputInterface $input, Console\Output\ConsoleOutput $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $result = 0;
 
@@ -394,16 +406,16 @@ class BuildCommand extends AbstractCommand
         $Formatter = $this->output
             ->getFormatter();
 
-        $Formatter->setStyle('log', new Console\Formatter\OutputFormatterStyle(null, null));
-        $Formatter->setStyle('header', new Console\Formatter\OutputFormatterStyle(null, null, ['bold']));
-        $Formatter->setStyle('prompt', new Console\Formatter\OutputFormatterStyle('blue', 'white'));
-        $Formatter->setStyle('error', new Console\Formatter\OutputFormatterStyle('red', null));
-        $Formatter->setStyle('task', new Console\Formatter\OutputFormatterStyle('black', 'blue'));
-        $Formatter->setStyle('task-error', new Console\Formatter\OutputFormatterStyle('black', 'red'));
-        $Formatter->setStyle('task-result', new Console\Formatter\OutputFormatterStyle('black', 'yellow'));
+        $Formatter->setStyle('log', new OutputFormatterStyle(null, null));
+        $Formatter->setStyle('header', new OutputFormatterStyle(null, null, ['bold']));
+        $Formatter->setStyle('prompt', new OutputFormatterStyle('blue', 'white'));
+        $Formatter->setStyle('error', new OutputFormatterStyle('red', null));
+        $Formatter->setStyle('task', new OutputFormatterStyle('black', 'blue'));
+        $Formatter->setStyle('task-error', new OutputFormatterStyle('black', 'red'));
+        $Formatter->setStyle('task-result', new OutputFormatterStyle('black', 'yellow'));
 
         if (in_array($color, ['no', 'none', 'never'], true)) {
-            $defaultStyle = new Console\Formatter\OutputFormatterStyle();
+            $defaultStyle = new OutputFormatterStyle();
 
             $Formatter->setStyle('error', $defaultStyle);
             $Formatter->setStyle('info', $defaultStyle);

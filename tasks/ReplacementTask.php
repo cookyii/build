@@ -15,10 +15,14 @@ namespace cookyii\build\tasks;
 class ReplacementTask extends AbstractTask
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $filename;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $placeholders = [];
 
     /**

@@ -15,10 +15,14 @@ namespace cookyii\build\tasks;
 class ExportConfigTask extends AbstractTask
 {
 
-    /** @var string|callable|null */
+    /**
+     * @var string|callable|null
+     */
     public $formatter;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $exportToFile;
 
     /**
@@ -79,6 +83,7 @@ class ExportConfigTask extends AbstractTask
     }
 
     /**
+     * @todo
      * @param array $config
      * @param integer $indent
      * @return string

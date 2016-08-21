@@ -15,19 +15,29 @@ namespace cookyii\build\tasks;
 class ChmodTask extends AbstractTask
 {
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $filename;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $fileSets = [];
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $dirMode = 0775;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $fileMode = 0664;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $skipOnError = true;
 
     /**

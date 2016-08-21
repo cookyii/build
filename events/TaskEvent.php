@@ -15,16 +15,24 @@ namespace cookyii\build\events;
 class TaskEvent extends \Symfony\Component\EventDispatcher\Event
 {
 
-    /** @var \cookyii\build\commands\BuildCommand */
+    /**
+     * @var \cookyii\build\commands\BuildCommand
+     */
     protected $command;
 
-    /** @var array|\cookyii\build\tasks\AbstractTask */
+    /**
+     * @var array|\cookyii\build\tasks\AbstractTask
+     */
     protected $task;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $prefix;
 
-    /** @var integer */
+    /**
+     * @var integer
+     */
     protected $indent;
 
     /**

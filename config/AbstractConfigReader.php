@@ -9,7 +9,7 @@
 namespace cookyii\build\config;
 
 use cookyii\build\components\Component;
-use Symfony\Component\Console;
+use cookyii\build\tasks\AbstractCompositeTask;
 
 /**
  * Class AbstractConfigReader
@@ -18,22 +18,34 @@ use Symfony\Component\Console;
 abstract class AbstractConfigReader extends \cookyii\build\components\Component
 {
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $configFile;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $basePath;
 
-    /** @var \cookyii\build\commands\BuildCommand */
+    /**
+     * @var \cookyii\build\commands\BuildCommand
+     */
     public $command;
 
-    /** @var Console\Input\InputInterface */
+    /**
+     * @var \Symfony\Component\Console\Input\InputInterface
+     */
     public $input;
 
-    /** @var Console\Output\OutputInterface */
+    /**
+     * @var \Symfony\Component\Console\Output\OutputInterface
+     */
     public $output;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public static $reservedWords = ['.task', '.depends', '.description', '.events'];
 
     /**
@@ -41,6 +53,8 @@ abstract class AbstractConfigReader extends \cookyii\build\components\Component
      */
     public function __construct($BuildCommand)
     {
+        parent::__construct([]);
+
         $this->command = $BuildCommand;
         $this->input = $BuildCommand->input;
         $this->output = $BuildCommand->output;
@@ -145,10 +159,10 @@ abstract class AbstractConfigReader extends \cookyii\build\components\Component
                     unset($params['class']);
                     $params['command'] = $this->command;
 
-                    /** @var \cookyii\build\tasks\AbstractCompositeTask $Task */
+                    /** @var AbstractCompositeTask $Task */
                     $Task = Component::createObject($className, $params);
 
-                    if ($Task instanceof \cookyii\build\tasks\AbstractCompositeTask) {
+                    if ($Task instanceof AbstractCompositeTask) {
                         $tasks = $Task->tasks();
                         if (!empty($tasks)) {
                             $config[$task_name] = array_merge($conf, $tasks);

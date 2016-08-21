@@ -15,19 +15,29 @@ namespace cookyii\build\tasks;
 class ChownTask extends AbstractTask
 {
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $filename;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $fileSets = [];
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $user;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $group;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $skipOnError = true;
 
     /**

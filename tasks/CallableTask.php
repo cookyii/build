@@ -23,7 +23,9 @@ class CallableTask extends AbstractTask
      */
     public $handler;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $params = [];
 
     /**

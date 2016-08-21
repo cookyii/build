@@ -15,7 +15,9 @@ namespace cookyii\build\components;
 class Component
 {
 
-    /** @var \Symfony\Component\EventDispatcher\EventDispatcher */
+    /**
+     * @var \Symfony\Component\EventDispatcher\EventDispatcher
+     */
     public static $eventDispatcher;
 
     /**
@@ -104,6 +106,7 @@ class Component
         } elseif (is_array($type) && isset($type['class'])) {
             $class = $type['class'];
             unset($type['class']);
+
             return new $class($type);
         } elseif (is_callable($type, true)) {
             return call_user_func($type, $params);

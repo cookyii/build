@@ -15,13 +15,19 @@ namespace cookyii\build\tasks;
 class LockTask extends AbstractCompositeTask
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $name;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $lockPath;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     public $state;
 
     public function init()

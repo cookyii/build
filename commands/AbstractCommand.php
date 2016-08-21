@@ -8,19 +8,25 @@
 
 namespace cookyii\build\commands;
 
-use Symfony\Component\Console;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 /**
  * Class AbstractCommand
  * @package cookyii\build\commands
  */
-abstract class AbstractCommand extends Console\Command\Command
+abstract class AbstractCommand extends Command
 {
 
-    /** @var Console\Input\InputInterface */
+    /**
+     * @var InputInterface
+     */
     public $input;
 
-    /** @var Console\Output\ConsoleOutput */
+    /**
+     * @var ConsoleOutput
+     */
     public $output;
 
     /** @var array */

@@ -15,7 +15,9 @@ namespace cookyii\build\tasks;
 class EchoTask extends AbstractTask
 {
 
-    /** @var string|array|null */
+    /**
+     * @var string|array|null
+     */
     public $message;
 
     /**

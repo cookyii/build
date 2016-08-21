@@ -10,8 +10,8 @@ Documentation
 - [Configuration (RU)][]
 - [Usage (RU)][]
 
-Quick start
-------------
+Quick start (LEGACY, NOT ACTUAL)
+--------------------------------
 
 **Installing**
 

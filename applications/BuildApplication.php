@@ -8,23 +8,24 @@
 
 namespace cookyii\build\applications;
 
-use Symfony\Component\Console;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputInterface;
 
 /**
  * Class BuildApplication
  * @package cookyii\build\applications
  */
-class BuildApplication extends Console\Application
+class BuildApplication extends Application
 {
 
     /**
      * Gets the name of the command based on input.
      *
-     * @param Console\Input\InputInterface $input The input interface
+     * @param InputInterface $input The input interface
      *
      * @return string The command name
      */
-    protected function getCommandName(Console\Input\InputInterface $input)
+    protected function getCommandName(InputInterface $input)
     {
         return 'build';
     }

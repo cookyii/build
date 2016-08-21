@@ -15,9 +15,14 @@ namespace cookyii\build\tasks;
 class SelfTask extends AbstractCompositeTask
 {
 
-    /** @var string */
+    /**
+     * @var string
+     */
     public $cwd;
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();

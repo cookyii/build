@@ -15,10 +15,14 @@ namespace cookyii\build\tasks;
 class CopyTask extends AbstractTask
 {
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $files = [];
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     public $override = true;
 
     /**
