@@ -374,7 +374,7 @@ class BuildCommand extends AbstractCommand
             throw new \InvalidArgumentException('Empty config file option.');
         }
 
-        $ext = array_pop(explode('.', $configFile));
+        $ext = pathinfo($configFile, PATHINFO_EXTENSION);
 
         $configReader = null;
         $config_reader_map = [
